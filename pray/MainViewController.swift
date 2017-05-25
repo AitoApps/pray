@@ -31,6 +31,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        displayPrayTiming()
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
+            })
+        }
+    }
+    
+    func displayPrayTiming() {
+        
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         
@@ -45,8 +65,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         activityIndicator.startAnimating()
         loadingView.addSubview(activityIndicator)
         
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
         Location.getUserCurrentLocation(locationManager: locationManager) { (location) in
             if location != nil {
                 
@@ -55,33 +74,31 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     
                     Timing.fetchCalendar(location: location!, completion: { (calendar, error) in
                         
-                        print(calendar!)
-                        
-                        let today = calendar![0] as [String: AnyObject]
-                        let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
-                        Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
-                        DispatchQueue.main.async {
-                            self.showTiming(timing: Timing.today!)
-                            loadingView.removeFromSuperview()
+                        if Timing.today == nil {
+                            
+                            let date = Date()
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "dd"
+                            let todayDate = dateFormatter.string(from: date)
+                            let index = Int(todayDate)! - 1
+                            
+                            let today = calendar![index] as [String: AnyObject]
+                            let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
+                            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
+                            DispatchQueue.main.async {
+                                self.showTiming(timing: Timing.today!)
+                                loadingView.removeFromSuperview()
+                            }
+                            
+                        } else {
+                            DispatchQueue.main.async {
+                                self.showTiming(timing: Timing.today!)
+                                loadingView.removeFromSuperview()
+                            }
                         }
                     })
                 })
             }
-        }
-        
-        
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
-            })
         }
     }
     
