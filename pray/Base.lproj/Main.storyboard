@@ -233,7 +233,11 @@
                                 <segue destination="B2h-4m-JRj" kind="show" id="gim-mz-M8X"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Qibla" id="pax-16-TXK"/>
+                        <barButtonItem key="rightBarButtonItem" title="Qibla" id="pax-16-TXK">
+                            <connections>
+                                <segue destination="Y5C-U1-qJe" kind="show" id="Lt7-qh-OC6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -257,6 +261,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NA-xD-PIX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="302" y="962"/>
+        </scene>
+        <!--Qibla View Controller-->
+        <scene sceneID="Ksg-9i-feD">
+            <objects>
+                <viewController id="Y5C-U1-qJe" customClass="QiblaViewController" customModule="pray" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EqY-Zj-gYu"/>
+                        <viewControllerLayoutGuide type="bottom" id="OfY-MN-lLb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zfj-LC-LCg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wr1-ot-ZzB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Wr1-ot-ZzB" secondAttribute="trailing" id="3dJ-ib-wTQ"/>
+                            <constraint firstItem="OfY-MN-lLb" firstAttribute="top" secondItem="Wr1-ot-ZzB" secondAttribute="bottom" id="A8c-H7-Wlg"/>
+                            <constraint firstItem="Wr1-ot-ZzB" firstAttribute="leading" secondItem="zfj-LC-LCg" secondAttribute="leading" id="nEQ-tW-Hz3"/>
+                            <constraint firstItem="Wr1-ot-ZzB" firstAttribute="top" secondItem="zfj-LC-LCg" secondAttribute="top" id="xhR-H0-XKr"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WP4-nt-RHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1936.8" y="960.2698650674663"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AAR-26-nfX">
