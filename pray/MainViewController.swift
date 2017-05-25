@@ -28,12 +28,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
-    var timing: Timing.DailyTiming? = nil
-    
-    let location = Location()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        
+        let loadingFrame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+        let loadingView = UIView(frame: loadingFrame)
+        loadingView.backgroundColor = UIColor.white
+        view.addSubview(loadingView)
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.center = loadingView.center
+        activityIndicator.activityIndicatorViewStyle = .gray
+        activityIndicator.startAnimating()
+        loadingView.addSubview(activityIndicator)
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         Location.getUserCurrentLocation(locationManager: locationManager) { (location) in
@@ -49,6 +60,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
                         DispatchQueue.main.async {
                             self.showTiming(timing: Timing.today!)
+                            loadingView.removeFromSuperview()
                         }
                     })
                 })

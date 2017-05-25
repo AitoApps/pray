@@ -35,8 +35,24 @@ class Timing: NSObject {
     
     static var calendar: [[String: AnyObject]]? = nil {
         didSet {
-            let today = calendar![0] as [String: AnyObject]
+            let date = Date()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd"
+            let todayDate = dateFormatter.string(from: date)
+            let index = Int(todayDate)! - 1
+            
+            print(index)
+            
+            guard let timings = calendar else {
+                return
+            }
+            
+            print(timings)
+            
+            let today = timings[index] as [String: AnyObject]
+            print(today)
             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
+            print(todayTimingsDictionary)
             Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
         }
     }
@@ -56,13 +72,22 @@ class Timing: NSObject {
             return
         }
         
+        
+        let date = Date()
+        let yearFormatter = DateFormatter()
+        yearFormatter.dateFormat = "yyyy"
+        let year = yearFormatter.string(from: date)
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MM"
+        let month = monthFormatter.string(from: date)
+        
         let parameters = [
             "latitude": latitude,
             "longitude": longitude,
             "timezonestring": timeZone,
             "method": "2",
-            "month": "6",
-            "year": "2017",
+            "month": month,
+            "year": year,
             ]
         
         AladhanClient.taskForGETMethod(parameters: parameters as [String : AnyObject], method: "calendar", completion: { (result, error) in
