@@ -80,8 +80,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     static func fetchCalendar() {
         
-        let url = URL(string: "http://api.aladhan.com/calendar?")
-        
         if let location = currentlocation {
             let latitude = location.coordinate.latitude.description
             let longitude = location.coordinate.longitude.description
@@ -98,15 +96,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 "month": "6",
                 "year": "2017",
             ]
-        }
-        
-        
-        
-        let task = URLSession.shared.dataTask(with: url!) {(data, response, error) in
+            
+            AladhanClient.taskForGETMethod(parameters: parameters as [String : AnyObject], method: "calendar", completion: { (result, error) in
+
+                print(result.debugDescription)
+            })
+            
             
         }
-        
-        task.resume()
     }
     
     func getAuthorizationForLocation(completion: @escaping (_ success: Bool) -> Void) {
