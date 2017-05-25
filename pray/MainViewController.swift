@@ -18,10 +18,14 @@ var currentlocation: CLLocation? = nil {
 
 var currentTimeZone: String? = nil {
     didSet {
-        MainViewController.fetchCalendar()
+        MainViewController.fetchCalendar { (data, error) in
+            calendar = data!
+            print(calendar!)
+        }
     }
 }
-var calendar: [String: Any]? = nil
+
+var calendar: [[String: AnyObject]]? = nil
 
 
 
@@ -39,6 +43,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Get location
         // Collect data
         // Bug if not allowed
+        
+        
         
         
                 
@@ -78,7 +84,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-    static func fetchCalendar() {
+    static func fetchCalendar(completion: @escaping (_ calendar: ([[String: AnyObject]])?, _ error: NSError?) -> Void) {
         
         if let location = currentlocation {
             let latitude = location.coordinate.latitude.description
@@ -99,7 +105,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             AladhanClient.taskForGETMethod(parameters: parameters as [String : AnyObject], method: "calendar", completion: { (result, error) in
 
-                print(result.debugDescription)
+                func sendError(_ error: String) {
+                    let userInfo = [NSLocalizedDescriptionKey : error]
+                    completion(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+                }
+                
+                guard (error == nil) else {
+                    sendError("There was an error with your request: \(error.debugDescription)")
+                    return
+                }
+                
+                guard let data = result!["data"] as? [[String : AnyObject]] else {
+                    sendError("No data was returned by the request!")
+                    return
+                }
+                
+                completion(data, nil)
+
             })
             
             

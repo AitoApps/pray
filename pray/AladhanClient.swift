@@ -65,10 +65,6 @@ class AladhanClient: NSObject {
             let queryItem = URLQueryItem(name: key, value: "\(value)")
             components.queryItems!.append(queryItem)
         }
-
-        print(components.debugDescription)
-        
-        print(components.url ?? "no components url")
         
         return components.url!
     }
