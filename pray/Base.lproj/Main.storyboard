@@ -277,15 +277,31 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wr1-ot-ZzB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVe-Bi-dUo">
+                                <rect key="frame" x="295" y="621" width="64" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="64" id="Q8V-gn-MVY"/>
+                                </constraints>
+                                <state key="normal" title="Location"/>
+                                <connections>
+                                    <action selector="showCurrentLocation:" destination="Y5C-U1-qJe" eventType="touchUpInside" id="zUz-dR-cNo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="tVe-Bi-dUo" secondAttribute="trailing" constant="16" id="01H-MX-jma"/>
                             <constraint firstAttribute="trailing" secondItem="Wr1-ot-ZzB" secondAttribute="trailing" id="3dJ-ib-wTQ"/>
                             <constraint firstItem="OfY-MN-lLb" firstAttribute="top" secondItem="Wr1-ot-ZzB" secondAttribute="bottom" id="A8c-H7-Wlg"/>
+                            <constraint firstItem="OfY-MN-lLb" firstAttribute="top" secondItem="tVe-Bi-dUo" secondAttribute="bottom" constant="16" id="RSZ-vm-zEq"/>
                             <constraint firstItem="Wr1-ot-ZzB" firstAttribute="leading" secondItem="zfj-LC-LCg" secondAttribute="leading" id="nEQ-tW-Hz3"/>
                             <constraint firstItem="Wr1-ot-ZzB" firstAttribute="top" secondItem="zfj-LC-LCg" secondAttribute="top" id="xhR-H0-XKr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="Wr1-ot-ZzB" id="TvL-By-OLt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WP4-nt-RHA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
