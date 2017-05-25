@@ -12,6 +12,9 @@ import CoreLocation
 
 class Timing: NSObject {
     
+    // BUG LISTS
+    // VIEW NOT UPDATING IF USER INITIAL OPEN THE APP
+    
     struct DailyTiming {
         var Fajr: String
         var Sunrise: String
