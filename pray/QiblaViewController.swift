@@ -23,17 +23,10 @@ class QiblaViewController: UIViewController, CLLocationManagerDelegate {
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        if let region = userRegion {
-            locationManager.startUpdatingLocation()
-            mapView.setRegion(region, animated: true)
-        }
-        
-        
-        
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getUserCurrentLocation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,21 +35,71 @@ class QiblaViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func showCurrentLocation(_ sender: Any) {
-        if let region = userRegion {
-            locationManager.startUpdatingLocation()
-            mapView.setRegion(region, animated: true)
+        getUserCurrentLocation()
+    }
+    
+    func getAuthorizationForLocation(completion: @escaping (_ success: Bool) -> Void) {
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse {
+            completion(true)
+        } else {
+            completion(false)
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+    }
+    
+    func getUserCurrentLocation() {
+        getAuthorizationForLocation { (success) in
+            if success {
+                self.locationManager.startUpdatingLocation()
+                self.showCurrentRegionOnTheMap()
+                
+                
+            } else {
+                self.getAuthorizationForLocation(completion: { (success) in
+                    if success {
+                        self.getUserCurrentLocation()
+                    } else {
+                        print("User doesn't authorized the location access")
+                    }
+                })
+            }
+        }
+    }
+    
+    func showCurrentRegionOnTheMap() {
+        if let region = self.userRegion {
+            self.mapView.setRegion(region, animated: true)
+        } else {
+            if let location = locationManager.location {
+                currentlocation = location
+                let locationCoordinateSpan = MKCoordinateSpanMake(0.025, 0.025)
+                let userLocation = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
+                let region = MKCoordinateRegionMake(userLocation, locationCoordinateSpan)
+                userRegion = region
+                self.mapView.showsUserLocation = true
+                self.mapView.showsPointsOfInterest = true
+                self.mapView.showsCompass = true
+                self.mapView.setRegion(region, animated: true)
+            }
+            
+            
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
-        let locationCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        let locationCoordinateSpan = MKCoordinateSpanMake(0.025, 0.025)
         let userLocation = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
-        let region = MKCoordinateRegionMake(userLocation, locationCoordinateSpan)
-        userRegion = region
+        userRegion = MKCoordinateRegionMake(userLocation, locationCoordinateSpan)
         self.mapView.showsUserLocation = true
         self.mapView.showsPointsOfInterest = true
         self.mapView.showsCompass = true
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            getUserCurrentLocation()
+        }
     }
     
     

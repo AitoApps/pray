@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -235,7 +236,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Qibla" id="pax-16-TXK">
                             <connections>
-                                <segue destination="Y5C-U1-qJe" kind="show" id="Lt7-qh-OC6"/>
+                                <segue destination="Y5C-U1-qJe" kind="presentation" id="Lt7-qh-OC6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -255,7 +256,47 @@
                     <view key="view" contentMode="scaleToFill" id="WbZ-UD-DFq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="PEM-qB-VKx">
+                                <rect key="frame" x="32" y="96" width="311" height="66.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5np-w1-Jre">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2EG-TM-Qab">
+                                                <rect key="frame" x="0.0" y="0.0" width="203" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8J-Gb-9bR">
+                                                <rect key="frame" x="203" y="0.0" width="108" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxJ-0O-Acl">
+                                        <rect key="frame" x="0.0" y="36.5" width="311" height="30"/>
+                                        <color key="backgroundColor" red="0.96862745100000003" green="0.72941176470000002" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Update Location"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="5np-w1-Jre" secondAttribute="trailing" id="0Cy-rQ-Kar"/>
+                                    <constraint firstItem="5np-w1-Jre" firstAttribute="leading" secondItem="PEM-qB-VKx" secondAttribute="leading" id="5LG-H6-QbE"/>
+                                    <constraint firstAttribute="trailing" secondItem="GxJ-0O-Acl" secondAttribute="trailing" id="7is-pg-xK0"/>
+                                    <constraint firstItem="GxJ-0O-Acl" firstAttribute="leading" secondItem="PEM-qB-VKx" secondAttribute="leading" id="c5G-pW-tA2"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="PEM-qB-VKx" firstAttribute="top" secondItem="bOV-wr-fkv" secondAttribute="bottom" constant="32" id="Z8r-9R-GRG"/>
+                            <constraint firstItem="PEM-qB-VKx" firstAttribute="leading" secondItem="WbZ-UD-DFq" secondAttribute="leadingMargin" constant="16" id="jIM-Ok-bZA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PEM-qB-VKx" secondAttribute="trailing" constant="16" id="krB-63-rgd"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3NA-xD-PIX" userLabel="First Responder" sceneMemberID="firstResponder"/>

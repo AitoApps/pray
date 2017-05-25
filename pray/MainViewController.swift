@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-let location: CLLocationCoordinate2D? = nil
+var currentlocation: CLLocation? = nil
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -20,9 +20,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+                
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +31,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[0]
         let locationCoordinateSpan = MKCoordinateSpanMake(0.01, 0.01)
+        currentlocation = locationManager.location
         let userLocation = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
         let region = MKCoordinateRegionMake(userLocation, locationCoordinateSpan)
     }
