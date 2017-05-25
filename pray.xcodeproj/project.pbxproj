@@ -19,7 +19,6 @@
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
 		6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BF1ED6C61A00B67592 /* Timing.swift */; };
 		6E3CC5C21ED6CCD300B67592 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5C11ED6CCD300B67592 /* Location.swift */; };
-		6EFE6C611ED698E300DCEDC1 /* timezones.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EFE6C601ED698E300DCEDC1 /* timezones.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +36,6 @@
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
 		6E3CC5BF1ED6C61A00B67592 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		6E3CC5C11ED6CCD300B67592 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		6EFE6C601ED698E300DCEDC1 /* timezones.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = timezones.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,7 +82,6 @@
 				6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */,
 				6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */,
 				6E1B5D011ED64E550012FF93 /* Info.plist */,
-				6EFE6C601ED698E300DCEDC1 /* timezones.json */,
 			);
 			path = pray;
 			sourceTree = "<group>";
@@ -157,7 +154,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EFE6C611ED698E300DCEDC1 /* timezones.json in Resources */,
 				6E1B5D001ED64E550012FF93 /* LaunchScreen.storyboard in Resources */,
 				6E1B5CFD1ED64E550012FF93 /* Assets.xcassets in Resources */,
 				6E1B5CFB1ED64E550012FF93 /* Main.storyboard in Resources */,
