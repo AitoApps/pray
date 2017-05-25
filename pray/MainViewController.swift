@@ -54,9 +54,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     Location.currentTimeZone = timeZone
                     
                     Timing.fetchCalendar(location: location!, completion: { (calendar, error) in
+                        
+                        print(calendar!)
+                        
                         let today = calendar![0] as [String: AnyObject]
                         let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
-                        print(todayTimingsDictionary)
                         Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
                         DispatchQueue.main.async {
                             self.showTiming(timing: Timing.today!)
@@ -79,25 +81,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.authorizedWhenInUse {
             Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
-                print(location!)
             })
         }
     }
     
-    func showTiming(withDictionary timing: [String: String]) {
-        fajrTime.text = timing["Fajr"]
-        sunriseTime.text = timing["Sunrise"]
-        dhuhrTime.text = timing["Dhuhr"]
-        asrTime.text = timing["Asr"]
-        maghribTime.text = timing["Maghrib"]
-        ishaTime.text = timing["Isha"]
-        imsakTime.text = timing["imsak"]
-    }
+//    func showTiming(withDictionary timing: [String: String]) {
+//        fajrTime.text = timing["Fajr"]
+//        sunriseTime.text = timing["Sunrise"]
+//        dhuhrTime.text = timing["Dhuhr"]
+//        asrTime.text = timing["Asr"]
+//        maghribTime.text = timing["Maghrib"]
+//        ishaTime.text = timing["Isha"]
+//        imsakTime.text = timing["imsak"]
+//    }
     
     func showTiming(timing: Timing.DailyTiming) {
+        
+        print(timing)
+        
         fajrTime.text = timing.Fajr
         sunriseTime.text = timing.Sunrise
-        dhuhrTime.text = timing.Asr
+        dhuhrTime.text = timing.Dhuhr
         asrTime.text = timing.Asr
         maghribTime.text = timing.Maghrib
         ishaTime.text = timing.Isha

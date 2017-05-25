@@ -43,19 +43,15 @@ class Timing: NSObject {
             dateFormatter.dateFormat = "dd"
             let todayDate = dateFormatter.string(from: date)
             let index = Int(todayDate)! - 1
-            
-            print(index)
+
             
             guard let timings = calendar else {
                 return
             }
             
-            print(timings)
-            
             let today = timings[index] as [String: AnyObject]
-            print(today)
             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
-            print(todayTimingsDictionary)
+
             Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
         }
     }
