@@ -240,6 +240,15 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="asrTime" destination="4Yj-5u-h7i" id="Dqg-AL-HKm"/>
+                        <outlet property="dhuhrTime" destination="tSp-Rn-Px9" id="un7-fC-Gz3"/>
+                        <outlet property="fajrTime" destination="hhz-6U-0pF" id="h3q-PQ-7c3"/>
+                        <outlet property="imsakTime" destination="IjH-Om-GSV" id="oPs-E3-QfU"/>
+                        <outlet property="ishaTime" destination="N9c-hi-rsa" id="08v-eW-kOV"/>
+                        <outlet property="maghribTime" destination="S6z-bg-GTh" id="AoJ-Ew-Vb7"/>
+                        <outlet property="sunriseTime" destination="jc4-2H-MHQ" id="8fg-dZ-d4V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

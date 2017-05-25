@@ -71,7 +71,7 @@ class QiblaViewController: UIViewController, CLLocationManagerDelegate {
             self.mapView.setRegion(region, animated: true)
         } else {
             if let location = locationManager.location {
-                currentlocation = location
+                Location.currentLocation = location
                 let locationCoordinateSpan = MKCoordinateSpanMake(0.025, 0.025)
                 let userLocation = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude)
                 let region = MKCoordinateRegionMake(userLocation, locationCoordinateSpan)
