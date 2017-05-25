@@ -12,7 +12,7 @@ import CoreLocation
 
 class Timing: NSObject {
     
-    struct dailyTiming {
+    struct DailyTiming {
         var Fajr: String
         var Sunrise: String
         var Dhuhr: String
@@ -20,11 +20,28 @@ class Timing: NSObject {
         var Maghrib: String
         var Isha: String
         var Imsak: String
+        
+        init(dictionary: [String: AnyObject]) {
+            self.Fajr = dictionary["Fajr"] as! String
+            self.Sunrise = dictionary["Sunrise"] as! String
+            self.Dhuhr = dictionary["Dhuhr"] as! String
+            self.Asr = dictionary["Asr"] as! String
+            self.Maghrib = dictionary["Maghrib"] as! String
+            self.Isha = dictionary["Isha"] as! String
+            self.Imsak = dictionary["Imsak"] as! String
+            
+        }
     }
     
+    static var calendar: [[String: AnyObject]]? = nil {
+        didSet {
+            let today = calendar![0] as [String: AnyObject]
+            let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
+            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
+        }
+    }
     
-    static var calendar = [[String: AnyObject]]()
-    static var today = [String: AnyObject]()
+    static var today: DailyTiming? = nil
     
     override init() {
         super.init()
@@ -66,7 +83,6 @@ class Timing: NSObject {
             }
             
             completion(data, nil)
-            
         })
     }
 

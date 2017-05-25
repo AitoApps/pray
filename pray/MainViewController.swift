@@ -28,53 +28,35 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
-    var todayTimings = [String: String]()
+    var timing: Timing.DailyTiming? = nil
     
-   
-    
-    var calendar: [[String: AnyObject]]? = nil {
-        didSet {
-            let today = calendar![0] as [String: AnyObject]
-            let todayTimingsDictionary = today["timings"] as! [String: String]
-            Timing.today = todayTimingsDictionary
-        }
-    }
-    
-    
-    func setTimings(timings: [String: String]) {
-        fajrTime.text = timings["Fajr"]
-        sunriseTime.text = timings["Sunrise"]
-        dhuhrTime.text = timings["Dhuhr"]
-        asrTime.text = timings["Asr"]
-        maghribTime.text = timings["Maghrib"]
-        ishaTime.text = timings["Isha"]
-        imsakTime.text = timings["imsak"]
-        
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            Location.getUserCurrentLocation(locationManager: locationManager)
-        }
-    }
+    let location = Location()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        
-        // Get location
-        // Collect data
-        // Bug if not allowed
-        
-        if let today = calendar?[0] {
-            print(today["timings"]!)
+        Location.getUserCurrentLocation(locationManager: locationManager) { (location) in
+            if location != nil {
+                
+                Location.getGeoCoder(location!, completion: { (timeZone) in
+                    Location.currentTimeZone = timeZone
+                    
+                    Timing.fetchCalendar(location: location!, completion: { (calendar, error) in
+                        let today = calendar![0] as [String: AnyObject]
+                        let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
+                        print(todayTimingsDictionary)
+                        Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
+                        DispatchQueue.main.async {
+                            self.showTiming(timing: Timing.today!)
+                        }
+                    })
+                })
+            }
         }
         
         
         
-                
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,7 +64,32 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-        
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
+                print(location!)
+            })
+        }
+    }
     
+    func showTiming(withDictionary timing: [String: String]) {
+        fajrTime.text = timing["Fajr"]
+        sunriseTime.text = timing["Sunrise"]
+        dhuhrTime.text = timing["Dhuhr"]
+        asrTime.text = timing["Asr"]
+        maghribTime.text = timing["Maghrib"]
+        ishaTime.text = timing["Isha"]
+        imsakTime.text = timing["imsak"]
+    }
+    
+    func showTiming(timing: Timing.DailyTiming) {
+        fajrTime.text = timing.Fajr
+        sunriseTime.text = timing.Sunrise
+        dhuhrTime.text = timing.Asr
+        asrTime.text = timing.Asr
+        maghribTime.text = timing.Maghrib
+        ishaTime.text = timing.Isha
+        imsakTime.text = timing.Imsak
+    }
 }
 

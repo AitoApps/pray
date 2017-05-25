@@ -12,11 +12,7 @@ import CoreLocation
 
 class Location: NSObject {
     
-    static var currentLocation: CLLocation? = nil {
-        didSet {
-            Location.getGeoCoder(currentLocation!)
-        }
-    }
+    static var currentLocation: CLLocation? = nil
     
     static var currentTimeZone: String? = nil {
         didSet {
@@ -34,21 +30,23 @@ class Location: NSObject {
         }
     }
     
-    static func getUserCurrentLocation(locationManager: CLLocationManager) {
+    static func getUserCurrentLocation(locationManager: CLLocationManager, completion: @escaping (_ location: CLLocation?) -> Void) {
         getAuthorizationForLocation { (success) in
             if success {
                 if let location = locationManager.location {
-                    Location.currentLocation = location
+                    currentLocation = location
+                    completion(location)
                 }
                 
             } else {
                 print("User doesn't authorized the location access")
                 locationManager.requestWhenInUseAuthorization()
+                completion(nil)
             }
         }
     }
     
-    static func getGeoCoder( _ location: CLLocation) {
+    static func getGeoCoder( _ location: CLLocation, completion: @escaping (_ timeZone: String) -> Void) {
         let geoCoder = CLGeocoder()
         geoCoder.reverseGeocodeLocation(location) { (placemark, error) in
             guard error == nil else {
@@ -61,31 +59,27 @@ class Location: NSObject {
             }
             
             if let timeZone = placemarks[0].timeZone {
-                print(timeZone.identifier)
-                self.currentTimeZone = timeZone.identifier
+                completion(timeZone.identifier)
             }
         }
     }
     
     
     
-    func fetchTimeZonesDatabase() -> [[String: AnyObject]]? {
-        
-        if let timeZonesURL = Bundle.main.url(forResource: "timezones", withExtension: "json") {
-            let rawTimeZones = try! Data(contentsOf: timeZonesURL)
-            var timeZones = [[String: AnyObject]]()
-            do {
-                timeZones = try JSONSerialization.jsonObject(with: rawTimeZones, options: JSONSerialization.ReadingOptions()) as! [[String: AnyObject]]
-                return timeZones
-            } catch {
-                print(error.localizedDescription)
-                return nil
-            }
-        } else {
-            return nil
-        }
-        
-        
-    }
+//    func fetchTimeZonesDatabase() -> [[String: AnyObject]]? {
+//        if let timeZonesURL = Bundle.main.url(forResource: "timezones", withExtension: "json") {
+//            let rawTimeZones = try! Data(contentsOf: timeZonesURL)
+//            var timeZones = [[String: AnyObject]]()
+//            do {
+//                timeZones = try JSONSerialization.jsonObject(with: rawTimeZones, options: JSONSerialization.ReadingOptions()) as! [[String: AnyObject]]
+//                return timeZones
+//            } catch {
+//                print(error.localizedDescription)
+//                return nil
+//            }
+//        } else {
+//            return nil
+//        }
+//    }
 
 }
