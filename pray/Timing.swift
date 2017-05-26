@@ -16,6 +16,7 @@ class Timing: NSObject {
     // VIEW NOT UPDATING IF USER INITIAL OPEN THE APP
     
     struct DailyTiming {
+        
         var FajrTime: Date
         var SunriseTime: Date
         var DhuhrTime: Date

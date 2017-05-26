@@ -51,19 +51,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     func displayPrayTiming() {
         
-        let screenWidth = UIScreen.main.bounds.size.width
-        let screenHeight = UIScreen.main.bounds.size.height
-        
-        let loadingFrame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
-        let loadingView = UIView(frame: loadingFrame)
-        loadingView.backgroundColor = UIColor.white
-        view.addSubview(loadingView)
-        
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.center = loadingView.center
-        activityIndicator.activityIndicatorViewStyle = .gray
-        activityIndicator.startAnimating()
-        loadingView.addSubview(activityIndicator)
+//        let screenWidth = UIScreen.main.bounds.size.width
+//        let screenHeight = UIScreen.main.bounds.size.height
+//        
+//        let loadingFrame = CGRect(x: 0, y: 0, width: screenWidth, height: screenHeight)
+//        let loadingView = UIView(frame: loadingFrame)
+//        loadingView.backgroundColor = UIColor.white
+//        view.addSubview(loadingView)
+//        
+//        let activityIndicator = UIActivityIndicatorView()
+//        activityIndicator.center = loadingView.center
+//        activityIndicator.activityIndicatorViewStyle = .gray
+//        activityIndicator.startAnimating()
+//        loadingView.addSubview(activityIndicator)
         
         
         Location.getUserCurrentLocation(locationManager: locationManager) { (location) in
@@ -74,31 +74,35 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     
                     Timing.fetchCalendar(location: location!, completion: { (calendar, error) in
                         
+                        guard error == nil else {
+                            print(error.debugDescription)
+                            return
+                        }
+                        
+                        print(Timing.today ?? "no timing for today")
+                        
                         if Timing.today == nil {
                             
                             let date = Date()
+                            
                             let dateIndexFormatter = DateFormatter()
                             dateIndexFormatter.dateFormat = "dd"
+                            let todayIndex = dateIndexFormatter.string(from: date)
+                            print(todayIndex)
+                            
+                            
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "dd MMM yyyy"
                             let todayDate = dateFormatter.string(from: date)
-                            let todayIndex = dateIndexFormatter.string(from: date)
-                            let index = Int(todayIndex)! - 1
+                            print(todayDate)
                             
+                            
+                            
+                            let index = Int(todayIndex)! - 1
                             let today = calendar![index] as [String: AnyObject]
                             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
                             Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary, stringDate: todayDate)
-                            DispatchQueue.main.async {
-                                self.showTiming(timing: Timing.today!)
-                                loadingView.removeFromSuperview()
-                            }
-                            
-                        } else {
-                            DispatchQueue.main.async {
-                                //This function has bug
-                                self.showTiming(timing: Timing.today!)
-                                loadingView.removeFromSuperview()
-                            }
+                            self.showTiming(timing: Timing.today!)
                         }
                     })
                 })
@@ -106,34 +110,22 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-//    func showTiming(withDictionary timing: [String: String]) {
-//        fajrTime.text = timing["Fajr"]
-//        sunriseTime.text = timing["Sunrise"]
-//        dhuhrTime.text = timing["Dhuhr"]
-//        asrTime.text = timing["Asr"]
-//        maghribTime.text = timing["Maghrib"]
-//        ishaTime.text = timing["Isha"]
-//        imsakTime.text = timing["imsak"]
-//    }
-    
     func showTiming(timing: Timing.DailyTiming) {
         
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short
         
-        if timing != nil {
-            
-            fajrTime.text = dateFormatter.string(from: timing.FajrTime)
-            sunriseTime.text = dateFormatter.string(from: timing.SunriseTime)
-            dhuhrTime.text = dateFormatter.string(from: timing.DhuhrTime)
-            asrTime.text = dateFormatter.string(from: timing.AsrTime)
-            maghribTime.text = dateFormatter.string(from: timing.MaghribTime)
-            ishaTime.text = dateFormatter.string(from: timing.IshaTime)
-            imsakTime.text = dateFormatter.string(from: timing.ImsakTime)
-            
-        } else {
-            print("timing is nil")
+        DispatchQueue.main.async {
+            self.fajrTime.text = dateFormatter.string(from: timing.FajrTime)
+            self.sunriseTime.text = dateFormatter.string(from: timing.SunriseTime)
+            self.dhuhrTime.text = dateFormatter.string(from: timing.DhuhrTime)
+            self.asrTime.text = dateFormatter.string(from: timing.AsrTime)
+            self.maghribTime.text = dateFormatter.string(from: timing.MaghribTime)
+            self.ishaTime.text = dateFormatter.string(from: timing.IshaTime)
+            self.imsakTime.text = dateFormatter.string(from: timing.ImsakTime)
         }
+        
+        
         
         
     }

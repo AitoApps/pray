@@ -35,6 +35,7 @@ class Location: NSObject {
             if success {
                 if let location = locationManager.location {
                     currentLocation = location
+                    print(currentLocation)
                     completion(location)
                 }
                 
