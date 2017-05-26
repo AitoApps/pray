@@ -77,14 +77,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         if Timing.today == nil {
                             
                             let date = Date()
+                            let dateIndexFormatter = DateFormatter()
+                            dateIndexFormatter.dateFormat = "dd"
                             let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "dd"
+                            dateFormatter.dateFormat = "dd MMM yyyy"
                             let todayDate = dateFormatter.string(from: date)
-                            let index = Int(todayDate)! - 1
+                            let todayIndex = dateIndexFormatter.string(from: date)
+                            let index = Int(todayIndex)! - 1
                             
                             let today = calendar![index] as [String: AnyObject]
                             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
-                            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
+                            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary, stringDate: todayDate)
                             DispatchQueue.main.async {
                                 self.showTiming(timing: Timing.today!)
                                 loadingView.removeFromSuperview()
@@ -92,6 +95,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                             
                         } else {
                             DispatchQueue.main.async {
+                                //This function has bug
                                 self.showTiming(timing: Timing.today!)
                                 loadingView.removeFromSuperview()
                             }
@@ -114,15 +118,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     func showTiming(timing: Timing.DailyTiming) {
         
-        print(timing)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
         
-        fajrTime.text = timing.Fajr
-        sunriseTime.text = timing.Sunrise
-        dhuhrTime.text = timing.Dhuhr
-        asrTime.text = timing.Asr
-        maghribTime.text = timing.Maghrib
-        ishaTime.text = timing.Isha
-        imsakTime.text = timing.Imsak
+        if timing != nil {
+            
+            fajrTime.text = dateFormatter.string(from: timing.FajrTime)
+            sunriseTime.text = dateFormatter.string(from: timing.SunriseTime)
+            dhuhrTime.text = dateFormatter.string(from: timing.DhuhrTime)
+            asrTime.text = dateFormatter.string(from: timing.AsrTime)
+            maghribTime.text = dateFormatter.string(from: timing.MaghribTime)
+            ishaTime.text = dateFormatter.string(from: timing.IshaTime)
+            imsakTime.text = dateFormatter.string(from: timing.ImsakTime)
+            
+        } else {
+            print("timing is nil")
+        }
+        
+        
     }
 }
 

@@ -16,23 +16,35 @@ class Timing: NSObject {
     // VIEW NOT UPDATING IF USER INITIAL OPEN THE APP
     
     struct DailyTiming {
-        var Fajr: String
-        var Sunrise: String
-        var Dhuhr: String
-        var Asr: String
-        var Maghrib: String
-        var Isha: String
-        var Imsak: String
+        var FajrTime: Date
+        var SunriseTime: Date
+        var DhuhrTime: Date
+        var AsrTime: Date
+        var MaghribTime: Date
+        var IshaTime: Date
+        var ImsakTime: Date
         
-        init(dictionary: [String: AnyObject]) {
-            self.Fajr = dictionary["Fajr"] as! String
-            self.Sunrise = dictionary["Sunrise"] as! String
-            self.Dhuhr = dictionary["Dhuhr"] as! String
-            self.Asr = dictionary["Asr"] as! String
-            self.Maghrib = dictionary["Maghrib"] as! String
-            self.Isha = dictionary["Isha"] as! String
-            self.Imsak = dictionary["Imsak"] as! String
+        init(dictionary: [String: AnyObject], stringDate: String) {
+            let stringFajrTime = dictionary["Fajr"] as! String
+            self.FajrTime = Timing.stringToDate(stringTime: stringFajrTime, stringDate: stringDate)
             
+            let stringSunriseTime = dictionary["Sunrise"] as! String
+            self.SunriseTime = Timing.stringToDate(stringTime: stringSunriseTime, stringDate: stringDate)
+            
+            let stringDhuhrTime = dictionary["Dhuhr"] as! String
+            self.DhuhrTime = Timing.stringToDate(stringTime: stringDhuhrTime, stringDate: stringDate)
+            
+            let stringAsrTime = dictionary["Asr"] as! String
+            self.AsrTime = Timing.stringToDate(stringTime: stringAsrTime, stringDate: stringDate)
+            
+            let stringMaghribTime = dictionary["Maghrib"] as! String
+            self.MaghribTime = Timing.stringToDate(stringTime: stringMaghribTime, stringDate: stringDate)
+            
+            let stringIshaTime = dictionary["Isha"] as! String
+            self.IshaTime = Timing.stringToDate(stringTime: stringIshaTime, stringDate: stringDate)
+            
+            let stringImsakTime = dictionary["Imsak"] as! String
+            self.ImsakTime = Timing.stringToDate(stringTime: stringImsakTime, stringDate: stringDate)
         }
     }
     
@@ -40,7 +52,7 @@ class Timing: NSObject {
         didSet {
             let date = Date()
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd"
+            dateFormatter.dateFormat = "dd MMM yyyy"
             let todayDate = dateFormatter.string(from: date)
             let index = Int(todayDate)! - 1
 
@@ -52,7 +64,7 @@ class Timing: NSObject {
             let today = timings[index] as [String: AnyObject]
             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
 
-            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary)
+            Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary, stringDate: todayDate)
         }
     }
     
@@ -60,6 +72,21 @@ class Timing: NSObject {
     
     override init() {
         super.init()
+    }
+    
+    static func stringToDate(stringTime: String, stringDate: String)  -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm (zzz), dd MMM yyyy"
+        let stringDate = "\(stringTime), \(stringDate)"
+        let date = dateFormatter.date(from: stringDate)
+        return date!
+    }
+    
+    static func dateToStringTime(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "K:mm a"
+        let stringTime = dateFormatter.string(from: date)
+        return stringTime
     }
     
     static func fetchCalendar(location: CLLocation, completion: @escaping (_ calendar: ([[String: AnyObject]])?, _ error: NSError?) -> Void) {

@@ -19,6 +19,7 @@
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
 		6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BF1ED6C61A00B67592 /* Timing.swift */; };
 		6E3CC5C21ED6CCD300B67592 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5C11ED6CCD300B67592 /* Location.swift */; };
+		6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
 		6E3CC5BF1ED6C61A00B67592 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		6E3CC5C11ED6CCD300B67592 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				6E1B5CF71ED64E550012FF93 /* MainViewController.swift */,
 				6E1B5D0C1ED659E00012FF93 /* QiblaViewController.swift */,
 				6E3CC5BF1ED6C61A00B67592 /* Timing.swift */,
+				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
 				6E3CC5C11ED6CCD300B67592 /* Location.swift */,
 				6E1B5D0A1ED6572E0012FF93 /* SettingsViewController.swift */,
 				6E3CC5BB1ED6AB3900B67592 /* AladhanClient.swift */,
@@ -175,6 +178,7 @@
 				6E1B5CF61ED64E550012FF93 /* AppDelegate.swift in Sources */,
 				6E1B5D0B1ED6572E0012FF93 /* SettingsViewController.swift in Sources */,
 				6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */,
+				6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
