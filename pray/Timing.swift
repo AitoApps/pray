@@ -27,25 +27,25 @@ class Timing: NSObject {
         
         init(dictionary: [String: AnyObject], stringDate: String) {
             let stringFajrTime = dictionary["Fajr"] as! String
-            self.FajrTime = Timing.stringToDate(stringTime: stringFajrTime, stringDate: stringDate)
+            self.FajrTime = stringFajrTime.stringToDate(stringDate: stringDate)
             
             let stringSunriseTime = dictionary["Sunrise"] as! String
-            self.SunriseTime = Timing.stringToDate(stringTime: stringSunriseTime, stringDate: stringDate)
+            self.SunriseTime = stringSunriseTime.stringToDate(stringDate: stringDate)
             
             let stringDhuhrTime = dictionary["Dhuhr"] as! String
-            self.DhuhrTime = Timing.stringToDate(stringTime: stringDhuhrTime, stringDate: stringDate)
+            self.DhuhrTime = stringDhuhrTime.stringToDate(stringDate: stringDate)
             
             let stringAsrTime = dictionary["Asr"] as! String
-            self.AsrTime = Timing.stringToDate(stringTime: stringAsrTime, stringDate: stringDate)
+            self.AsrTime = stringAsrTime.stringToDate(stringDate: stringDate)
             
             let stringMaghribTime = dictionary["Maghrib"] as! String
-            self.MaghribTime = Timing.stringToDate(stringTime: stringMaghribTime, stringDate: stringDate)
+            self.MaghribTime = stringMaghribTime.stringToDate(stringDate: stringDate)
             
             let stringIshaTime = dictionary["Isha"] as! String
-            self.IshaTime = Timing.stringToDate(stringTime: stringIshaTime, stringDate: stringDate)
+            self.IshaTime = stringIshaTime.stringToDate(stringDate: stringDate)
             
             let stringImsakTime = dictionary["Imsak"] as! String
-            self.ImsakTime = Timing.stringToDate(stringTime: stringImsakTime, stringDate: stringDate)
+            self.ImsakTime = stringImsakTime.stringToDate(stringDate: stringDate)
         }
     }
     
@@ -53,8 +53,9 @@ class Timing: NSObject {
         didSet {
             let date = Date()
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd MMM yyyy"
+            dateFormatter.dateFormat = "dd"
             let todayDate = dateFormatter.string(from: date)
+            print(todayDate)
             let index = Int(todayDate)! - 1
 
             
@@ -73,14 +74,6 @@ class Timing: NSObject {
     
     override init() {
         super.init()
-    }
-    
-    static func stringToDate(stringTime: String, stringDate: String)  -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm (zzz), dd MMM yyyy"
-        let stringDate = "\(stringTime), \(stringDate)"
-        let date = dateFormatter.date(from: stringDate)
-        return date!
     }
     
     static func dateToStringTime(date: Date) -> String {

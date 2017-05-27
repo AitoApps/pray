@@ -43,9 +43,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == CLAuthorizationStatus.authorizedWhenInUse {
-            Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
-            })
+        
+        if Location.currentLocation == nil {
+            if status == CLAuthorizationStatus.authorizedWhenInUse {
+                Location.getUserCurrentLocation(locationManager: locationManager, completion: { (location) in
+                })
+            }
         }
     }
     
@@ -101,6 +104,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                             let index = Int(todayIndex)! - 1
                             let today = calendar![index] as [String: AnyObject]
                             let todayTimingsDictionary = today["timings"] as! [String: AnyObject]
+                            print(todayDate)
                             Timing.today = Timing.DailyTiming.init(dictionary: todayTimingsDictionary, stringDate: todayDate)
                             self.showTiming(timing: Timing.today!)
                         }

@@ -17,7 +17,19 @@ class Location: NSObject {
     static var currentTimeZone: String? = nil {
         didSet {
             Timing.fetchCalendar(location: Location.currentLocation!) { (data, error) in
-                Timing.calendar = data!
+                
+                guard error == nil else {
+                    print(error.debugDescription)
+                    return
+                }
+                
+                if data != nil {
+                    print(data ?? "no data")
+                    Timing.calendar = data!
+                } else {
+                    print("data is nil")
+                }
+                
             }
         }
     }
@@ -35,7 +47,7 @@ class Location: NSObject {
             if success {
                 if let location = locationManager.location {
                     currentLocation = location
-                    print(currentLocation)
+                    print(currentLocation!)
                     completion(location)
                 }
                 
@@ -64,23 +76,4 @@ class Location: NSObject {
             }
         }
     }
-    
-    
-    
-//    func fetchTimeZonesDatabase() -> [[String: AnyObject]]? {
-//        if let timeZonesURL = Bundle.main.url(forResource: "timezones", withExtension: "json") {
-//            let rawTimeZones = try! Data(contentsOf: timeZonesURL)
-//            var timeZones = [[String: AnyObject]]()
-//            do {
-//                timeZones = try JSONSerialization.jsonObject(with: rawTimeZones, options: JSONSerialization.ReadingOptions()) as! [[String: AnyObject]]
-//                return timeZones
-//            } catch {
-//                print(error.localizedDescription)
-//                return nil
-//            }
-//        } else {
-//            return nil
-//        }
-//    }
-
 }
