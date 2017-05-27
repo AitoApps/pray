@@ -10,11 +10,11 @@ import Foundation
 
 extension String {
     func stringToDate(stringDate: String)  -> Date {
+        print(stringDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm (zzz), dd MMM yyyy"
         let stringDate = "\(self), \(stringDate)"
         let date = dateFormatter.date(from: stringDate)
-        print(date)
         return date!
     }
 }
