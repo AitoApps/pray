@@ -23,6 +23,17 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         return delegate.stack
     }
     
+    func preloadTimingFromCoreData() {
+        try? fetchedResultsController().performFetch()
+        let fetchRequest = fetchedResultsController().fetchRequest
+        let managedObjectContext = fetchedResultsController().managedObjectContext
+        let totalTimings = try! managedObjectContext.count(for: fetchRequest)
+        for i in 0..<totalTimings {
+            let timing = fetchedResultsController().object(at: IndexPath(row: i, section: 0)) as! Timing
+            DataSource.timings.append(timing)
+        }
+    }
+    
     func addToCoreData(of dictionary: NSDictionary) -> Timing? {
         do {
             let timing = Timing(dictionary: dictionary, context: coreDataStack().context)

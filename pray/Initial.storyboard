@@ -34,6 +34,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="sjH-9D-9RB" id="fDH-PT-xKH"/>
+                                    <outlet property="delegate" destination="sjH-9D-9RB" id="hlK-4H-0Kf"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,6 +49,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T1S-Kb-jnD"/>
+                    <connections>
+                        <outlet property="tableView" destination="Y6z-5P-1Ia" id="Xow-WJ-VQi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSG-55-FHC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
