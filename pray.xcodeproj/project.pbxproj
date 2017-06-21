@@ -13,13 +13,11 @@
 		6E1B5CFD1ED64E550012FF93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */; };
 		6E1B5D001ED64E550012FF93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */; };
 		6E1B5D091ED656AF0012FF93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */; };
-		6E1B5D0B1ED6572E0012FF93 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B5D0A1ED6572E0012FF93 /* SettingsViewController.swift */; };
-		6E1B5D0D1ED659E00012FF93 /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B5D0C1ED659E00012FF93 /* QiblaViewController.swift */; };
 		6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */; };
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
 		6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BF1ED6C61A00B67592 /* Timing.swift */; };
-		6E3CC5C21ED6CCD300B67592 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5C11ED6CCD300B67592 /* Location.swift */; };
 		6E6558FA1EFAE58800EE55CD /* pray.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558F81EFAE58800EE55CD /* pray.xcdatamodeld */; };
+		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,13 +30,11 @@
 		6E1B5CFF1ED64E550012FF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E1B5D011ED64E550012FF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		6E1B5D0A1ED6572E0012FF93 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		6E1B5D0C1ED659E00012FF93 /* QiblaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
 		6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanAPI.swift; sourceTree = "<group>"; };
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
 		6E3CC5BF1ED6C61A00B67592 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
-		6E3CC5C11ED6CCD300B67592 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6E6558F91EFAE58800EE55CD /* pray.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pray.xcdatamodel; sourceTree = "<group>"; };
+		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,13 +72,11 @@
 			children = (
 				6E1B5CF51ED64E550012FF93 /* AppDelegate.swift */,
 				6E1B5CF71ED64E550012FF93 /* MainViewController.swift */,
-				6E1B5D0C1ED659E00012FF93 /* QiblaViewController.swift */,
 				6E3CC5BF1ED6C61A00B67592 /* Timing.swift */,
 				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
-				6E3CC5C11ED6CCD300B67592 /* Location.swift */,
-				6E1B5D0A1ED6572E0012FF93 /* SettingsViewController.swift */,
 				6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */,
 				6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */,
+				6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */,
 				6E6558F81EFAE58800EE55CD /* pray.xcdatamodeld */,
 				6E1B5CF91ED64E550012FF93 /* Main.storyboard */,
 				6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */,
@@ -173,13 +167,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E1B5D0D1ED659E00012FF93 /* QiblaViewController.swift in Sources */,
 				6E1B5CF81ED64E550012FF93 /* MainViewController.swift in Sources */,
-				6E3CC5C21ED6CCD300B67592 /* Location.swift in Sources */,
 				6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */,
 				6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */,
 				6E1B5CF61ED64E550012FF93 /* AppDelegate.swift in Sources */,
-				6E1B5D0B1ED6572E0012FF93 /* SettingsViewController.swift in Sources */,
+				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
 				6E6558FA1EFAE58800EE55CD /* pray.xcdatamodeld in Sources */,
 				6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */,
 				6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */,
