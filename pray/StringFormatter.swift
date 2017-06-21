@@ -9,12 +9,17 @@
 import Foundation
 
 extension String {
-    func stringToDate(stringDate: String)  -> Date {
-        print(stringDate)
+    func formatToDate() -> NSDate {
+        
+        let today = Date()
+        let todayFormatter = DateFormatter()
+        todayFormatter.dateFormat = "dd MMM yyyy"
+        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm (zzz), dd MMM yyyy"
-        let stringDate = "\(self), \(stringDate)"
-        let date = dateFormatter.date(from: stringDate)
-        return date!
+
+        let date = dateFormatter.date(from: "\(self), \(todayFormatter.string(from: today))")! as NSDate
+        
+        return date
     }
 }

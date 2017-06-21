@@ -244,9 +244,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SgB-aT-1e1"/>
-                    <connections>
-                        <outlet property="fajrTime" destination="hhz-6U-0pF" id="h3q-PQ-7c3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
