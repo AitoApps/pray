@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension AladhanClient {
+extension AladhanAPI {
     
     struct Constants {
         static let ApiScheme = "http"

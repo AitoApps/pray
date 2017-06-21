@@ -12,20 +12,6 @@ import CoreLocation
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
     
-    @IBOutlet weak var fajrTime: UILabel!
-    
-    @IBOutlet weak var sunriseTime: UILabel!
-    
-    @IBOutlet weak var dhuhrTime: UILabel!
-    
-    @IBOutlet weak var asrTime: UILabel!
-    
-    @IBOutlet weak var maghribTime: UILabel!
-    
-    @IBOutlet weak var ishaTime: UILabel!
-    
-    @IBOutlet weak var imsakTime: UILabel!
-    
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
@@ -128,10 +114,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.ishaTime.text = dateFormatter.string(from: timing.IshaTime)
             self.imsakTime.text = dateFormatter.string(from: timing.ImsakTime)
         }
-        
-        
-        
-        
+
     }
 }
 

@@ -110,7 +110,7 @@ class Timing: NSObject {
             "year": year,
             ]
         
-        AladhanClient.taskForGETMethod(parameters: parameters as [String : AnyObject], method: "calendar", completion: { (result, error) in
+        AladhanAPI.taskForGETMethod(parameters: parameters as [String : AnyObject], method: "calendar", completion: { (result, error) in
             
             func sendError(_ error: String) {
                 let userInfo = [NSLocalizedDescriptionKey : error]

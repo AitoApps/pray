@@ -1,5 +1,5 @@
 //
-//  AladhanClient.swift
+//  AladhanAPI.swift
 //  pray
 //
 //  Created by Zulwiyoza Putra on 5/24/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AladhanClient: NSObject {
+class AladhanAPI: NSObject {
     
     static var session = URLSession.shared
     
@@ -56,8 +56,8 @@ class AladhanClient: NSObject {
     
     static func aladhanURLFromParameters(parameters: [String: AnyObject], method: String ) -> URL {
         var components = URLComponents()
-        components.scheme = AladhanClient.Constants.ApiScheme
-        components.host = AladhanClient.Constants.ApiHost
+        components.scheme = AladhanAPI.Constants.ApiScheme
+        components.host = AladhanAPI.Constants.ApiHost
         components.path = "/" + method
         components.queryItems = [URLQueryItem]()
         
