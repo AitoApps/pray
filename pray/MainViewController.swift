@@ -14,12 +14,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        displayPrayTiming()
-        
+        super.viewDidLoad()        
     }
 
     override func didReceiveMemoryWarning() {

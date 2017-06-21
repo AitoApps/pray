@@ -15,7 +15,6 @@
 		6E1B5D091ED656AF0012FF93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */; };
 		6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */; };
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
-		6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BF1ED6C61A00B67592 /* Timing.swift */; };
 		6E6558FA1EFAE58800EE55CD /* pray.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558F81EFAE58800EE55CD /* pray.xcdatamodeld */; };
 		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */; };
@@ -32,7 +31,6 @@
 		6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanAPI.swift; sourceTree = "<group>"; };
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
-		6E3CC5BF1ED6C61A00B67592 /* Timing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timing.swift; sourceTree = "<group>"; };
 		6E6558F91EFAE58800EE55CD /* pray.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pray.xcdatamodel; sourceTree = "<group>"; };
 		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringFormatter.swift; sourceTree = "<group>"; };
@@ -72,7 +70,6 @@
 			children = (
 				6E1B5CF51ED64E550012FF93 /* AppDelegate.swift */,
 				6E1B5CF71ED64E550012FF93 /* MainViewController.swift */,
-				6E3CC5BF1ED6C61A00B67592 /* Timing.swift */,
 				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
 				6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */,
 				6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */,
@@ -168,7 +165,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E1B5CF81ED64E550012FF93 /* MainViewController.swift in Sources */,
-				6E3CC5C01ED6C61A00B67592 /* Timing.swift in Sources */,
 				6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */,
 				6E1B5CF61ED64E550012FF93 /* AppDelegate.swift in Sources */,
 				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
