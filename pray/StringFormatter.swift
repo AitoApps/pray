@@ -11,10 +11,15 @@ import Foundation
 extension String {
     func formatTimeToNSDate(day: Day) -> NSDate {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm (zzz), dd MMM yyyy"
-
-
-        let date = dateFormatter.date(from: "\(self), \(day.readable!)")! as NSDate
+        dateFormatter.dateFormat = "HH:mm, dd MMM yyyy"
+        print(self)
+        let timeZoneIdentifier = self.components(separatedBy: " ")[1].components(separatedBy: "(")[1].components(separatedBy: ")")[0]
+        
+        let timeComponent = self.components(separatedBy: " ")[0]
+        
+        dateFormatter.timeZone = TimeZone(identifier: timeZoneIdentifier)
+        
+        let date = dateFormatter.date(from: "\(timeComponent), \(day.readable!)")! as NSDate
         
         return date
     }

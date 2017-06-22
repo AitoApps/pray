@@ -30,7 +30,7 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         let totalTimings = try! managedObjectContext.count(for: fetchRequest)
         for i in 0..<totalTimings {
             let timing = fetchedResultsController().object(at: IndexPath(row: i, section: 0)) as! Timings
-//            DataSource.timings.append(timing)
+            DataSource.calendar.append(timing)
         }
     }
     

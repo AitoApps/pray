@@ -33,6 +33,9 @@ extension InitialViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         loadingView(present: true)
         let placemark = placemarks[indexPath.row]
+        
+        DataSource.placemark = placemark
+        
         AladhanAPI.getCalendarTiming(placemark: placemark) { (data: [[String : AnyObject]]?, error: NSError?) in
             for item in data! {
                 guard let date = item["date"] as? [String:
@@ -46,9 +49,11 @@ extension InitialViewController: UITableViewDelegate {
                 
                 let timings = Timings(dictionary: dictionary, timestamp: timestamp, insertInto: self.coreDataStack().context)
                 
-                print(timings)
+                DataSource.calendar.append(timings)
             }
-            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+            self.present(main, animated: true, completion: nil)
         }
     }
 }

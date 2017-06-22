@@ -244,6 +244,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SgB-aT-1e1"/>
+                    <connections>
+                        <outlet property="asrTimeLabel" destination="U0D-aq-aDa" id="kM2-1b-hQv"/>
+                        <outlet property="cityNameLabel" destination="UpH-qo-EVe" id="0Xv-oj-bFY"/>
+                        <outlet property="dhuhrTimeLabel" destination="wvA-HG-LUp" id="gFc-Ua-8Zl"/>
+                        <outlet property="fajrTimeLabel" destination="zEK-ST-NLf" id="9FD-jm-R2f"/>
+                        <outlet property="imsakTimeLabel" destination="hhz-6U-0pF" id="lw3-Iu-1hS"/>
+                        <outlet property="ishaTimeLabel" destination="dac-X5-LWM" id="V1x-PE-JSd"/>
+                        <outlet property="maghribTimeLabel" destination="2Uy-qx-yDe" id="Gr8-ml-qei"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,7 +261,7 @@
         <!--Navigation Controller-->
         <scene sceneID="AAR-26-nfX">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Yfj-g0-Hwv" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="Yfj-g0-Hwv" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="M1v-bh-zLG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

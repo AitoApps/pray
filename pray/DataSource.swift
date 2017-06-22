@@ -8,9 +8,9 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class DataSource: NSObject {
-//    static var timings = [Timing]()
-
-
+    static var calendar = [Timings]()
+    static var placemark: CLPlacemark!
 }
