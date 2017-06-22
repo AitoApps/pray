@@ -10,5 +10,7 @@ import UIKit
 import CoreData
 
 class DataSource: NSObject {
-    static var timings = [Timing]()
+//    static var timings = [Timing]()
+
+
 }

@@ -34,7 +34,21 @@ extension InitialViewController: UITableViewDelegate {
         loadingView(present: true)
         let placemark = placemarks[indexPath.row]
         AladhanAPI.getCalendarTiming(placemark: placemark) { (data: [[String : AnyObject]]?, error: NSError?) in
-            print(data)
+            for item in data! {
+                guard let date = item["date"] as? [String:
+                AnyObject], let timestamp = date["timestamp"] as? String else {
+                    return
+                }
+                
+                guard let dictionary = item["timings"] as? [String: AnyObject] else {
+                    return
+                }
+                
+                let timings = Timings(dictionary: dictionary, timestamp: timestamp, insertInto: self.coreDataStack().context)
+                
+                print(timings)
+            }
+            
         }
     }
 }

@@ -13,7 +13,7 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
     
     func fetchedResultsController() -> NSFetchedResultsController<NSFetchRequestResult> {
         let stack = coreDataStack()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Timing")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Timings")
         fetchRequest.sortDescriptors = []
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     }
@@ -29,19 +29,8 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         let managedObjectContext = fetchedResultsController().managedObjectContext
         let totalTimings = try! managedObjectContext.count(for: fetchRequest)
         for i in 0..<totalTimings {
-            let timing = fetchedResultsController().object(at: IndexPath(row: i, section: 0)) as! Timing
-            DataSource.timings.append(timing)
-        }
-    }
-    
-    func addToCoreData(of dictionary: NSDictionary) -> Timing? {
-        do {
-            let timing = Timing(dictionary: dictionary, context: coreDataStack().context)
-            try coreDataStack().saveContext()
-            return timing
-        } catch {
-            print("Add Core Data Failed")
-            return nil
+            let timing = fetchedResultsController().object(at: IndexPath(row: i, section: 0)) as! Timings
+//            DataSource.timings.append(timing)
         }
     }
     
