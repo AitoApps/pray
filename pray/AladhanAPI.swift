@@ -17,7 +17,7 @@ class AladhanAPI: NSObject {
         super.init()
     }
     
-    class func getCalendarTiming(placemark: CLPlacemark, completion: @escaping (_ results: NSDictionary?, _ error: NSError?) -> Void) {
+    class func getCalendarTiming(placemark: CLPlacemark, completion: @escaping (_ data: [[String: AnyObject]]?, _ error: NSError?) -> Void) {
         let latitude = placemark.location!.coordinate.latitude
         let longitude = placemark.location!.coordinate.longitude
         let timezone = placemark.timeZone!.identifier
@@ -40,17 +40,19 @@ class AladhanAPI: NSObject {
             "month": month,
             "year": year]
 
-        AladhanAPI.taskForGETMethod(parameters: parameters, method: "calendar") { (results: NSDictionary?, error: NSError?) in
+        AladhanAPI.taskForGETMethod(parameters: parameters, method: "calendar") { (results: [String: AnyObject]?, error: NSError?) in
             guard error == nil else {
                 completion(nil, error!)
                 return
             }
             
-            completion(results!, nil)
+            let data = results!["data"] as! [[String: AnyObject]]
+            
+            completion(data, nil)
         }
     }
     
-    @discardableResult static func taskForGETMethod(parameters: [String: Any], method: String, completion: @escaping (_ results: NSDictionary?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    @discardableResult static func taskForGETMethod(parameters: [String: Any], method: String, completion: @escaping (_ results: [String: AnyObject]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         let url = self.aladhanURLFromParameters(parameters: parameters, method: method)
         
@@ -103,11 +105,11 @@ class AladhanAPI: NSObject {
         return components.url!
     }
     
-    static func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ results: NSDictionary?, _ error: NSError?) -> Void) {
+    static func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ results: [String: AnyObject]?, _ error: NSError?) -> Void) {
         
-        var parsedResult: NSDictionary! = nil
+        var parsedResult: [String: AnyObject]! = nil
         do {
-            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! NSDictionary
+            parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: AnyObject]
         } catch {
             let userInfo = [NSLocalizedDescriptionKey : "Could not parse the data as JSON: '\(data)'"]
             completionHandlerForConvertData(nil, NSError(domain: "convertDataWithCompletionHandler", code: 1, userInfo: userInfo))

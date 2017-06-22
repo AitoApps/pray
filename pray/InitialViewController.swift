@@ -33,12 +33,8 @@ extension InitialViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         loadingView(present: true)
         let placemark = placemarks[indexPath.row]
-        AladhanAPI.getCalendarTiming(placemark: placemark) { (results: NSDictionary?, error: NSError?) in
-            var calendarTimings = [NSDictionary]()
-            let data = results!["data"] as! [[NSDictionary]]
-            for item in data {
-                let timings = item["timings"] as! [NSDictionary]
-            }
+        AladhanAPI.getCalendarTiming(placemark: placemark) { (data: [[String : AnyObject]]?, error: NSError?) in
+            print(data)
         }
     }
 }
