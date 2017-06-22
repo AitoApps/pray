@@ -245,8 +245,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="SgB-aT-1e1"/>
                     <connections>
+                        <outlet property="activeTimingNameLabel" destination="mrh-Tc-6Xq" id="gjl-OD-J6g"/>
                         <outlet property="asrTimeLabel" destination="U0D-aq-aDa" id="kM2-1b-hQv"/>
                         <outlet property="cityNameLabel" destination="UpH-qo-EVe" id="0Xv-oj-bFY"/>
+                        <outlet property="countDownLabel" destination="oxy-oW-Kvu" id="tuX-Kc-b0o"/>
                         <outlet property="dhuhrTimeLabel" destination="wvA-HG-LUp" id="gFc-Ua-8Zl"/>
                         <outlet property="fajrTimeLabel" destination="zEK-ST-NLf" id="9FD-jm-R2f"/>
                         <outlet property="imsakTimeLabel" destination="hhz-6U-0pF" id="lw3-Iu-1hS"/>
