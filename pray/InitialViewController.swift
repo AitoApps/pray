@@ -26,6 +26,8 @@ class InitialViewController: UIViewController {
         self.searchBar.delegate = self
         self.addSearchBar()
     }
+    
+    
 }
 
 // MARK: UITableViewDelegate
@@ -34,23 +36,8 @@ extension InitialViewController: UITableViewDelegate {
         loadingView(present: true)
         let placemark = placemarks[indexPath.row]
         
-        DataSource.placemark = placemark
-        
-        AladhanAPI.getCalendarTiming(placemark: placemark) { (data: [[String : AnyObject]]?, error: NSError?) in
-            for item in data! {
-                guard let date = item["date"] as? [String:
-                AnyObject], let timestamp = date["timestamp"] as? String else {
-                    return
-                }
-                
-                guard let dictionary = item["timings"] as? [String: AnyObject] else {
-                    return
-                }
-                
-                let timings = Timings(dictionary: dictionary, timestamp: timestamp, insertInto: self.coreDataStack().context)
-                
-                DataSource.calendar.append(timings)
-            }
+        DataSource.currentPlacemark = placemark
+        getCalendarFromAPIToCoreData(placemark: placemark) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
             self.present(main, animated: true, completion: nil)

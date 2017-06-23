@@ -19,7 +19,7 @@ extension String {
         
         dateFormatter.timeZone = TimeZone(identifier: timeZoneIdentifier)
         
-        let date = dateFormatter.date(from: "\(timeComponent), \(day.readable!)")! as NSDate
+        let date = dateFormatter.date(from: "\(timeComponent), \(day.readableDate!)")! as NSDate
         
         return date
     }

@@ -17,6 +17,8 @@ class AladhanAPI: NSObject {
         super.init()
     }
     
+    
+    
     class func getCalendarTiming(placemark: CLPlacemark, completion: @escaping (_ data: [[String: AnyObject]]?, _ error: NSError?) -> Void) {
         let latitude = placemark.location!.coordinate.latitude
         let longitude = placemark.location!.coordinate.longitude

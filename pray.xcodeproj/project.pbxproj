@@ -13,13 +13,14 @@
 		6E1B5CFD1ED64E550012FF93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */; };
 		6E1B5D001ED64E550012FF93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */; };
 		6E1B5D091ED656AF0012FF93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */; };
-		6E26E3041EFBF3840033CE81 /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E26E3001EFBF3840033CE81 /* Day+CoreDataClass.swift */; };
-		6E26E3051EFBF3840033CE81 /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E26E3011EFBF3840033CE81 /* Day+CoreDataProperties.swift */; };
-		6E26E3061EFBF3840033CE81 /* Timings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E26E3021EFBF3840033CE81 /* Timings+CoreDataClass.swift */; };
-		6E26E3071EFBF3840033CE81 /* Timings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E26E3031EFBF3840033CE81 /* Timings+CoreDataProperties.swift */; };
 		6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */; };
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
-		6E5E32AC1EFBF116000308D8 /* pray.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E32AA1EFBF116000308D8 /* pray.xcdatamodeld */; };
+		6E3EC9641EFCF89400A4F1AA /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9631EFCF89400A4F1AA /* Time.swift */; };
+		6E3EC9671EFCF90300A4F1AA /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9651EFCF90300A4F1AA /* Model.xcdatamodeld */; };
+		6E3EC96C1EFCFA0F00A4F1AA /* Timing+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9681EFCFA0F00A4F1AA /* Timing+CoreDataClass.swift */; };
+		6E3EC96D1EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9691EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift */; };
+		6E3EC96E1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC96A1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift */; };
+		6E3EC96F1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */; };
 		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6559021EFAEF8100EE55CD /* InitialViewController.swift */; };
 		6E6559051EFAEF9D00EE55CD /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6559041EFAEF9D00EE55CD /* Initial.storyboard */; };
@@ -39,13 +40,14 @@
 		6E1B5CFF1ED64E550012FF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E1B5D011ED64E550012FF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		6E26E3001EFBF3840033CE81 /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6E26E3011EFBF3840033CE81 /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		6E26E3021EFBF3840033CE81 /* Timings+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timings+CoreDataClass.swift"; sourceTree = "<group>"; };
-		6E26E3031EFBF3840033CE81 /* Timings+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanAPI.swift; sourceTree = "<group>"; };
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
-		6E5E32AB1EFBF116000308D8 /* pray.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = pray.xcdatamodel; sourceTree = "<group>"; };
+		6E3EC9631EFCF89400A4F1AA /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		6E3EC9661EFCF90300A4F1AA /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		6E3EC9681EFCFA0F00A4F1AA /* Timing+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timing+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6E3EC9691EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timing+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6E3EC96A1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6E6559021EFAEF8100EE55CD /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		6E6559041EFAEF9D00EE55CD /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
@@ -93,16 +95,17 @@
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
 				6E65590E1EFB0E1700EE55CD /* LoadingView.swift */,
 				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
+				6E3EC9631EFCF89400A4F1AA /* Time.swift */,
 				6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */,
 				6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */,
 				6E6559011EFAEA7200EE55CD /* Model */,
 				6E1B5CF91ED64E550012FF93 /* Main.storyboard */,
+				6E3EC9651EFCF90300A4F1AA /* Model.xcdatamodeld */,
 				6E65590C1EFB0D1D00EE55CD /* LoadingView.xib */,
 				6E6559041EFAEF9D00EE55CD /* Initial.storyboard */,
 				6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */,
 				6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */,
 				6E1B5D011ED64E550012FF93 /* Info.plist */,
-				6E5E32AA1EFBF116000308D8 /* pray.xcdatamodeld */,
 			);
 			path = pray;
 			sourceTree = "<group>";
@@ -119,10 +122,10 @@
 			isa = PBXGroup;
 			children = (
 				6E6559081EFAF55C00EE55CD /* DataSource.swift */,
-				6E26E3001EFBF3840033CE81 /* Day+CoreDataClass.swift */,
-				6E26E3011EFBF3840033CE81 /* Day+CoreDataProperties.swift */,
-				6E26E3021EFBF3840033CE81 /* Timings+CoreDataClass.swift */,
-				6E26E3031EFBF3840033CE81 /* Timings+CoreDataProperties.swift */,
+				6E3EC9681EFCFA0F00A4F1AA /* Timing+CoreDataClass.swift */,
+				6E3EC9691EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift */,
+				6E3EC96A1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift */,
+				6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */,
 				6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */,
 				6E6559061EFAF0BB00EE55CD /* CoreDataHelper.swift */,
 			);
@@ -204,21 +207,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E26E3041EFBF3840033CE81 /* Day+CoreDataClass.swift in Sources */,
+				6E3EC96F1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift in Sources */,
 				6E1B5CF81ED64E550012FF93 /* MainViewController.swift in Sources */,
 				6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */,
 				6E1B5CF61ED64E550012FF93 /* AppDelegate.swift in Sources */,
+				6E3EC96D1EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift in Sources */,
+				6E3EC9641EFCF89400A4F1AA /* Time.swift in Sources */,
 				6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */,
-				6E26E3051EFBF3840033CE81 /* Day+CoreDataProperties.swift in Sources */,
 				6E6559091EFAF55C00EE55CD /* DataSource.swift in Sources */,
-				6E26E3061EFBF3840033CE81 /* Timings+CoreDataClass.swift in Sources */,
-				6E5E32AC1EFBF116000308D8 /* pray.xcdatamodeld in Sources */,
-				6E26E3071EFBF3840033CE81 /* Timings+CoreDataProperties.swift in Sources */,
 				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
 				6E6559071EFAF0BB00EE55CD /* CoreDataHelper.swift in Sources */,
+				6E3EC96E1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift in Sources */,
 				6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */,
+				6E3EC96C1EFCFA0F00A4F1AA /* Timing+CoreDataClass.swift in Sources */,
 				6E65590F1EFB0E1700EE55CD /* LoadingView.swift in Sources */,
 				6EFDE6BB1ED7AA90002065B2 /* StringFormatter.swift in Sources */,
+				6E3EC9671EFCF90300A4F1AA /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,13 +391,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		6E5E32AA1EFBF116000308D8 /* pray.xcdatamodeld */ = {
+		6E3EC9651EFCF90300A4F1AA /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				6E5E32AB1EFBF116000308D8 /* pray.xcdatamodel */,
+				6E3EC9661EFCF90300A4F1AA /* Model.xcdatamodel */,
 			);
-			currentVersion = 6E5E32AB1EFBF116000308D8 /* pray.xcdatamodel */;
-			path = pray.xcdatamodeld;
+			currentVersion = 6E3EC9661EFCF90300A4F1AA /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

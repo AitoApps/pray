@@ -29,20 +29,21 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var activeTimingDate: Date? = nil
     
-    var timings: Timings!
+    var day: Day!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        day = DataSource.today()
         setupNavigationBarTransparent()
         setupTimingsLabel()
         setupCurrentCityLabel()
-        setupActiveTimingDate {
-            if activeTimingDate != nil {
-                seconds = -(Date().seconds(from: activeTimingDate!))
-                runTimer()
-            }
-            
-        }
+//        setupActiveTimingDate {
+//            if activeTimingDate != nil {
+//                seconds = -(Date().seconds(from: activeTimingDate!))
+//                runTimer()
+//            }
+//            
+//        }
         
         setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left)
         setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right)
@@ -87,6 +88,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         dayFormatter.dateFormat = "dd MMM yyyy"
         let currentDateString = dayFormatter.string(from: currentDate)
         
+        
+        /*
         for timings in DataSource.calendar {
             if timings.day?.readable == currentDateString  {
                 self.timings = timings
@@ -100,14 +103,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 ishaTimeLabel.text = timeFormatter.string(from: timings.isha! as Date)
             }
         }
+ */
     }
     
     func setupCurrentCityLabel() {
-        let lines = DataSource.placemark.addressDictionary?["FormattedAddressLines"] as! NSArray
+        let lines = DataSource.currentPlacemark.addressDictionary?["FormattedAddressLines"] as! NSArray
         let line = lines[0] as! String
         cityNameLabel.text = line
     }
     
+    /*
     func setupActiveTimingDate(completion: () -> Void) {
         let currentTime = Date()
         var timingsHasNotPassedYet: [Date] = []
@@ -167,6 +172,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         completion()
     }
+ */
     
     func updateTimer() {
         seconds -= 1
