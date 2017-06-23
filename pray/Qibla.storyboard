@@ -28,16 +28,25 @@
                             <imageView userInteractionEnabled="NO" alpha="0.40000000596046448" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="9i7-fb-fwX">
                                 <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="UNF-rd-4iR">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="UNF-rd-4iR" secondAttribute="height" multiplier="1:1" id="Tkp-2j-mJP"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RfF-0P-rQq" firstAttribute="top" secondItem="w5t-mK-3dJ" secondAttribute="bottom" id="1W5-6Q-Mdq"/>
+                            <constraint firstItem="UNF-rd-4iR" firstAttribute="centerY" secondItem="1Gn-Qa-1cm" secondAttribute="centerY" id="KVg-dU-mAm"/>
                             <constraint firstItem="9i7-fb-fwX" firstAttribute="leading" secondItem="1Gn-Qa-1cm" secondAttribute="leading" id="NgJ-vC-tXx"/>
                             <constraint firstAttribute="trailing" secondItem="w5t-mK-3dJ" secondAttribute="trailing" id="Vb2-sz-dy0"/>
                             <constraint firstItem="w5t-mK-3dJ" firstAttribute="top" secondItem="1Gn-Qa-1cm" secondAttribute="top" id="Wf7-dU-BnM"/>
+                            <constraint firstItem="UNF-rd-4iR" firstAttribute="leading" secondItem="9i7-fb-fwX" secondAttribute="leading" id="kIF-7G-Y5A"/>
                             <constraint firstItem="RfF-0P-rQq" firstAttribute="top" secondItem="9i7-fb-fwX" secondAttribute="bottom" id="mmg-66-PoH"/>
                             <constraint firstAttribute="trailing" secondItem="9i7-fb-fwX" secondAttribute="trailing" id="qKB-xe-ltk"/>
                             <constraint firstItem="w5t-mK-3dJ" firstAttribute="leading" secondItem="1Gn-Qa-1cm" secondAttribute="leading" id="upD-49-9JG"/>
+                            <constraint firstItem="UNF-rd-4iR" firstAttribute="centerX" secondItem="1Gn-Qa-1cm" secondAttribute="centerX" id="woB-qC-qFJ"/>
                             <constraint firstItem="9i7-fb-fwX" firstAttribute="width" secondItem="9i7-fb-fwX" secondAttribute="height" multiplier="1:1" id="zVn-8K-buM"/>
                         </constraints>
                     </view>
@@ -47,11 +56,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10N-F3-7o5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="148" y="186"/>
+            <point key="canvasLocation" x="148" y="185.75712143928038"/>
         </scene>
     </scenes>
     <resources>
         <image name="Background" width="750" height="1334"/>
+        <image name="compass" width="750" height="750"/>
         <image name="footer" width="750" height="748"/>
     </resources>
 </document>

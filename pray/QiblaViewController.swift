@@ -25,8 +25,8 @@ class QiblaViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
     }
-    
 
+    
     /*
     // MARK: - Navigation
 
