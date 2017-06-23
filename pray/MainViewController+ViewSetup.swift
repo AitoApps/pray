@@ -49,63 +49,23 @@ extension MainViewController {
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
     }
-    
-    /*
+
     func setupActiveTimingDate(completion: () -> Void) {
         let currentTime = Date()
-        var timingsHasNotPassedYet: [Date] = []
+        var timingsHasNotPassedYet: [Timing] = []
         
-        if timings.fajr! as Date > currentTime as Date {
-            
-            if timingsHasNotPassedYet.count == 0 {
-                activeTimingNameLabel.text = "Fajr"
+        for timing in timings {
+            if timing.date! as Date > currentTime {
+                timingsHasNotPassedYet.append(timing)
             }
-            
-            timingsHasNotPassedYet.append(timings.fajr! as Date)
         }
         
-        if timings.dhuhr! as Date > currentTime as Date {
-            
-            if timingsHasNotPassedYet.count == 0 {
-                activeTimingNameLabel.text = "Dhuhr"
-            }
-            
-            timingsHasNotPassedYet.append(timings.dhuhr! as Date)
-        }
-        
-        if timings.asr! as Date > currentTime as Date {
-            
-            if timingsHasNotPassedYet.count == 0 {
-                activeTimingNameLabel.text = "Asr"
-            }
-            
-            timingsHasNotPassedYet.append(timings.asr! as Date)
-        }
-        
-        if timings.maghrib! as Date > currentTime as Date {
-            
-            if timingsHasNotPassedYet.count == 0 {
-                activeTimingNameLabel.text = "Maghrib"
-            }
-            
-            timingsHasNotPassedYet.append(timings.maghrib! as Date)
-        }
-        
-        if timings.isha! as Date > currentTime as Date {
-            
-            if timingsHasNotPassedYet.count == 0 {
-                activeTimingNameLabel.text = "Isha"
-            }
-            
-            timingsHasNotPassedYet.append(timings.isha! as Date)
-        }
-        
+        timingsHasNotPassedYet = timingsHasNotPassedYet.sorted(by: { ($0.date! as Date) < ($1.date! as Date) })
         if timingsHasNotPassedYet.count != 0 {
-            self.activeTimingDate = timingsHasNotPassedYet[0]
+            self.activeTiming = timingsHasNotPassedYet[0]
         } else {
-            self.activeTimingDate = nil
+            self.activeTiming = nil
         }
         completion()
     }
-    */
 }

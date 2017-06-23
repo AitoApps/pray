@@ -17,7 +17,7 @@ class DataSource: NSObject {
     class func today() -> Day? {
         let date = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MM yyyy"
+        dateFormatter.dateFormat = "dd MMM yyyy"
         let today = dateFormatter.string(from: date)
         for day in calendar {
             if day.readableDate == today {

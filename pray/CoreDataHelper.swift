@@ -19,7 +19,14 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
     }
     
-    
+    //Fetch Results
+    func timingFetchedResultsController(for day: Day) -> NSFetchedResultsController<NSFetchRequestResult> {
+        let stack = coreDataStack()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Timing")
+        fetchRequest.sortDescriptors = []
+        fetchRequest.predicate = NSPredicate(format: "day = %@", argumentArray: [day])
+        return NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.context, sectionNameKeyPath: nil, cacheName: nil)
+    }
     
     func coreDataStack() -> CoreDataStack {
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -80,14 +87,33 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
     }
     
     func preloadDaysFromCoreData() {
-        try? dayFetchedResultsController().performFetch()
-        let fetchRequest = dayFetchedResultsController().fetchRequest
-        let managedObjectContext = dayFetchedResultsController().managedObjectContext
-        let totalTimings = try! managedObjectContext.count(for: fetchRequest)
-        print(totalTimings)
-        for i in 0..<totalTimings {
-            let day = dayFetchedResultsController().object(at: IndexPath(row: i, section: 0)) as! Day
-            DataSource.calendar.append(day)
+        let fetchedResultController = dayFetchedResultsController()
+        do {
+            try fetchedResultController.performFetch()
+            let totalDays = try! fetchedResultController.managedObjectContext.count(for: fetchedResultController.fetchRequest)
+            print(totalDays)
+            for i in 0..<totalDays {
+                let day = fetchedResultController.object(at: IndexPath(row: i, section: 0)) as! Day
+                DataSource.calendar.append(day)
+            }
+        } catch {
+            fatalError()
+        }
+    }
+    
+    func preloadTimingsFromCoreData(for day: Day) -> [Timing] {
+        var timings = [Timing]()
+        let fetchedResultController = timingFetchedResultsController(for: day)
+        do {
+            try fetchedResultController.performFetch()
+            let totalTimings = try! fetchedResultController.managedObjectContext.count(for: fetchedResultController.fetchRequest)
+            for i in 0..<totalTimings {
+                let timing = fetchedResultController.object(at: IndexPath(row: i, section: 0)) as! Timing
+                timings.append(timing)
+            }
+            return timings
+        } catch {
+            fatalError()
         }
     }
     

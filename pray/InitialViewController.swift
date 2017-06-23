@@ -18,21 +18,28 @@ class InitialViewController: UIViewController {
     var placemarks = [CLPlacemark]()
     
     var loadingView = LoadingView()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.searchBar.delegate = self
         self.addSearchBar()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
+        
         if hasPlacemark() {
-            presentMain()
+            preloadDaysFromCoreData()
+            if DataSource.calendar.count == 0 {
+                getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
+                    self.presentMain()
+                })
+            } else {
+                
+                self.presentMain()
+            }
+            
         }
     }
+    
     
     func hasPlacemark() -> Bool {
         

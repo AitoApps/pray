@@ -29,22 +29,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var seconds = Int()
     
-    var activeTimingDate: Date? = nil
+    var activeTiming: Timing? = nil
     
     var day: Day!
+    
+    var timings: [Timing]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         day = DataSource.today()
         initialViewSetup()
-        
-//        setupActiveTimingDate {
-//            if activeTimingDate != nil {
-//                seconds = -(Date().seconds(from: activeTimingDate!))
-//                runTimer()
-//            }
-//            
-//        }
+        setupTimingsLabel()
+        setupActiveTimingDate {
+            if activeTiming != nil {
+                seconds = -(Date().seconds(from: (activeTiming!.date as Date?)!))
+                activeTimingNameLabel.text = activeTiming!.name
+                runTimer()
+            }
+            
+        }
         
         
     }
@@ -69,29 +72,46 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         dayFormatter.dateFormat = "dd MMM yyyy"
         let currentDateString = dayFormatter.string(from: currentDate)
         print(currentDateString)
+        print(day)
+        timings = preloadTimingsFromCoreData(for: day)
         
-        
-        /*
-        for timings in DataSource.calendar {
-            if timings.day?.readable == currentDateString  {
-                self.timings = timings
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateFormat = "h:mm a"
-                imsakTimeLabel.text = timeFormatter.string(from: timings.imsak! as Date)
-                fajrTimeLabel.text = timeFormatter.string(from: timings.fajr! as Date)
-                dhuhrTimeLabel.text = timeFormatter.string(from: timings.dhuhr! as Date)
-                asrTimeLabel.text = timeFormatter.string(from: timings.asr! as Date)
-                maghribTimeLabel.text = timeFormatter.string(from: timings.maghrib! as Date)
-                ishaTimeLabel.text = timeFormatter.string(from: timings.isha! as Date)
+        for timing in timings {
+            let timeFormatter = DateFormatter()
+            timeFormatter.dateFormat = "h:mm a"
+            
+            if timing.name == Time.Imsak.rawValue {
+                imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+            } else if timing.name == Time.Fajr.rawValue {
+                fajrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+            } else if timing.name == Time.Dhuhr.rawValue {
+                dhuhrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+            } else if timing.name == Time.Asr.rawValue {
+                asrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+            } else if timing.name == Time.Maghrib.rawValue {
+                maghribTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+            } else if timing.name == Time.Isha.rawValue {
+                ishaTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
             }
+            
         }
-        */
     }
  
     
     func updateTimer() {
-        seconds -= 1
-        countDownLabel.text = timeString(time: TimeInterval(seconds))
+        if seconds < 1 {
+            timer.invalidate()
+            setupActiveTimingDate {
+                if activeTiming != nil {
+                    seconds = -(Date().seconds(from: (activeTiming!.date as Date?)!))
+                    activeTimingNameLabel.text = activeTiming!.name
+                    runTimer()
+                }
+            }
+        } else {
+            seconds -= 1
+            countDownLabel.text = timeString(time: TimeInterval(seconds))
+        }
+
     }
     
     func runTimer() {
