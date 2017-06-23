@@ -34,12 +34,24 @@
                                     <constraint firstAttribute="width" secondItem="UNF-rd-4iR" secondAttribute="height" multiplier="1:1" id="Tkp-2j-mJP"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qibla" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pP6-ET-VXf">
+                                <rect key="frame" x="32" y="96" width="311" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="YLm-vv-NO6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RfF-0P-rQq" firstAttribute="top" secondItem="w5t-mK-3dJ" secondAttribute="bottom" id="1W5-6Q-Mdq"/>
+                            <constraint firstItem="pP6-ET-VXf" firstAttribute="leading" secondItem="1Gn-Qa-1cm" secondAttribute="leading" constant="32" id="9w2-rQ-LhJ"/>
+                            <constraint firstAttribute="trailing" secondItem="pP6-ET-VXf" secondAttribute="trailing" constant="32" id="GVK-E1-Xif"/>
                             <constraint firstItem="UNF-rd-4iR" firstAttribute="centerY" secondItem="1Gn-Qa-1cm" secondAttribute="centerY" id="KVg-dU-mAm"/>
                             <constraint firstItem="9i7-fb-fwX" firstAttribute="leading" secondItem="1Gn-Qa-1cm" secondAttribute="leading" id="NgJ-vC-tXx"/>
+                            <constraint firstItem="pP6-ET-VXf" firstAttribute="top" secondItem="w5t-mK-3dJ" secondAttribute="top" constant="96" id="QI7-kZ-7IQ"/>
                             <constraint firstAttribute="trailing" secondItem="w5t-mK-3dJ" secondAttribute="trailing" id="Vb2-sz-dy0"/>
                             <constraint firstItem="w5t-mK-3dJ" firstAttribute="top" secondItem="1Gn-Qa-1cm" secondAttribute="top" id="Wf7-dU-BnM"/>
                             <constraint firstItem="UNF-rd-4iR" firstAttribute="leading" secondItem="9i7-fb-fwX" secondAttribute="leading" id="kIF-7G-Y5A"/>

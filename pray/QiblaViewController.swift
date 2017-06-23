@@ -54,6 +54,10 @@ class QiblaViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundImagePattern.imageGradientFadeTop(target: self)
+        
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
         locationManager.delegate = locationDelegate
         
         locationDelegate.locationCallback = { location in

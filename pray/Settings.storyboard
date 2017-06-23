@@ -96,8 +96,8 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vei-xH-GeI">
-                                <rect key="frame" x="48" y="100" width="279" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vei-xH-GeI">
+                                <rect key="frame" x="32" y="96" width="311" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="rLk-7k-WS8"/>
                                 </constraints>
@@ -109,19 +109,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="VEp-uY-5NR" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" id="1QK-wr-M9V"/>
+                            <constraint firstItem="Vei-xH-GeI" firstAttribute="top" secondItem="tkr-w0-IJK" secondAttribute="top" constant="96" id="3Xd-hY-dZO"/>
                             <constraint firstItem="DL6-gn-hFw" firstAttribute="centerY" secondItem="QW0-bR-T5d" secondAttribute="centerY" id="AEO-0z-Xzb"/>
                             <constraint firstItem="tkr-w0-IJK" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" id="AS7-Hc-iQP"/>
+                            <constraint firstAttribute="trailing" secondItem="Vei-xH-GeI" secondAttribute="trailing" constant="32" id="DAa-oL-IrJ"/>
                             <constraint firstItem="tkr-w0-IJK" firstAttribute="top" secondItem="QW0-bR-T5d" secondAttribute="top" id="Ihk-gC-1OY"/>
                             <constraint firstItem="4Zy-6r-ihN" firstAttribute="top" secondItem="VEp-uY-5NR" secondAttribute="bottom" id="Mh9-ez-dvC"/>
                             <constraint firstItem="4Zy-6r-ihN" firstAttribute="top" secondItem="tkr-w0-IJK" secondAttribute="bottom" id="NkI-eW-Gsj"/>
                             <constraint firstItem="VEp-uY-5NR" firstAttribute="width" secondItem="VEp-uY-5NR" secondAttribute="height" multiplier="1:1" id="TVT-Tq-YCo"/>
-                            <constraint firstItem="Vei-xH-GeI" firstAttribute="top" secondItem="Khf-J3-jHl" secondAttribute="bottom" constant="80" id="UlA-FX-u93"/>
                             <constraint firstItem="DL6-gn-hFw" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leadingMargin" constant="32" id="bCu-3D-X8I"/>
-                            <constraint firstItem="Vei-xH-GeI" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leadingMargin" constant="32" id="rEc-r9-WaQ"/>
+                            <constraint firstItem="Vei-xH-GeI" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" constant="32" id="ja3-V6-8HC"/>
                             <constraint firstAttribute="trailing" secondItem="tkr-w0-IJK" secondAttribute="trailing" id="xUN-xY-shl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DL6-gn-hFw" secondAttribute="trailing" constant="32" id="xeC-Vw-8eW"/>
                             <constraint firstAttribute="trailing" secondItem="VEp-uY-5NR" secondAttribute="trailing" id="yck-nP-0uY"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Vei-xH-GeI" secondAttribute="trailing" constant="32" id="zha-zA-R38"/>
                         </constraints>
                     </view>
                     <connections>
