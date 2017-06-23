@@ -22,23 +22,63 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var maghribTimeLabel: UILabel!
     @IBOutlet weak var ishaTimeLabel: UILabel!
     
+    @IBOutlet weak var backgroundPatternImageView: UIImageView!
     var timer = Timer()
     
     var seconds = Int()
     
-    var activeTimingDate = Date()
+    var activeTimingDate: Date? = nil
     
     var timings: Timings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationBarTransparent()
         setupTimingsLabel()
         setupCurrentCityLabel()
-        setupActiveTimingDate { 
-            print(activeTimingDate)
-            seconds = -(Date().seconds(from: activeTimingDate))
-            runTimer()
+        setupActiveTimingDate {
+            if activeTimingDate != nil {
+                seconds = -(Date().seconds(from: activeTimingDate!))
+                runTimer()
+            }
+            
         }
+        
+        setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left)
+        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right)
+        
+        let mask = CAGradientLayer()
+        mask.startPoint = CGPoint(x: 1.0, y: 0.0)
+        mask.endPoint = CGPoint(x:1.0, y:1.0)
+        let whiteColor = UIColor.white
+        mask.colors = [whiteColor.withAlphaComponent(0.0).cgColor, whiteColor.withAlphaComponent(1.0),whiteColor.withAlphaComponent(1.0).cgColor]
+        mask.locations = [NSNumber(value: 0.0), NSNumber(value: 0.1), NSNumber(value: 1.0)]
+        mask.frame = view.bounds
+        backgroundPatternImageView.layer.mask = mask
+    }
+    
+    enum BarButtonItemPosition {
+        case left
+        case right
+    }
+    
+    func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition) {
+        let barButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+        barButtonItem.tintColor = .white
+        switch position {
+        case .left:
+            navigationItem.leftBarButtonItem = barButtonItem
+        case .right:
+            navigationItem.rightBarButtonItem = barButtonItem
+        }
+    }
+    
+    func setupNavigationBarTransparent() {
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.blackOpaque
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
     }
     
     func setupTimingsLabel() {
@@ -117,7 +157,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             timingsHasNotPassedYet.append(timings.isha! as Date)
         }
         
-        self.activeTimingDate = timingsHasNotPassedYet[0]
+        if timingsHasNotPassedYet.count != 0 {
+            self.activeTimingDate = timingsHasNotPassedYet[0]
+        } else {
+            self.activeTimingDate = nil
+        }
+        
+        
         
         completion()
     }
