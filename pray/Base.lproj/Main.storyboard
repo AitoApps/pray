@@ -25,20 +25,20 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="koq-Ba-Hp4">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="Kgb-zD-UP7">
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header" translatesAutoresizingMaskIntoConstraints="NO" id="Kgb-zD-UP7">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Kgb-zD-UP7" secondAttribute="height" multiplier="750:440" id="1zM-kL-T9u"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-ct-qUm">
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="footer" translatesAutoresizingMaskIntoConstraints="NO" id="jDg-ct-qUm">
                                 <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="jDg-ct-qUm" secondAttribute="height" multiplier="1:1" id="0aZ-wq-FOP"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="sMy-MJ-YWy">
-                                <rect key="frame" x="96" y="128" width="185" height="65.5"/>
+                                <rect key="frame" x="95" y="128" width="185" height="65.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Francisco" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpH-qo-EVe">
                                         <rect key="frame" x="0.0" y="0.0" width="185" height="33.5"/>
@@ -47,7 +47,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZWJ-Js-iFg">
-                                        <rect key="frame" x="10.5" y="41.5" width="163.5" height="24"/>
+                                        <rect key="frame" x="11" y="41.5" width="163.5" height="24"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NYB-WR-TPM">
                                                 <rect key="frame" x="0.0" y="0.0" width="163.5" height="24"/>

@@ -27,6 +27,24 @@ class InitialViewController: UIViewController {
         self.addSearchBar()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if hasPlacemark() {
+            presentMain()
+        }
+    }
+    
+    func hasPlacemark() -> Bool {
+        
+        if let placemarkData  = UserDefaults.standard.object(forKey: "placemark") as? Data {
+            let placemark = NSKeyedUnarchiver.unarchiveObject(with: placemarkData) as! CLPlacemark
+            DataSource.currentPlacemark = placemark
+            return true
+        } else {
+            return false
+        }
+    }
+    
     
 }
 
@@ -34,13 +52,16 @@ class InitialViewController: UIViewController {
 extension InitialViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         loadingView(present: true)
+        
         let placemark = placemarks[indexPath.row]
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
+        let userDefaults = UserDefaults.standard
+        userDefaults.set(encodedData, forKey: "placemark")
         
         DataSource.currentPlacemark = placemark
+        
         getCalendarFromAPIToCoreData(placemark: placemark) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-            self.present(main, animated: true, completion: nil)
+            self.presentMain()
         }
     }
 }
@@ -117,6 +138,12 @@ extension InitialViewController {
         searchBar.showsCancelButton = true
         searchBar.sizeToFit()
         self.navigationItem.titleView = searchBar
+    }
+    
+    func presentMain() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+        self.present(main, animated: true, completion: nil)
     }
     
     func loadingViewFromNib() -> LoadingView {

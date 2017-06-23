@@ -16,7 +16,7 @@ enum BarButtonItemPosition {
 
 extension MainViewController {
     
-    func setupUI() {
+    func initialViewSetup() {
         setupNavigationBarTransparent()
         setupTimingsLabel()
         setupCurrentCityLabel()

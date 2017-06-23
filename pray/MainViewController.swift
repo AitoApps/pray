@@ -34,6 +34,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         day = DataSource.today()
+        initialViewSetup()
         
 //        setupActiveTimingDate {
 //            if activeTimingDate != nil {
@@ -87,8 +88,3 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
 }
-
-
-
-
-
