@@ -23,7 +23,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var ishaTimeLabel: UILabel!
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
     
-    let longPressGestureRecognizer = UISwipeGestureRecognizer()
+    let swipeGestureRecognizer = UISwipeGestureRecognizer()
     
     var timer = Timer()
     
@@ -49,16 +49,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
+    
+    
     func presentSettings() {
-        let transition = CATransition()
-        transition.duration = 0.3
-        transition.type = kCATransitionPush
-        transition.subtype = kCATransitionFromLeft
-        view.window!.layer.add(transition, forKey: kCATransition)
-        
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let settings = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
-        self.present(settings, animated: false, completion: nil)
+        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
+    
+    func presentQibla() {
+        let storyboard = UIStoryboard(name: "Qibla", bundle: nil)
+        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "Qibla") as! QiblaViewController
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
     func setupTimingsLabel() {
@@ -66,6 +68,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let dayFormatter = DateFormatter()
         dayFormatter.dateFormat = "dd MMM yyyy"
         let currentDateString = dayFormatter.string(from: currentDate)
+        print(currentDateString)
         
         
         /*

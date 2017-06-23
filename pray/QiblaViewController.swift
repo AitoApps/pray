@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  QiblaViewController.swift
 //  pray
 //
 //  Created by Zulwiyoza Putra on 6/23/17.
@@ -8,11 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class QiblaViewController: UIViewController {
 
     @IBOutlet weak var backgroundImagePattern: UIImageView!
-    @IBOutlet weak var backButton: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         backgroundImagePattern.imageGradientFadeTop(target: self)
@@ -28,9 +26,6 @@ class SettingsViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    func back() {
-        self.navigationController?.popViewController(animated: true)
-    }
 
     /*
     // MARK: - Navigation

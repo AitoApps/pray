@@ -21,25 +21,14 @@ extension MainViewController {
         setupTimingsLabel()
         setupCurrentCityLabel()
         setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left, selector: #selector(presentSettings))
-        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right, selector: nil)
-        setupBackgroundImageGradient()
+        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right, selector: #selector(presentQibla))
+        backgroundPatternImageView.imageGradientFadeTop(target: self)
     }
     
     func setupCurrentCityLabel() {
         let lines = DataSource.currentPlacemark.addressDictionary?["FormattedAddressLines"] as! NSArray
         let line = lines[0] as! String
         cityNameLabel.text = line
-    }
-    
-    func setupBackgroundImageGradient() {
-        let mask = CAGradientLayer()
-        mask.startPoint = CGPoint(x: 1.0, y: 0.0)
-        mask.endPoint = CGPoint(x:1.0, y:1.0)
-        let whiteColor = UIColor.white
-        mask.colors = [whiteColor.withAlphaComponent(0.0).cgColor, whiteColor.withAlphaComponent(1.0),whiteColor.withAlphaComponent(1.0).cgColor]
-        mask.locations = [NSNumber(value: 0.0), NSNumber(value: 0.1), NSNumber(value: 1.0)]
-        mask.frame = view.bounds
-        backgroundPatternImageView.layer.mask = mask
     }
     
     func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition, selector: Selector?) {
