@@ -21,6 +21,8 @@
 		6E3EC96D1EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9691EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift */; };
 		6E3EC96E1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC96A1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift */; };
 		6E3EC96F1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */; };
+		6E3EC9711EFD0BF800A4F1AA /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9701EFD0BF800A4F1AA /* DateHelper.swift */; };
+		6E3EC9731EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */; };
 		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6559021EFAEF8100EE55CD /* InitialViewController.swift */; };
 		6E6559051EFAEF9D00EE55CD /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6559041EFAEF9D00EE55CD /* Initial.storyboard */; };
@@ -48,6 +50,8 @@
 		6E3EC9691EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Timing+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		6E3EC96A1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataClass.swift"; sourceTree = "<group>"; };
 		6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Day+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		6E3EC9701EFD0BF800A4F1AA /* DateHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
+		6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainViewController+ViewSetup.swift"; sourceTree = "<group>"; };
 		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6E6559021EFAEF8100EE55CD /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		6E6559041EFAEF9D00EE55CD /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
@@ -92,10 +96,12 @@
 			children = (
 				6E1B5CF51ED64E550012FF93 /* AppDelegate.swift */,
 				6E1B5CF71ED64E550012FF93 /* MainViewController.swift */,
+				6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */,
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
 				6E65590E1EFB0E1700EE55CD /* LoadingView.swift */,
 				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
 				6E3EC9631EFCF89400A4F1AA /* Time.swift */,
+				6E3EC9701EFD0BF800A4F1AA /* DateHelper.swift */,
 				6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */,
 				6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */,
 				6E6559011EFAEA7200EE55CD /* Model */,
@@ -215,7 +221,9 @@
 				6E3EC9641EFCF89400A4F1AA /* Time.swift in Sources */,
 				6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */,
 				6E6559091EFAF55C00EE55CD /* DataSource.swift in Sources */,
+				6E3EC9731EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift in Sources */,
 				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
+				6E3EC9711EFD0BF800A4F1AA /* DateHelper.swift in Sources */,
 				6E6559071EFAF0BB00EE55CD /* CoreDataHelper.swift in Sources */,
 				6E3EC96E1EFCFA0F00A4F1AA /* Day+CoreDataClass.swift in Sources */,
 				6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */,
