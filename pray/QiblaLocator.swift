@@ -11,18 +11,15 @@ import MapKit
 
 class QiblaLocator {
     
-    let qiblaLocation = CLLocation(latitude: 21.4228394, longitude: 39.8250211)
+    private static let qiblaLocation = CLLocation(latitude: 21.4228394, longitude: 39.8250211)
     
-    func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
-    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
-    
-    func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
+    class func bearingRadian(location: CLLocation) -> CGFloat {
         
-        let latitude = degreesToRadians(degrees: point1.coordinate.latitude)
-        let longitude = degreesToRadians(degrees: point1.coordinate.longitude)
+        let latitude = location.coordinate.latitude.degreesToRadians
+        let longitude = location.coordinate.longitude.degreesToRadians
         
-        let qiblaLatitude = degreesToRadians(degrees: qiblaLocation.coordinate.latitude)
-        let qiblaLongitude = degreesToRadians(degrees: qiblaLocation.coordinate.longitude)
+        let qiblaLatitude = self.qiblaLocation.coordinate.latitude.degreesToRadians
+        let qiblaLongitude = self.qiblaLocation.coordinate.longitude.degreesToRadians
         
         let differentLongitude = qiblaLongitude - longitude
         
@@ -30,7 +27,21 @@ class QiblaLocator {
         let x = cos(latitude) * sin(qiblaLatitude) - sin(latitude) * cos(qiblaLatitude) * cos(differentLongitude)
         let radiansBearing = atan2(y, x)
         
-        return radiansToDegrees(radians: radiansBearing)
+        return CGFloat(radiansBearing)
+    }
+    
+    class func bearingDegrees(location: CLLocation) -> CGFloat {
+        return QiblaLocator.bearingRadian(location: location).radiansToDegrees
     }
 
+}
+
+extension CGFloat {
+    var degreesToRadians: CGFloat { return self * .pi / 180 }
+    var radiansToDegrees: CGFloat { return self * 180 / .pi }
+}
+
+private extension Double {
+    var degreesToRadians: Double { return Double(CGFloat(self).degreesToRadians) }
+    var radiansToDegrees: Double { return Double(CGFloat(self).radiansToDegrees) }
 }

@@ -29,6 +29,7 @@
 		6E3EC97D1EFD317500A4F1AA /* Qibla.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E3EC97C1EFD317500A4F1AA /* Qibla.storyboard */; };
 		6E3EC97F1EFD31BC00A4F1AA /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */; };
 		6E3EC9811EFD364A00A4F1AA /* QiblaLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */; };
+		6E3EEEE51EFD449D00FD7415 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EEEE41EFD449D00FD7415 /* LocationDelegate.swift */; };
 		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6559021EFAEF8100EE55CD /* InitialViewController.swift */; };
 		6E6559051EFAEF9D00EE55CD /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6559041EFAEF9D00EE55CD /* Initial.storyboard */; };
@@ -64,6 +65,7 @@
 		6E3EC97C1EFD317500A4F1AA /* Qibla.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Qibla.storyboard; sourceTree = "<group>"; };
 		6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
 		6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiblaLocator.swift; sourceTree = "<group>"; };
+		6E3EEEE41EFD449D00FD7415 /* LocationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
 		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6E6559021EFAEF8100EE55CD /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		6E6559041EFAEF9D00EE55CD /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
 				6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */,
 				6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */,
+				6E3EEEE41EFD449D00FD7415 /* LocationDelegate.swift */,
 				6E3EC9761EFD1ABD00A4F1AA /* SettingsViewController.swift */,
 				6E65590E1EFB0E1700EE55CD /* LoadingView.swift */,
 				6EFDE6BA1ED7AA90002065B2 /* StringFormatter.swift */,
@@ -244,6 +247,7 @@
 				6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */,
 				6E3EC9811EFD364A00A4F1AA /* QiblaLocator.swift in Sources */,
 				6E6559091EFAF55C00EE55CD /* DataSource.swift in Sources */,
+				6E3EEEE51EFD449D00FD7415 /* LocationDelegate.swift in Sources */,
 				6E3EC9731EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift in Sources */,
 				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
 				6E3EC9711EFD0BF800A4F1AA /* DateHelper.swift in Sources */,

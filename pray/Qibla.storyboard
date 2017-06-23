@@ -52,6 +52,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImagePattern" destination="9i7-fb-fwX" id="Hmy-Rv-FnK"/>
+                        <outlet property="compassView" destination="UNF-rd-4iR" id="OVq-oD-noT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10N-F3-7o5" userLabel="First Responder" sceneMemberID="firstResponder"/>
