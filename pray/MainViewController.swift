@@ -21,8 +21,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var asrTimeLabel: UILabel!
     @IBOutlet weak var maghribTimeLabel: UILabel!
     @IBOutlet weak var ishaTimeLabel: UILabel!
-    
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
+    
+    let longPressGestureRecognizer = UISwipeGestureRecognizer()
+    
     var timer = Timer()
     
     var seconds = Int()
@@ -45,6 +47,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 //        }
         
         
+    }
+    
+    func presentSettings() {
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = kCATransitionPush
+        transition.subtype = kCATransitionFromLeft
+        view.window!.layer.add(transition, forKey: kCATransition)
+        
+        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
+        let settings = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
+        self.present(settings, animated: false, completion: nil)
     }
     
     func setupTimingsLabel() {

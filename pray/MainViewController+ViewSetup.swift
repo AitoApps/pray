@@ -20,8 +20,8 @@ extension MainViewController {
         setupNavigationBarTransparent()
         setupTimingsLabel()
         setupCurrentCityLabel()
-        setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left)
-        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right)
+        setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left, selector: #selector(presentSettings))
+        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right, selector: nil)
         setupBackgroundImageGradient()
     }
     
@@ -42,8 +42,8 @@ extension MainViewController {
         backgroundPatternImageView.layer.mask = mask
     }
     
-    func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition) {
-        let barButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: nil)
+    func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition, selector: Selector?) {
+        let barButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: selector)
         barButtonItem.tintColor = .white
         switch position {
         case .left:
