@@ -39,8 +39,21 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         day = DataSource.today()
         initialViewSetup()
+        setupSwipeGesture()
+        countDownLabel.text = timeString(time: TimeInterval(seconds))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupTimer()
+        countDownLabel.text = timeString(time: TimeInterval(seconds))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        timer.invalidate()
+    }
+    
+    func setupTimer() {
         setupTimingsLabel()
-        
         setupActiveTimingDate {
             if activeTiming != nil {
                 seconds = -(Date().seconds(from: (activeTiming!.date as Date?)!))
@@ -49,8 +62,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
             }
             
         }
-        
-        setupSwipeGesture()
     }
     
     func setupSwipeGesture() {
@@ -70,9 +81,11 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
             case UISwipeGestureRecognizerDirection.right:
                 print("Swiped right")
                 presentSettings()
+                
             case UISwipeGestureRecognizerDirection.left:
                 print("Swiped left")
                 presentQibla()
+                
             default:
                 break
             }

@@ -8,11 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class InitialViewController: UIViewController {
 
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
     
+    let locationManager = CLLocationManager()
     
     var loadingView = LoadingView()
     
@@ -36,7 +38,19 @@ class InitialViewController: UIViewController {
             } else {
                 self.presentMain()
             }
-            
+        } else {
+            getPlacemark()
+        }
+    }
+    
+    func getPlacemark() {
+        locationManager.delegate = self
+        
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
         }
     }
     
@@ -58,5 +72,35 @@ class InitialViewController: UIViewController {
     }
     
     
+}
+
+// The Delegate
+
+extension InitialViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = locations[0]
+        locationManager.stopUpdatingLocation()
+        CLGeocoder().reverseGeocodeLocation(userLocation) { (placemarks: [CLPlacemark]?, error: Error?) in
+            guard error == nil else {
+                print("No Locaton Returned")
+                return
+            }
+            
+            let placemark = placemarks![0]
+            
+            let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(encodedData, forKey: "placemark")
+            
+            DataSource.currentPlacemark = placemark
+            
+            self.getCalendarFromAPIToCoreData(placemark: placemark) {
+                self.executeOnMain {
+                    self.presentMain()
+                }
+                
+            }
+        }
+    }
 }
 

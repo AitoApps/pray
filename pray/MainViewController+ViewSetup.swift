@@ -20,15 +20,16 @@ extension MainViewController {
         setupNavigationBarTransparent()
         setupTimingsLabel()
         setupCurrentCityLabel()
-        setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left, selector: #selector(presentSettings))
-        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right, selector: #selector(presentQibla))
+//        setupBarButtonItem(image: #imageLiteral(resourceName: "settings"), position: .left, selector: #selector(presentSettings))
+//        setupBarButtonItem(image: #imageLiteral(resourceName: "Qibla"), position: .right, selector: #selector(presentQibla))
         backgroundPatternImageView.imageGradientFadeTop(target: self)
     }
     
     func setupCurrentCityLabel() {
         let lines = DataSource.currentPlacemark.addressDictionary?["FormattedAddressLines"] as! NSArray
+        let cityName = DataSource.currentPlacemark.locality ?? DataSource.currentPlacemark.subAdministrativeArea
         let line = lines[0] as! String
-        cityNameLabel.text = line
+        cityNameLabel.text = cityName ?? line
     }
     
     func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition, selector: Selector?) {

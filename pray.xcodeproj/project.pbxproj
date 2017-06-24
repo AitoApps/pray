@@ -13,6 +13,7 @@
 		6E1B5CFD1ED64E550012FF93 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */; };
 		6E1B5D001ED64E550012FF93 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */; };
 		6E1B5D091ED656AF0012FF93 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */; };
+		6E3C97D71EFEAB5500FA79C6 /* ThreadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3C97D61EFEAB5500FA79C6 /* ThreadController.swift */; };
 		6E3CC5BC1ED6AB3900B67592 /* AladhanAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */; };
 		6E3CC5BE1ED6ACF600B67592 /* AladhanConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */; };
 		6E3EC9641EFCF89400A4F1AA /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9631EFCF89400A4F1AA /* Time.swift */; };
@@ -53,6 +54,7 @@
 		6E1B5CFF1ED64E550012FF93 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E1B5D011ED64E550012FF93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E1B5D081ED656AF0012FF93 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6E3C97D61EFEAB5500FA79C6 /* ThreadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThreadController.swift; sourceTree = "<group>"; };
 		6E3CC5BB1ED6AB3900B67592 /* AladhanAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanAPI.swift; sourceTree = "<group>"; };
 		6E3CC5BD1ED6ACF600B67592 /* AladhanConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AladhanConstants.swift; sourceTree = "<group>"; };
 		6E3EC9631EFCF89400A4F1AA /* Time.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				6E50301C1EFEA2AC00F57910 /* PrayViewController.swift */,
 				6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */,
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
+				6E3C97D61EFEAB5500FA79C6 /* ThreadController.swift */,
 				6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */,
 				6E50301A1EFE9AD200F57910 /* NavigationControllerPresenter.swift */,
 				6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */,
@@ -263,6 +266,7 @@
 				6E6559091EFAF55C00EE55CD /* DataSource.swift in Sources */,
 				6E3EEEE51EFD449D00FD7415 /* LocationDelegate.swift in Sources */,
 				6E3EC9731EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift in Sources */,
+				6E3C97D71EFEAB5500FA79C6 /* ThreadController.swift in Sources */,
 				6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */,
 				6E3EC9711EFD0BF800A4F1AA /* DateHelper.swift in Sources */,
 				6E6559071EFAF0BB00EE55CD /* CoreDataHelper.swift in Sources */,
