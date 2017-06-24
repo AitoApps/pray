@@ -23,6 +23,19 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     @IBOutlet weak var ishaTimeLabel: UILabel!
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
     
+    // Views
+    @IBOutlet weak var fajrTimingView: UIView!
+    @IBOutlet weak var dhuhrTimingView: UIView!
+    @IBOutlet weak var asrTimingView: UIView!
+    @IBOutlet weak var maghribTimingView: UIView!
+    @IBOutlet weak var ishaTimingView: UIView!
+    
+    @IBOutlet weak var fajrCompletion: UILabel!
+    @IBOutlet weak var dhuhrCompletion: UILabel!
+    @IBOutlet weak var asrCompletion: UILabel!
+    @IBOutlet weak var maghribCompletion: UILabel!
+    @IBOutlet weak var ishaCompletion: UILabel!
+    
     let swipeGestureRecognizer = UISwipeGestureRecognizer()
     
     var timer = Timer()
@@ -37,10 +50,18 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addGestureToView(view: fajrTimingView)
+        addGestureToView(view: dhuhrTimingView)
+        addGestureToView(view: asrTimingView)
+        addGestureToView(view: maghribTimingView)
+        addGestureToView(view: ishaTimingView)
+        
         day = DataSource.today()
         initialViewSetup()
         setupSwipeGesture()
         countDownLabel.text = timeString(time: TimeInterval(seconds))
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +71,37 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
     override func viewDidDisappear(_ animated: Bool) {
         timer.invalidate()
+    }
+    
+    func addGestureToView(view: UIView) {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(completionDidTap(sender:)))
+        view.addGestureRecognizer(gesture)
+    }
+
+    
+    func completionDidTap(sender: UITapGestureRecognizer) {
+        let tag = sender.view!.tag
+        let readableTime = Date().formatTimeToReadableTime()
+        
+        switch tag {
+        case 1:
+            fajrCompletion.text = "Completed at \(readableTime)"
+            fajrTimingView.alpha = 0.5
+        case 2:
+            dhuhrCompletion.text = "Completed at \(readableTime)"
+            dhuhrTimingView.alpha = 0.5
+        case 3:
+            asrCompletion.text = "Completed at \(readableTime)"
+            asrTimingView.alpha = 0.5
+        case 4:
+            maghribCompletion.text = "Completed at \(readableTime)"
+            maghribTimingView.alpha = 0.5
+        default:
+            ishaCompletion.text = "Completed at \(readableTime)"
+            ishaTimingView.alpha = 0.5
+        }
+        
+        
     }
     
     func setupTimer() {
@@ -118,7 +170,7 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
             timeFormatter.dateFormat = "h:mm a"
             
             if timing.name == Time.Imsak.rawValue {
-                imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
+//                imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
             } else if timing.name == Time.Fajr.rawValue {
                 fajrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
             } else if timing.name == Time.Dhuhr.rawValue {

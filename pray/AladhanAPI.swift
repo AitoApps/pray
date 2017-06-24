@@ -38,7 +38,7 @@ class AladhanAPI: NSObject {
             "latitude": latitude,
             "longitude": longitude,
             "timezonestring": timezone,
-            "method": 4,
+            "method": 2,
             "month": month,
             "year": year]
 

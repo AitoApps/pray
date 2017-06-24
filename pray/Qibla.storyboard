@@ -29,8 +29,9 @@
                                 <rect key="frame" x="0.0" y="292" width="375" height="375"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="compass" translatesAutoresizingMaskIntoConstraints="NO" id="UNF-rd-4iR">
-                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <rect key="frame" x="52.5" y="198.5" width="270" height="270"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="270" id="MW0-sU-AF9"/>
                                     <constraint firstAttribute="width" secondItem="UNF-rd-4iR" secondAttribute="height" multiplier="1:1" id="Tkp-2j-mJP"/>
                                 </constraints>
                             </imageView>
@@ -54,7 +55,6 @@
                             <constraint firstItem="pP6-ET-VXf" firstAttribute="top" secondItem="w5t-mK-3dJ" secondAttribute="top" constant="96" id="QI7-kZ-7IQ"/>
                             <constraint firstAttribute="trailing" secondItem="w5t-mK-3dJ" secondAttribute="trailing" id="Vb2-sz-dy0"/>
                             <constraint firstItem="w5t-mK-3dJ" firstAttribute="top" secondItem="1Gn-Qa-1cm" secondAttribute="top" id="Wf7-dU-BnM"/>
-                            <constraint firstItem="UNF-rd-4iR" firstAttribute="leading" secondItem="9i7-fb-fwX" secondAttribute="leading" id="kIF-7G-Y5A"/>
                             <constraint firstItem="RfF-0P-rQq" firstAttribute="top" secondItem="9i7-fb-fwX" secondAttribute="bottom" id="mmg-66-PoH"/>
                             <constraint firstAttribute="trailing" secondItem="9i7-fb-fwX" secondAttribute="trailing" id="qKB-xe-ltk"/>
                             <constraint firstItem="w5t-mK-3dJ" firstAttribute="leading" secondItem="1Gn-Qa-1cm" secondAttribute="leading" id="upD-49-9JG"/>
@@ -74,7 +74,7 @@
     </scenes>
     <resources>
         <image name="Background" width="750" height="1334"/>
-        <image name="compass" width="750" height="750"/>
+        <image name="compass" width="350" height="350"/>
         <image name="footer" width="750" height="748"/>
     </resources>
 </document>

@@ -1,5 +1,5 @@
 //
-//  StringFormatter.swift
+//  StringToDateFormatter.swift
 //  pray
 //
 //  Created by Zulwiyoza Putra on 5/25/17.
