@@ -20,7 +20,5 @@ extension UIImageView {
         print(target.view.bounds)
         mask.frame = CGRect(x: 0, y: target.view.frame.height - 2 * (target.view.frame.width), width: target.view.frame.width, height: 2 * target.view.frame.width)
         self.layer.mask = mask
-        
     }
-
 }

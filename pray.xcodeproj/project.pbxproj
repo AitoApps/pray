@@ -30,6 +30,8 @@
 		6E3EC97F1EFD31BC00A4F1AA /* QiblaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */; };
 		6E3EC9811EFD364A00A4F1AA /* QiblaLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */; };
 		6E3EEEE51EFD449D00FD7415 /* LocationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3EEEE41EFD449D00FD7415 /* LocationDelegate.swift */; };
+		6E5030171EFE842300F57910 /* LocationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5030161EFE842300F57910 /* LocationSearchViewController.swift */; };
+		6E5030191EFE8D1400F57910 /* LocationSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E5030181EFE8D1400F57910 /* LocationSearch.storyboard */; };
 		6E6558FC1EFAE94D00EE55CD /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */; };
 		6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6559021EFAEF8100EE55CD /* InitialViewController.swift */; };
 		6E6559051EFAEF9D00EE55CD /* Initial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E6559041EFAEF9D00EE55CD /* Initial.storyboard */; };
@@ -66,6 +68,8 @@
 		6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiblaViewController.swift; sourceTree = "<group>"; };
 		6E3EC9801EFD364A00A4F1AA /* QiblaLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QiblaLocator.swift; sourceTree = "<group>"; };
 		6E3EEEE41EFD449D00FD7415 /* LocationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationDelegate.swift; sourceTree = "<group>"; };
+		6E5030161EFE842300F57910 /* LocationSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchViewController.swift; sourceTree = "<group>"; };
+		6E5030181EFE8D1400F57910 /* LocationSearch.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LocationSearch.storyboard; sourceTree = "<group>"; };
 		6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		6E6559021EFAEF8100EE55CD /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		6E6559041EFAEF9D00EE55CD /* Initial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Initial.storyboard; sourceTree = "<group>"; };
@@ -109,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				6E1B5CF51ED64E550012FF93 /* AppDelegate.swift */,
+				6E5030161EFE842300F57910 /* LocationSearchViewController.swift */,
 				6E1B5CF71ED64E550012FF93 /* MainViewController.swift */,
 				6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */,
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
@@ -127,8 +132,8 @@
 				6E1B5CF91ED64E550012FF93 /* Main.storyboard */,
 				6E3EC9741EFD15CE00A4F1AA /* Settings.storyboard */,
 				6E3EC97C1EFD317500A4F1AA /* Qibla.storyboard */,
-				6E3EC9651EFCF90300A4F1AA /* Model.xcdatamodeld */,
 				6E65590C1EFB0D1D00EE55CD /* LoadingView.xib */,
+				6E5030181EFE8D1400F57910 /* LocationSearch.storyboard */,
 				6E6559041EFAEF9D00EE55CD /* Initial.storyboard */,
 				6E1B5CFC1ED64E550012FF93 /* Assets.xcassets */,
 				6E1B5CFE1ED64E550012FF93 /* LaunchScreen.storyboard */,
@@ -155,6 +160,7 @@
 				6E3EC96B1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift */,
 				6E6558FB1EFAE94D00EE55CD /* CoreDataStack.swift */,
 				6E6559061EFAF0BB00EE55CD /* CoreDataHelper.swift */,
+				6E3EC9651EFCF90300A4F1AA /* Model.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -226,6 +232,7 @@
 				6E3EC9751EFD15CE00A4F1AA /* Settings.storyboard in Resources */,
 				6E6559051EFAEF9D00EE55CD /* Initial.storyboard in Resources */,
 				6E65590D1EFB0D1D00EE55CD /* LoadingView.xib in Resources */,
+				6E5030191EFE8D1400F57910 /* LocationSearch.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +250,7 @@
 				6E1B5CF61ED64E550012FF93 /* AppDelegate.swift in Sources */,
 				6E3EC96D1EFCFA0F00A4F1AA /* Timing+CoreDataProperties.swift in Sources */,
 				6E3EC9771EFD1ABD00A4F1AA /* SettingsViewController.swift in Sources */,
+				6E5030171EFE842300F57910 /* LocationSearchViewController.swift in Sources */,
 				6E3EC9641EFCF89400A4F1AA /* Time.swift in Sources */,
 				6E6559031EFAEF8100EE55CD /* InitialViewController.swift in Sources */,
 				6E3EC9811EFD364A00A4F1AA /* QiblaLocator.swift in Sources */,
