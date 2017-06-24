@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class QiblaViewController: UIViewController {
+class QiblaViewController: PrayViewController {
 
     @IBOutlet weak var compassView: UIImageView!
     
@@ -53,6 +53,8 @@ class QiblaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
+        setupSwipeGesture()
         backgroundImagePattern.imageGradientFadeTop(target: self)
         
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
@@ -93,6 +95,17 @@ class QiblaViewController: UIViewController {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    func setupSwipeGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        self.pop(direction: .left)
     }
 
     

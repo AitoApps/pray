@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class MainViewController: UIViewController, CLLocationManagerDelegate {
+class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var cityNameLabel: UILabel!
     @IBOutlet weak var activeTimingNameLabel: UILabel!
@@ -40,6 +40,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         day = DataSource.today()
         initialViewSetup()
         setupTimingsLabel()
+        
         setupActiveTimingDate {
             if activeTiming != nil {
                 seconds = -(Date().seconds(from: (activeTiming!.date as Date?)!))
@@ -49,21 +50,45 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
         }
         
+        setupSwipeGesture()
+    }
+    
+    func setupSwipeGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
     
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+                presentSettings()
+            case UISwipeGestureRecognizerDirection.left:
+                print("Swiped left")
+                presentQibla()
+            default:
+                break
+            }
+        }
+    }
     
     func presentSettings() {
         let storyboard = UIStoryboard(name: "Settings", bundle: nil)
         let settingsViewController = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
-        self.navigationController?.pushViewController(settingsViewController, animated: true)
+        self.present(viewController: settingsViewController, to: .left)
     }
     
     func presentQibla() {
         let storyboard = UIStoryboard(name: "Qibla", bundle: nil)
-        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "Qibla") as! QiblaViewController
-        self.navigationController?.pushViewController(settingsViewController, animated: true)
+        let qiblaViewController = storyboard.instantiateViewController(withIdentifier: "Qibla") as! QiblaViewController
+        self.present(viewController: qiblaViewController, to: .right)
     }
     
     func setupTimingsLabel() {
@@ -124,4 +149,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
+    
+    
 }
+

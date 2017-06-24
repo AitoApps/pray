@@ -8,14 +8,16 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: PrayViewController {
 
     @IBOutlet weak var backgroundImagePattern: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupSwipeGesture()
         backgroundImagePattern.imageGradientFadeTop(target: self)
+        self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.tintColor = UIColor.white
         // Do any additional setup after loading the view.
@@ -30,8 +32,15 @@ class SettingsViewController: UIViewController {
         return UIStatusBarStyle.lightContent
     }
     
-    func back() {
-        self.navigationController?.popViewController(animated: true)
+    func setupSwipeGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+    }
+    
+    
+    func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        self.pop(direction: .right)
     }
 
     /*
