@@ -52,14 +52,11 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UNUserNotificationCenter.current().delegate = self
         setupUserNotification()
         createNotification()
         
-        addGestureToView(view: fajrTimingView)
-        addGestureToView(view: dhuhrTimingView)
-        addGestureToView(view: asrTimingView)
-        addGestureToView(view: maghribTimingView)
-        addGestureToView(view: ishaTimingView)
+        
         
         day = DataSource.today()
         initialViewSetup()
@@ -71,11 +68,14 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         setupTimer()
         countDownLabel.text = timeString(time: TimeInterval(seconds))
+        setupActiveTimingViewInteractor()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         timer.invalidate()
     }
+    
+    
     
     func addGestureToView(view: UIView) {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(completionDidTap(sender:)))
@@ -86,6 +86,8 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     func completionDidTap(sender: UITapGestureRecognizer) {
         let tag = sender.view!.tag
         let readableTime = Date().formatTimeToReadableTime()
+        let date = Date()
+        activeTiming?.completionDate = date as NSDate
         
         switch tag {
         case 1:
@@ -106,32 +108,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         }
         
         
-    }
-    
-    func setupUserNotification() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
-            if didAllow {
-                print("Allowed")
-            } else {
-                print("Not allowed please go to settings to allow notification")
-            }
-        }
-    }
-    
-    
-    func createNotification() {
-        let content = UNMutableNotificationContent()
-        content.title = "Pray Title"
-        content.subtitle = "Pray Subtitle"
-        content.body = "Pray Body"
-        content.badge = 1
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "Test", content: content, trigger: trigger)
-        UNUserNotificationCenter.current().add(request) { (error: Error?) in
-            print("Error adding notification request in notification center")
-        }
     }
     
     func setupTimer() {
@@ -174,47 +150,9 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         }
     }
     
-    func presentSettings() {
-        let storyboard = UIStoryboard(name: "Settings", bundle: nil)
-        let settingsViewController = storyboard.instantiateViewController(withIdentifier: "Settings") as! SettingsViewController
-        self.present(viewController: settingsViewController, to: .left)
-    }
     
-    func presentQibla() {
-        let storyboard = UIStoryboard(name: "Qibla", bundle: nil)
-        let qiblaViewController = storyboard.instantiateViewController(withIdentifier: "Qibla") as! QiblaViewController
-        self.present(viewController: qiblaViewController, to: .right)
-    }
     
-    func setupTimingsLabel() {
-        let currentDate = Date()
-        let dayFormatter = DateFormatter()
-        dayFormatter.dateFormat = "dd MMM yyyy"
-        let currentDateString = dayFormatter.string(from: currentDate)
-        print(currentDateString)
-        print(day)
-        timings = preloadTimingsFromCoreData(for: day)
-        
-        for timing in timings {
-            let timeFormatter = DateFormatter()
-            timeFormatter.dateFormat = "h:mm a"
-            
-            if timing.name == Time.Imsak.rawValue {
-//                imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            } else if timing.name == Time.Fajr.rawValue {
-                fajrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            } else if timing.name == Time.Dhuhr.rawValue {
-                dhuhrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            } else if timing.name == Time.Asr.rawValue {
-                asrTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            } else if timing.name == Time.Maghrib.rawValue {
-                maghribTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            } else if timing.name == Time.Isha.rawValue {
-                ishaTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
-            }
-            
-        }
-    }
+    
  
     
     func updateTimer() {
@@ -244,7 +182,5 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         let seconds = Int(time) % 60
         return String(format: "%02i:%02i:%02i", hours, minutes, seconds)
     }
-    
-    
 }
 
