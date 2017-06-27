@@ -79,15 +79,16 @@ extension MainViewController {
         
         // Label for passed time
         for time in timings {
-            if now > time.date! as Date {
+            if now > time.date! as Date && time.name != "Imsak" && time.name != "Sunrise" {
                 passedTimings.append(time)
             }
         }
         
         if passedTimings.count != 0 {
+            
             for passedTiming in passedTimings {
                 print(passedTiming)
-                print(passedTimings[passedTimings.count - 1])
+
                 if passedTiming != passedTimings[passedTimings.count - 1] {
                     executeOnMain {
                         if passedTiming.name == Time.Fajr.rawValue {
@@ -107,6 +108,29 @@ extension MainViewController {
                             self.ishaTimingView.alpha = 0.5
                         }
                     }
+                } else {
+                    if passedTiming.name == Time.Fajr.rawValue {
+                        addGestureToView(view: fajrTimingView)
+                        fajrTimingView.alpha = 1.0
+                        fajrCompletion.text = "Tap to complete"
+                    } else if passedTiming.name == Time.Dhuhr.rawValue {
+                        addGestureToView(view: dhuhrTimingView)
+                        dhuhrTimingView.alpha = 1.0
+                        dhuhrCompletion.text = "Tap to complete"
+                    } else if passedTiming.name == Time.Asr.rawValue {
+                        addGestureToView(view: asrTimingView)
+                        asrTimingView.alpha = 1.0
+                        asrCompletion.text = "Tap to complete"
+                    } else if passedTiming.name == Time.Maghrib.rawValue {
+                        addGestureToView(view: maghribTimingView)
+                        maghribTimingView.alpha = 1.0
+                        maghribCompletion.text = "Tap to complete"
+                    } else if passedTiming.name == Time.Isha.rawValue {
+                        addGestureToView(view: ishaTimingView)
+                        ishaTimingView.alpha = 1.0
+                        ishaCompletion.text = "Tap to complete"
+                    }
+
                 }
                 
             }
@@ -114,35 +138,6 @@ extension MainViewController {
         
 
         
-        // Label for active time
-        guard let timing = activeTiming else {
-            print("active timing")
-            return
-        }
-        
-        if timing.date! as Date > now {
-            if timing.name == Time.Fajr.rawValue {
-                addGestureToView(view: fajrTimingView)
-                fajrTimingView.alpha = 1.0
-                fajrCompletion.text = "Tap to complete"
-            } else if timing.name == Time.Dhuhr.rawValue {
-                addGestureToView(view: dhuhrTimingView)
-                dhuhrTimingView.alpha = 1.0
-                dhuhrCompletion.text = "Tap to complete"
-            } else if timing.name == Time.Asr.rawValue {
-                addGestureToView(view: asrTimingView)
-                asrTimingView.alpha = 1.0
-                asrCompletion.text = "Tap to complete"
-            } else if timing.name == Time.Maghrib.rawValue {
-                addGestureToView(view: maghribTimingView)
-                maghribTimingView.alpha = 1.0
-                maghribCompletion.text = "Tap to complete"
-            } else if timing.name == Time.Isha.rawValue {
-                addGestureToView(view: ishaTimingView)
-                ishaTimingView.alpha = 1.0
-                ishaCompletion.text = "Tap to complete"
-            }
-        }
         
     }
     
