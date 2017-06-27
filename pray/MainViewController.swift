@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import CoreData
+import UserNotifications
 
 class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
@@ -50,6 +51,9 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupUserNotification()
+        createNotification()
         
         addGestureToView(view: fajrTimingView)
         addGestureToView(view: dhuhrTimingView)
@@ -102,6 +106,32 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         }
         
         
+    }
+    
+    func setupUserNotification() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
+            if didAllow {
+                print("Allowed")
+            } else {
+                print("Not allowed please go to settings to allow notification")
+            }
+        }
+    }
+    
+    
+    func createNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "Pray Title"
+        content.subtitle = "Pray Subtitle"
+        content.body = "Pray Body"
+        content.badge = 1
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "Test", content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { (error: Error?) in
+            print("Error adding notification request in notification center")
+        }
     }
     
     func setupTimer() {
