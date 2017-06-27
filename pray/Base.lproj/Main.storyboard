@@ -41,7 +41,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="nVL-LU-Zv6" userLabel="Timings Stack View">
                                 <rect key="frame" x="32" y="339" width="311" height="264"/>
                                 <subviews>
-                                    <view alpha="0.90000000000000002" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhe-Yu-mPw">
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mhe-Yu-mPw">
                                         <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2bL-HR-Z85" userLabel="Fajr Stack View">
@@ -90,7 +90,7 @@
                                             <constraint firstAttribute="height" constant="40" id="pxk-OF-hMD"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.90000000000000002" tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-3c-2Pu">
+                                    <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-3c-2Pu">
                                         <rect key="frame" x="0.0" y="56" width="311" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-yy-IeM" userLabel="Dhuhr Stack View">
@@ -139,7 +139,7 @@
                                             <constraint firstItem="Gfn-yy-IeM" firstAttribute="centerX" secondItem="7zr-3c-2Pu" secondAttribute="centerX" id="haK-bt-d4Z"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.90000000000000002" tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1Y-3T-lsd">
+                                    <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l1Y-3T-lsd">
                                         <rect key="frame" x="0.0" y="112" width="311" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="PWj-MS-IUP" userLabel="Asr Stack View">
@@ -188,7 +188,7 @@
                                             <constraint firstItem="PWj-MS-IUP" firstAttribute="leading" secondItem="l1Y-3T-lsd" secondAttribute="leading" id="rMC-5d-w2s"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.90000000000000002" tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-5C-Szj">
+                                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dN6-5C-Szj">
                                         <rect key="frame" x="0.0" y="168" width="311" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="szq-tP-ILe" userLabel="Maghrib Stack View">
@@ -234,7 +234,7 @@
                                             <constraint firstItem="szq-tP-ILe" firstAttribute="centerY" secondItem="dN6-5C-Szj" secondAttribute="centerY" id="nZW-Ib-RBk"/>
                                         </constraints>
                                     </view>
-                                    <view alpha="0.90000000000000002" tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1R-xm-UDe">
+                                    <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y1R-xm-UDe">
                                         <rect key="frame" x="0.0" y="224" width="311" height="40"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="G2C-89-Jgc" userLabel="Isha Stack View">
@@ -284,6 +284,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Mhe-Yu-mPw" secondAttribute="trailing" id="fJf-WN-4f3"/>
                                     <constraint firstItem="Mhe-Yu-mPw" firstAttribute="leading" secondItem="nVL-LU-Zv6" secondAttribute="leading" id="rWw-9V-RYT"/>

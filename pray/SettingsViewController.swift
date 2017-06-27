@@ -12,10 +12,13 @@ class SettingsViewController: PrayViewController {
 
     @IBOutlet weak var backgroundImagePattern: UIImageView!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var subview: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSwipeGesture()
+        subview.layer.cornerRadius = 10.0
+        subview.clipsToBounds = true
         backgroundImagePattern.imageGradientFadeTop(target: self)
         self.navigationController?.isNavigationBarHidden = true
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black

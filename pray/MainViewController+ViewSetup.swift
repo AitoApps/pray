@@ -73,6 +73,7 @@ extension MainViewController {
         }
     }
     
+    // TODO: This function is messy. refactor it in the future
     func setupActiveTimingViewInteractor() {
         let now = Date()
         var passedTimings = [Timing]()
@@ -85,12 +86,10 @@ extension MainViewController {
         }
         
         if passedTimings.count != 0 {
-            
             for passedTiming in passedTimings {
-                print(passedTiming)
 
                 if passedTiming != passedTimings[passedTimings.count - 1] {
-                    executeOnMain {
+                    if passedTiming.completionDate == nil {
                         if passedTiming.name == Time.Fajr.rawValue {
                             self.fajrCompletion.text = "Time has passed and incompleted"
                             self.fajrTimingView.alpha = 0.5
@@ -105,6 +104,23 @@ extension MainViewController {
                             self.maghribTimingView.alpha = 0.5
                         } else if passedTiming.name == Time.Isha.rawValue {
                             self.ishaCompletion.text = "Time has passed and incompleted"
+                            self.ishaTimingView.alpha = 0.5
+                        }
+                    } else {
+                        if passedTiming.name == Time.Fajr.rawValue {
+                            self.fajrCompletion.text = passedTiming.readableCompletionDate
+                            self.fajrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Dhuhr.rawValue {
+                            self.dhuhrCompletion.text = passedTiming.readableCompletionDate
+                            self.dhuhrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Asr.rawValue {
+                            self.asrCompletion.text = passedTiming.readableCompletionDate
+                            self.asrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Maghrib.rawValue {
+                            self.maghribCompletion.text = passedTiming.readableCompletionDate
+                            self.maghribTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Isha.rawValue {
+                            self.ishaCompletion.text = passedTiming.readableCompletionDate
                             self.ishaTimingView.alpha = 0.5
                         }
                     }
@@ -130,15 +146,9 @@ extension MainViewController {
                         ishaTimingView.alpha = 1.0
                         ishaCompletion.text = "Tap to complete"
                     }
-
                 }
-                
             }
         }
-        
-
-        
-        
     }
     
     func setupBarButtonItem(image: UIImage, position: BarButtonItemPosition, selector: Selector?) {
