@@ -87,24 +87,50 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         let tag = sender.view!.tag
         let readableTime = Date().formatTimeToReadableTime()
         let date = Date()
-        activeTiming?.completionDate = date as NSDate
+        
         
         switch tag {
         case 1:
             fajrCompletion.text = "Completed at \(readableTime)"
             fajrTimingView.alpha = 0.5
+            for timing in timings {
+                if timing.name == Time.Fajr.rawValue {
+                    updateCompletionDate(timing: timing, completedAt: date)
+                }
+            }
+            
         case 2:
             dhuhrCompletion.text = "Completed at \(readableTime)"
             dhuhrTimingView.alpha = 0.5
+            for timing in timings {
+                if timing.name == Time.Dhuhr.rawValue {
+                    updateCompletionDate(timing: timing, completedAt: date)
+                }
+            }
         case 3:
             asrCompletion.text = "Completed at \(readableTime)"
             asrTimingView.alpha = 0.5
+            for timing in timings {
+                if timing.name == Time.Asr.rawValue {
+                    updateCompletionDate(timing: timing, completedAt: date)
+                }
+            }
         case 4:
             maghribCompletion.text = "Completed at \(readableTime)"
             maghribTimingView.alpha = 0.5
+            for timing in timings {
+                if timing.name == Time.Maghrib.rawValue {
+                    updateCompletionDate(timing: timing, completedAt: date)
+                }
+            }
         default:
             ishaCompletion.text = "Completed at \(readableTime)"
             ishaTimingView.alpha = 0.5
+            for timing in timings {
+                if timing.name == Time.Isha.rawValue {
+                    updateCompletionDate(timing: timing, completedAt: date)
+                }
+            }
         }
         
         

@@ -117,4 +117,11 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         }
     }
     
+    func updateCompletionDate(timing: Timing, completedAt: Date) {
+        timing.completionDate = completedAt as NSDate
+        let readableDate = completedAt.formatTimeToReadableTime()
+        timing.readableCompletionDate = readableDate
+        try? coreDataStack().context.save()
+    }
+    
 }

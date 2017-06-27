@@ -43,19 +43,19 @@ extension MainViewController {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "h:mm a"
             
-            if let readableTime = timing.readableCompletionDate {
-                if timing.name == Time.Fajr.rawValue {
-                    fajrCompletion.text = readableTime
-                } else if timing.name == Time.Dhuhr.rawValue {
-                    dhuhrCompletion.text = readableTime
-                } else if timing.name == Time.Asr.rawValue {
-                    asrCompletion.text = readableTime
-                } else if timing.name == Time.Maghrib.rawValue {
-                    maghribCompletion.text = readableTime
-                } else if timing.name == Time.Isha.rawValue {
-                    ishaCompletion.text = readableTime
-                }
-            }
+//            if let readableTime = timing.readableCompletionDate {
+//                if timing.name == Time.Fajr.rawValue {
+//                    fajrCompletion.text = readableTime
+//                } else if timing.name == Time.Dhuhr.rawValue {
+//                    dhuhrCompletion.text = readableTime
+//                } else if timing.name == Time.Asr.rawValue {
+//                    asrCompletion.text = readableTime
+//                } else if timing.name == Time.Maghrib.rawValue {
+//                    maghribCompletion.text = readableTime
+//                } else if timing.name == Time.Isha.rawValue {
+//                    ishaCompletion.text = readableTime
+//                }
+//            }
             
             if timing.name == Time.Imsak.rawValue {
                 // imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
@@ -125,27 +125,48 @@ extension MainViewController {
                         }
                     }
                 } else {
-                    if passedTiming.name == Time.Fajr.rawValue {
-                        addGestureToView(view: fajrTimingView)
-                        fajrTimingView.alpha = 1.0
-                        fajrCompletion.text = "Tap to complete"
-                    } else if passedTiming.name == Time.Dhuhr.rawValue {
-                        addGestureToView(view: dhuhrTimingView)
-                        dhuhrTimingView.alpha = 1.0
-                        dhuhrCompletion.text = "Tap to complete"
-                    } else if passedTiming.name == Time.Asr.rawValue {
-                        addGestureToView(view: asrTimingView)
-                        asrTimingView.alpha = 1.0
-                        asrCompletion.text = "Tap to complete"
-                    } else if passedTiming.name == Time.Maghrib.rawValue {
-                        addGestureToView(view: maghribTimingView)
-                        maghribTimingView.alpha = 1.0
-                        maghribCompletion.text = "Tap to complete"
-                    } else if passedTiming.name == Time.Isha.rawValue {
-                        addGestureToView(view: ishaTimingView)
-                        ishaTimingView.alpha = 1.0
-                        ishaCompletion.text = "Tap to complete"
+                    if passedTiming.completionDate == nil {
+                        if passedTiming.name == Time.Fajr.rawValue {
+                            addGestureToView(view: fajrTimingView)
+                            fajrTimingView.alpha = 1.0
+                            fajrCompletion.text = "Tap to complete"
+                        } else if passedTiming.name == Time.Dhuhr.rawValue {
+                            addGestureToView(view: dhuhrTimingView)
+                            dhuhrTimingView.alpha = 1.0
+                            dhuhrCompletion.text = "Tap to complete"
+                        } else if passedTiming.name == Time.Asr.rawValue {
+                            addGestureToView(view: asrTimingView)
+                            asrTimingView.alpha = 1.0
+                            asrCompletion.text = "Tap to complete"
+                        } else if passedTiming.name == Time.Maghrib.rawValue {
+                            addGestureToView(view: maghribTimingView)
+                            maghribTimingView.alpha = 1.0
+                            maghribCompletion.text = "Tap to complete"
+                        } else if passedTiming.name == Time.Isha.rawValue {
+                            addGestureToView(view: ishaTimingView)
+                            ishaTimingView.alpha = 1.0
+                            ishaCompletion.text = "Tap to complete"
+                        }
+                    } else {
+                        if passedTiming.name == Time.Fajr.rawValue {
+                            self.fajrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
+                            self.fajrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Dhuhr.rawValue {
+                            self.dhuhrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
+                            self.dhuhrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Asr.rawValue {
+                            self.asrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
+                            self.asrTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Maghrib.rawValue {
+                            self.maghribCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
+                            self.maghribTimingView.alpha = 0.5
+                        } else if passedTiming.name == Time.Isha.rawValue {
+                            self.ishaCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
+                            self.ishaTimingView.alpha = 0.5
+                        }
+
                     }
+                    
                 }
             }
         }
