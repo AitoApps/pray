@@ -43,20 +43,6 @@ extension MainViewController {
             let timeFormatter = DateFormatter()
             timeFormatter.dateFormat = "h:mm a"
             
-//            if let readableTime = timing.readableCompletionDate {
-//                if timing.name == Time.Fajr.rawValue {
-//                    fajrCompletion.text = readableTime
-//                } else if timing.name == Time.Dhuhr.rawValue {
-//                    dhuhrCompletion.text = readableTime
-//                } else if timing.name == Time.Asr.rawValue {
-//                    asrCompletion.text = readableTime
-//                } else if timing.name == Time.Maghrib.rawValue {
-//                    maghribCompletion.text = readableTime
-//                } else if timing.name == Time.Isha.rawValue {
-//                    ishaCompletion.text = readableTime
-//                }
-//            }
-            
             if timing.name == Time.Imsak.rawValue {
                 // imsakTimeLabel.text = timeFormatter.string(from: timing.date! as Date)
             } else if timing.name == Time.Fajr.rawValue {
@@ -85,9 +71,14 @@ extension MainViewController {
             }
         }
         
+        print(passedTimings.count)
+        
+        passedTimings = passedTimings.sorted { ($0.date! as Date) < ($1.date! as Date) }
+        
         if passedTimings.count != 0 {
+            
             for passedTiming in passedTimings {
-
+                
                 if passedTiming != passedTimings[passedTimings.count - 1] {
                     if passedTiming.completionDate == nil {
                         if passedTiming.name == Time.Fajr.rawValue {
@@ -108,19 +99,19 @@ extension MainViewController {
                         }
                     } else {
                         if passedTiming.name == Time.Fajr.rawValue {
-                            self.fajrCompletion.text = passedTiming.readableCompletionDate
+                            self.fajrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
                             self.fajrTimingView.alpha = 0.5
                         } else if passedTiming.name == Time.Dhuhr.rawValue {
-                            self.dhuhrCompletion.text = passedTiming.readableCompletionDate
+                            self.dhuhrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
                             self.dhuhrTimingView.alpha = 0.5
                         } else if passedTiming.name == Time.Asr.rawValue {
-                            self.asrCompletion.text = passedTiming.readableCompletionDate
+                            self.asrCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
                             self.asrTimingView.alpha = 0.5
                         } else if passedTiming.name == Time.Maghrib.rawValue {
-                            self.maghribCompletion.text = passedTiming.readableCompletionDate
+                            self.maghribCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
                             self.maghribTimingView.alpha = 0.5
                         } else if passedTiming.name == Time.Isha.rawValue {
-                            self.ishaCompletion.text = passedTiming.readableCompletionDate
+                            self.ishaCompletion.text = "Completed at " + passedTiming.readableCompletionDate!
                             self.ishaTimingView.alpha = 0.5
                         }
                     }
