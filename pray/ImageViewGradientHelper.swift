@@ -17,7 +17,6 @@ extension UIImageView {
         let whiteColor = UIColor.white
         mask.colors = [whiteColor.withAlphaComponent(1.0).cgColor, whiteColor.withAlphaComponent(1.0),whiteColor.withAlphaComponent(1.0).cgColor]
         mask.locations = [NSNumber(value: 0.0), NSNumber(value: 0.0)]
-        print(target.view.bounds)
         mask.frame = CGRect(x: 0, y: target.view.frame.height - 2 * (target.view.frame.width), width: target.view.frame.width, height: 2 * target.view.frame.width)
         self.layer.mask = mask
     }

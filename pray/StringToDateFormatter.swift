@@ -12,7 +12,6 @@ extension String {
     func formatTimeToNSDate(day: Day) -> NSDate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm, dd MMM yyyy"
-        print(self)
         let timeZoneIdentifier = self.components(separatedBy: " ")[1].components(separatedBy: "(")[1].components(separatedBy: ")")[0]
         
         let timeComponent = self.components(separatedBy: " ")[0]

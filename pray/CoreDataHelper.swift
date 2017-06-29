@@ -91,7 +91,7 @@ extension UIViewController: NSFetchedResultsControllerDelegate {
         do {
             try fetchedResultController.performFetch()
             let totalDays = try! fetchedResultController.managedObjectContext.count(for: fetchedResultController.fetchRequest)
-            print(totalDays)
+
             for i in 0..<totalDays {
                 let day = fetchedResultController.object(at: IndexPath(row: i, section: 0)) as! Day
                 DataSource.calendar.append(day)

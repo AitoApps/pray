@@ -43,6 +43,7 @@
 		6E6559091EFAF55C00EE55CD /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6559081EFAF55C00EE55CD /* DataSource.swift */; };
 		6E65590D1EFB0D1D00EE55CD /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E65590C1EFB0D1D00EE55CD /* LoadingView.xib */; };
 		6E65590F1EFB0E1700EE55CD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E65590E1EFB0E1700EE55CD /* LoadingView.swift */; };
+		6E9A18DA1F0450E800423C7D /* IndicatorActivityForUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9A18D91F0450E800423C7D /* IndicatorActivityForUIButton.swift */; };
 		6EFDE6BB1ED7AA90002065B2 /* StringToDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EFDE6BA1ED7AA90002065B2 /* StringToDateFormatter.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		6E6559081EFAF55C00EE55CD /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		6E65590C1EFB0D1D00EE55CD /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		6E65590E1EFB0E1700EE55CD /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		6E9A18D91F0450E800423C7D /* IndicatorActivityForUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorActivityForUIButton.swift; sourceTree = "<group>"; };
 		6EFDE6BA1ED7AA90002065B2 /* StringToDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringToDateFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,6 +128,7 @@
 				6E50301C1EFEA2AC00F57910 /* PrayViewController.swift */,
 				6E3EC9721EFD0CB900A4F1AA /* MainViewController+ViewSetup.swift */,
 				6E6559021EFAEF8100EE55CD /* InitialViewController.swift */,
+				6E9A18D91F0450E800423C7D /* IndicatorActivityForUIButton.swift */,
 				6E3C97D61EFEAB5500FA79C6 /* ThreadController.swift */,
 				6E3EC97E1EFD31BC00A4F1AA /* QiblaViewController.swift */,
 				6E50301A1EFE9AD200F57910 /* NavigationControllerPresenter.swift */,
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E3EC9791EFD20E800A4F1AA /* ImageViewGradientHelper.swift in Sources */,
+				6E9A18DA1F0450E800423C7D /* IndicatorActivityForUIButton.swift in Sources */,
 				6E3EC96F1EFCFA0F00A4F1AA /* Day+CoreDataProperties.swift in Sources */,
 				6E3C97D91EFEC39C00FA79C6 /* DateToStringFormatter.swift in Sources */,
 				6E1B5CF81ED64E550012FF93 /* MainViewController.swift in Sources */,

@@ -52,10 +52,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UNUserNotificationCenter.current().delegate = self
-        setupUserNotification()
-        createNotification()
-        
         
         
         day = DataSource.today()
@@ -163,11 +159,9 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
             case UISwipeGestureRecognizerDirection.right:
-                print("Swiped right")
                 presentSettings()
                 
             case UISwipeGestureRecognizerDirection.left:
-                print("Swiped left")
                 presentQibla()
                 
             default:

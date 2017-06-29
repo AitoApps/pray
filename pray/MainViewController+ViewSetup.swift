@@ -34,9 +34,7 @@ extension MainViewController {
         let currentDate = Date()
         let dayFormatter = DateFormatter()
         dayFormatter.dateFormat = "dd MMM yyyy"
-        let currentDateString = dayFormatter.string(from: currentDate)
-        print(currentDateString)
-        print(day)
+        _ = dayFormatter.string(from: currentDate)
         timings = preloadTimingsFromCoreData(for: day)
         
         for timing in timings {
@@ -70,8 +68,6 @@ extension MainViewController {
                 passedTimings.append(time)
             }
         }
-        
-        print(passedTimings.count)
         
         passedTimings = passedTimings.sorted { ($0.date! as Date) < ($1.date! as Date) }
         
