@@ -112,7 +112,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 self.allowLocationAccessButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
                 self.allowNotificationAccessButton.isEnabled = true
             }
-            
         }
     }
     
