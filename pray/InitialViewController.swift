@@ -98,20 +98,21 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     
     func getLocation() {
         
-        
-        
         allowLocationAccessButton.setTitle("", for: UIControlState.normal)
         allowLocationAccessButton.isEnabled = false
         allowLocationAccessButton.activityIndicator(show: true)
         
         getPlacemark {
-            self.allowLocationAccessButton.activityIndicator(show: false
-            )
-            let placemark = DataSource.currentPlacemark
-            self.allowLocationAccessButton.setTitle(placemark?.subAdministrativeArea ?? placemark?.locality, for: UIControlState.normal)
-            self.allowLocationAccessButton.backgroundColor = UIColor.white
-            self.allowLocationAccessButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
-            self.allowNotificationAccessButton.isEnabled = true
+            
+            self.executeOnMain {
+                self.allowLocationAccessButton.activityIndicator(show: false)
+                let placemark = DataSource.currentPlacemark
+                self.allowLocationAccessButton.setTitle(placemark?.subAdministrativeArea ?? placemark?.locality, for: UIControlState.normal)
+                self.allowLocationAccessButton.backgroundColor = UIColor.white
+                self.allowLocationAccessButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                self.allowNotificationAccessButton.isEnabled = true
+            }
+            
         }
     }
     
@@ -220,18 +221,15 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             print("Done")
             UIApplication.shared.applicationIconBadgeNumber = 0
         }
-        
         completionHandler()
     }
-    
-    
 }
 
 // The Delegate
 
 extension InitialViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = locations[0]
+        let _ = locations[0]
         locationManager.stopUpdatingLocation()
     }
 }
