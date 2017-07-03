@@ -50,50 +50,58 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        if hasPlacemark() {
-//            preloadDaysFromCoreData()
-//            print(DataSource.calendar.count)
-//            if DataSource.calendar.count == 0 {
-//                getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
-//                    self.createNotificationFromCalendar {
-//                        self.presentMain()
-//                    }
-//                })
-//            } else {
-//                self.presentMain()
-//            }
-//        } else {
-//            getPlacemark {
-//                self.createNotificationFromCalendar {
-//                    self.executeOnMain {
-//                        self.presentMain()
-//                    }
-//                }
-//            }
-//        }
+        
+        if hasPlacemark() {
+            
+            allowLocationAccessButton.removeFromSuperview()
+            allowNotificationAccessButton.removeFromSuperview()
+            
+            hasSamePlacemark(completion: { (same: Bool) in
+                if same {
+                    self.preloadDaysFromCoreData()
+                    if DataSource.calendar.count == 0 {
+                        self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
+                            self.createNotificationFromCalendar {
+                                self.presentMain()
+                            }
+                        })
+                    } else {
+                        self.presentMain()
+                    }
+                } else {
+                    self.updateLocation()
+                }
+            })
+        }
     }
     
     func createNotificationFromCalendar(completion: @escaping () -> Void) {
+        
         for day in DataSource.calendar {
             let now = Date()
             
             let timings = self.preloadTimingsFromCoreData(for: day)
             
             for timing in timings {
-                
                 if timing.date!
                     as Date > now {
                     let timeInterval = timing.date!.timeIntervalSinceNow
-                    self.createNotification(with: timeInterval, identifier: timing.name! + timing.readableDate!)
+                    self.createNotification(with: timeInterval, timingName: timing.name!, readableDate: timing.readableDate! + " " + timing.day!.readableDate!)
                 }
             }
         }
         
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (notificationRequests: [UNNotificationRequest]) in
-            print(notificationRequests)
             completion()
         })
         
+    }
+    
+    func updateLocation() {
+        getPlacemark {
+            UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+            self.setupUserNotification()
+        }
     }
     
     func getLocation() {
@@ -103,7 +111,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         allowLocationAccessButton.activityIndicator(show: true)
         
         getPlacemark {
-            
             self.executeOnMain {
                 self.allowLocationAccessButton.activityIndicator(show: false)
                 let placemark = DataSource.currentPlacemark
@@ -125,6 +132,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             let location = locationManager.location!
             
+            locationManager.stopUpdatingLocation()
+            
             CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
                 guard error == nil else {
                     print("No Locaton Returned")
@@ -140,24 +149,52 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 DataSource.currentPlacemark = placemark
                 
                 self.getCalendarFromAPIToCoreData(placemark: placemark) {
-                    self.executeOnMain {
-                        self.createNotificationFromCalendar {
-                            completion()
-                        }
-                    }
+                    completion()
                 }
             }
         }
     }
     
     func hasPlacemark() -> Bool {
-        
-        if let placemarkData  = UserDefaults.standard.object(forKey: "placemark") as? Data {
-            let placemark = NSKeyedUnarchiver.unarchiveObject(with: placemarkData) as! CLPlacemark
-            DataSource.currentPlacemark = placemark
+        if (UserDefaults.standard.object(forKey: "placemark") as? Data) != nil {
             return true
         } else {
             return false
+        }
+    }
+    
+    func hasSamePlacemark(completion: @escaping (Bool) -> Void) {
+        
+        guard let placemarkData = UserDefaults.standard.object(forKey: "placemark") as? Data else {
+            completion(false)
+            return
+        }
+        
+        let placemark = NSKeyedUnarchiver.unarchiveObject(with: placemarkData) as! CLPlacemark
+        
+        if CLLocationManager.locationServicesEnabled() {
+            
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+            
+            let location = locationManager.location!
+            
+            locationManager.stopUpdatingLocation()
+            
+            CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
+                
+                if error == nil {
+                    let currentPlacemark = placemarks![0]
+                    
+                    if currentPlacemark.locality == placemark.locality || currentPlacemark.subAdministrativeArea == placemark.subAdministrativeArea {
+                        DataSource.currentPlacemark = placemark
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            }
         }
     }
     
@@ -174,32 +211,38 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
                         print("Allowed")
+                        self.createNotificationFromCalendar {
+                            self.presentMain()
+                        }
                     } else {
                         print("Not allowed please go to settings to allow notification")
                     }
+                }
+            } else {
+                self.createNotificationFromCalendar {
+                    self.presentMain()
                 }
             }
         }
     }
     
     // Mark: Notification
-    func createNotification(with timeInterval: Double, identifier: String) {
+    func createNotification(with timeInterval: Double, timingName: String, readableDate: String) {
         let remindIn15Mins = UNNotificationAction(identifier: "remindIn15Mins", title: "Remind me in 15 minutes", options: .destructive)
         let done = UNNotificationAction(identifier: "done", title: "Done", options: .foreground)
-        let category = UNNotificationCategory(identifier: "category", actions: [remindIn15Mins, done], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: "default", actions: [remindIn15Mins, done], intentIdentifiers: [], options: [])
         
         UNUserNotificationCenter.current().setNotificationCategories([category])
         
         let content = UNMutableNotificationContent()
-        content.title = "Pray Title"
-        content.subtitle = "Pray Subtitle"
-        content.body = "Pray Body"
-        content.categoryIdentifier = "category"
+        content.title = "Pray"
+        content.body = "Time for \(timingName)"
+        content.categoryIdentifier = "default"
         content.sound = UNNotificationSound.default()
         content.badge = 0
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         
-        let request = UNNotificationRequest(identifier: "Test", content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: timingName + " " + readableDate, content: content, trigger: trigger)
         
         
         UNUserNotificationCenter.current().add(request) { (error: Error?) in
@@ -223,8 +266,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         completionHandler()
     }
 }
-
-// The Delegate
 
 extension InitialViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

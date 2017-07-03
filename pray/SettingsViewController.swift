@@ -10,12 +10,15 @@ import UIKit
 
 class SettingsViewController: PrayViewController {
 
+    @IBOutlet weak var location: UILabel!
     @IBOutlet weak var backgroundImagePattern: UIImageView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var subview: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        location.text = DataSource.currentPlacemark.locality
         setupSwipeGesture()
         subview.layer.cornerRadius = 10.0
         subview.clipsToBounds = true
