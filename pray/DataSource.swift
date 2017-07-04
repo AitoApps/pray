@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import MapKit
 
-class DataSource: NSObject {
+class DataSource {
     static var calendar = [Day]()
     static var currentPlacemark: CLPlacemark!
     

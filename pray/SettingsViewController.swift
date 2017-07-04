@@ -23,9 +23,9 @@ class SettingsViewController: PrayViewController {
         subview.layer.cornerRadius = 10.0
         subview.clipsToBounds = true
         backgroundImagePattern.imageGradientFadeTop(target: self)
-        self.navigationController?.isNavigationBarHidden = true
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.isNavigationBarHidden = true
+        navigationController?.navigationBar.barStyle = UIBarStyle.black
+        navigationController?.navigationBar.tintColor = UIColor.white
         // Do any additional setup after loading the view.
     }
 
@@ -48,15 +48,5 @@ class SettingsViewController: PrayViewController {
     func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         self.pop(direction: .right)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

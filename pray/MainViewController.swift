@@ -52,8 +52,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         day = DataSource.today()
         initialViewSetup()
         setupSwipeGesture()
@@ -62,12 +60,14 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupTimer()
         countDownLabel.text = timeString(time: TimeInterval(seconds))
         setupActiveTimingViewInteractor()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         timer.invalidate()
     }
     
