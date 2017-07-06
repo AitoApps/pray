@@ -180,7 +180,11 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             let location = locationManager.location!
             
+            
+            
             locationManager.stopUpdatingLocation()
+            
+            print(location)
             
             CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
                 
