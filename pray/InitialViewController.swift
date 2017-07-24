@@ -17,8 +17,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     
     let locationManager = CLLocationManager()
     
-    var loadingView = LoadingView()
-    
     @IBOutlet weak var allowLocationAccessButton: UIButton!
     @IBOutlet weak var allowNotificationAccessButton: UIButton!
     
@@ -58,8 +56,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 allowLocationAccessButton.removeFromSuperview()
                 allowNotificationAccessButton.removeFromSuperview()
                 
-                hasSamePlacemark(completion: { (same: Bool) in
-                    if same {
+                isInRange(completion: { (inRange: Bool) in
+                    if inRange {
                         self.preloadDaysFromCoreData()
                         if DataSource.calendar.count == 0 {
                             self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
@@ -156,6 +154,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 
                 let placemark = placemarks![0]
                 
+                print(placemark)
+                
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
                 let userDefaults = UserDefaults.standard
                 userDefaults.set(encodedData, forKey: "placemark")
@@ -188,7 +188,7 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         return false
     }
     
-    func hasSamePlacemark(completion: @escaping (Bool) -> Void) {
+    func isInRange(completion: @escaping (Bool) -> Void) {
         
         guard let placemarkData = UserDefaults.standard.object(forKey: "placemark") as? Data else {
             completion(false)
@@ -200,11 +200,9 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         if CLLocationManager.locationServicesEnabled() {
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
             
-            
-            
-            
-            
+            let status = CLLocationManager.authorizationStatus()            
             let location = locationManager.location!
             
             locationManager.stopUpdatingLocation()
