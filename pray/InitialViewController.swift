@@ -50,29 +50,37 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
-        if hasPlacemark() {
-            
-            allowLocationAccessButton.removeFromSuperview()
-            allowNotificationAccessButton.removeFromSuperview()
-            
-            hasSamePlacemark(completion: { (same: Bool) in
-                if same {
-                    self.preloadDaysFromCoreData()
-                    if DataSource.calendar.count == 0 {
-                        self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
-                            self.createNotificationFromCalendar {
-                                self.presentMain()
-                            }
-                        })
+        if status == CLAuthorizationStatus.authorizedWhenInUse {
+            if hasPlacemark() {
+                
+                allowLocationAccessButton.removeFromSuperview()
+                allowNotificationAccessButton.removeFromSuperview()
+                
+                hasSamePlacemark(completion: { (same: Bool) in
+                    if same {
+                        self.preloadDaysFromCoreData()
+                        if DataSource.calendar.count == 0 {
+                            self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
+                                self.createNotificationFromCalendar {
+                                    self.presentMain()
+                                }
+                            })
+                        } else {
+                            self.presentMain()
+                        }
                     } else {
-                        self.presentMain()
+                        self.updateLocation()
                     }
-                } else {
-                    self.updateLocation()
-                }
-            })
+                })
+            }
+            
+        } else {
+
+            
         }
+        
     }
     
     func createNotificationFromCalendar(completion: @escaping () -> Void) {
@@ -114,7 +122,13 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             self.executeOnMain {
                 self.allowLocationAccessButton.activityIndicator(show: false)
                 let placemark = DataSource.currentPlacemark
-                self.allowLocationAccessButton.setTitle(placemark?.subAdministrativeArea ?? placemark?.locality, for: UIControlState.normal)
+                
+                let lines = placemark?.addressDictionary?["FormattedAddressLines"] as! NSArray
+                let cityName = placemark?.locality ?? DataSource.currentPlacemark.subAdministrativeArea
+                let line = lines[0] as! String
+                let cityNameLabel = cityName ?? line
+
+                self.allowLocationAccessButton.setTitle(cityNameLabel, for: UIControlState.normal)
                 self.allowLocationAccessButton.backgroundColor = UIColor.white
                 self.allowLocationAccessButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
                 self.allowNotificationAccessButton.isEnabled = true
@@ -163,6 +177,17 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         }
     }
     
+    func isDegreesInRange(x: CLLocationDegrees, in degrees: CLLocationDegrees) -> Bool {
+        let lowerBound = (x) - 0.1
+        let upperBound = (x) + 0.1
+        
+        if lowerBound...upperBound ~= degrees {
+            return true
+        }
+        
+        return false
+    }
+    
     func hasSamePlacemark(completion: @escaping (Bool) -> Void) {
         
         guard let placemarkData = UserDefaults.standard.object(forKey: "placemark") as? Data else {
@@ -175,30 +200,34 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         if CLLocationManager.locationServicesEnabled() {
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
+            
+            
+            
+            
             
             let location = locationManager.location!
             
-            
-            
             locationManager.stopUpdatingLocation()
             
-            print(location)
+            let previousLocation = placemark.location
             
-            CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
-                
-                if error == nil {
-                    let currentPlacemark = placemarks![0]
-                    
-                    if currentPlacemark.locality == placemark.locality || currentPlacemark.subAdministrativeArea == placemark.subAdministrativeArea {
-                        DataSource.currentPlacemark = placemark
-                        completion(true)
-                    } else {
-                        completion(false)
-                    }
-                }
+            print(location.coordinate)
+            print(previousLocation?.coordinate)
+            
+            let latitudeIsInRange = isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
+            
+            print(latitudeIsInRange)
+            
+            let longitudeIsInRange = isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
+            
+            print(longitudeIsInRange)
+            
+            if  latitudeIsInRange && longitudeIsInRange  {
+                DataSource.currentPlacemark = placemark
+                completion(true)
             }
+            
+            completion(false)
         }
     }
     
