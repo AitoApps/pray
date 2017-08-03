@@ -13,6 +13,7 @@ import UserNotifications
 
 class InitialViewController: UIViewController, UNUserNotificationCenterDelegate {
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
     
     let locationManager = CLLocationManager()
@@ -148,7 +149,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
                 guard error == nil else {
-                    print("No Locaton Returned")
                     return
                 }
                 
@@ -202,15 +202,14 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
             
-            let status = CLLocationManager.authorizationStatus()            
+            let status = CLLocationManager.authorizationStatus()
+            print(status)
             let location = locationManager.location!
             
             locationManager.stopUpdatingLocation()
             
             let previousLocation = placemark.location
             
-            print(location.coordinate)
-            print(previousLocation?.coordinate)
             
             let latitudeIsInRange = isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
             
@@ -237,20 +236,27 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     
     
     func setupUserNotification() {
+        self.activityIndicator.startAnimating()
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings: UNNotificationSettings) in
             if notificationSettings.authorizationStatus != .authorized {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
                         print("Allowed")
                         self.createNotificationFromCalendar {
+                            self.activityIndicator.stopAnimating()
                             self.presentMain()
                         }
                     } else {
-                        print("Not allowed please go to settings to allow notification")
+                        self.activityIndicator.stopAnimating()
+                        let alert = UIAlertController(title: "Error", message: "Please turn on your notification service in settings", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+                        alert.addAction(action)
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
             } else {
                 self.createNotificationFromCalendar {
+                    self.activityIndicator.stopAnimating()
                     self.presentMain()
                 }
             }
@@ -279,7 +285,10 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         UNUserNotificationCenter.current().add(request) { (error: Error?) in
             
             guard error == nil else {
-                print("Error adding notification request in notification center")
+                let alert = UIAlertController(title: "Error", message: "Please turn your notification service in settings", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
                 return
             }
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7yG-su-Ec7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7yG-su-Ec7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,9 +37,26 @@
                                     <constraint firstAttribute="width" secondItem="9fv-de-JwZ" secondAttribute="height" multiplier="1:1" id="la6-21-tuS"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Wsi-Je-cHb">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Wsi-Je-cHb">
                                 <rect key="frame" x="178" y="324" width="20" height="20"/>
                             </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="tHD-qV-GUd">
+                                <rect key="frame" x="32" y="148" width="311" height="114"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Pray" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SVY-Ud-nDs">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pray needs your location to calculate accurate prayer times and notification access to alert you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEZ-Md-mo3">
+                                        <rect key="frame" x="0.0" y="49.5" width="311" height="64.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bT1-hF-cx1">
                                 <rect key="frame" x="32" y="507" width="311" height="96"/>
                                 <subviews>
@@ -66,6 +83,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tHD-qV-GUd" firstAttribute="leading" secondItem="qLv-a1-33o" secondAttribute="leading" constant="32" id="5RB-RJ-eHq"/>
                             <constraint firstItem="9fv-de-JwZ" firstAttribute="leading" secondItem="qLv-a1-33o" secondAttribute="leading" id="7F8-EB-lwN"/>
                             <constraint firstItem="PjC-Nj-OlN" firstAttribute="top" secondItem="oEm-Ao-Q9L" secondAttribute="bottom" id="7UY-Kc-BLs"/>
                             <constraint firstItem="Wsi-Je-cHb" firstAttribute="centerY" secondItem="qLv-a1-33o" secondAttribute="centerY" id="Dnw-fG-3W8"/>
@@ -74,10 +92,12 @@
                             <constraint firstItem="PjC-Nj-OlN" firstAttribute="top" secondItem="bT1-hF-cx1" secondAttribute="bottom" constant="64" id="HlH-pq-dP7"/>
                             <constraint firstItem="PjC-Nj-OlN" firstAttribute="top" secondItem="9fv-de-JwZ" secondAttribute="bottom" id="Sma-uE-3WF"/>
                             <constraint firstItem="oEm-Ao-Q9L" firstAttribute="top" secondItem="qLv-a1-33o" secondAttribute="top" id="Xnd-hg-nTF"/>
+                            <constraint firstItem="tHD-qV-GUd" firstAttribute="top" secondItem="LDb-tr-1AH" secondAttribute="bottom" constant="128" id="Y6F-Di-FRf"/>
                             <constraint firstItem="xIk-2V-9rR" firstAttribute="leading" secondItem="qLv-a1-33o" secondAttribute="leading" id="ie4-TM-py9"/>
                             <constraint firstAttribute="trailing" secondItem="bT1-hF-cx1" secondAttribute="trailing" constant="32" id="lGe-jK-qzL"/>
                             <constraint firstAttribute="trailing" secondItem="oEm-Ao-Q9L" secondAttribute="trailing" id="mAY-2X-X5n"/>
                             <constraint firstAttribute="trailing" secondItem="xIk-2V-9rR" secondAttribute="trailing" id="nfD-Gv-XMC"/>
+                            <constraint firstAttribute="trailing" secondItem="tHD-qV-GUd" secondAttribute="trailing" constant="32" id="oos-yV-15E"/>
                             <constraint firstAttribute="trailing" secondItem="9fv-de-JwZ" secondAttribute="trailing" id="rXM-Ed-Hbs"/>
                             <constraint firstItem="bT1-hF-cx1" firstAttribute="leading" secondItem="qLv-a1-33o" secondAttribute="leading" constant="32" id="tqY-Hd-eSP"/>
                             <constraint firstItem="Wsi-Je-cHb" firstAttribute="centerX" secondItem="qLv-a1-33o" secondAttribute="centerX" id="wJS-29-CQZ"/>
@@ -85,6 +105,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="5ws-4x-tKP"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Wsi-Je-cHb" id="Ylx-S1-G9c"/>
                         <outlet property="allowLocationAccessButton" destination="V0a-WC-4zS" id="RPv-FM-eke"/>
                         <outlet property="allowNotificationAccessButton" destination="mRI-fb-47F" id="Zxx-g2-yLl"/>
                         <outlet property="backgroundPatternImageView" destination="9fv-de-JwZ" id="sCy-U7-Gq7"/>
@@ -92,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySa-Pq-P7N" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-887"/>
+            <point key="canvasLocation" x="885.60000000000002" y="-887.40629685157433"/>
         </scene>
     </scenes>
     <resources>
