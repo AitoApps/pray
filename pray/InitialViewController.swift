@@ -120,16 +120,13 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         getPlacemark {
             self.executeOnMain {
                 self.allowLocationAccessButton.activityIndicator(show: false)
-                let placemark = DataSource.currentPlacemark
-                
-                let lines = placemark?.addressDictionary?["FormattedAddressLines"] as! NSArray
-                let cityName = placemark?.locality ?? DataSource.currentPlacemark.subAdministrativeArea
-                let line = lines[0] as! String
-                let cityNameLabel = cityName ?? line
+//                let placemark = DataSource.currentPlacemark
+//                let lines = placemark?.addressDictionary?["FormattedAddressLines"] as! NSArray
+//                let cityName = placemark?.locality ?? DataSource.currentPlacemark.subAdministrativeArea
+//                let line = lines[0] as! String
+//                let cityNameLabel = cityName ?? line
 
-                self.allowLocationAccessButton.setTitle(cityNameLabel, for: UIControlState.normal)
-                self.allowLocationAccessButton.backgroundColor = UIColor.white
-                self.allowLocationAccessButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
+                self.allowLocationAccessButton.removeFromSuperview()
                 self.allowNotificationAccessButton.isEnabled = true
             }
         }
@@ -153,8 +150,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                 }
                 
                 let placemark = placemarks![0]
-                
-                print(placemark)
                 
                 let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
                 let userDefaults = UserDefaults.standard
@@ -201,9 +196,7 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-            
-            let status = CLLocationManager.authorizationStatus()
-            print(status)
+
             let location = locationManager.location!
             
             locationManager.stopUpdatingLocation()
@@ -241,7 +234,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             if notificationSettings.authorizationStatus != .authorized {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
-                        print("Allowed")
+                        self.allowNotificationAccessButton.removeFromSuperview()
+
                         self.createNotificationFromCalendar {
                             self.activityIndicator.stopAnimating()
                             self.presentMain()
@@ -255,6 +249,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
                     }
                 }
             } else {
+                
+                
                 self.createNotificationFromCalendar {
                     self.activityIndicator.stopAnimating()
                     self.presentMain()
@@ -280,7 +276,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
         
         let request = UNNotificationRequest(identifier: timingName + " " + readableDate, content: content, trigger: trigger)
-        
         
         UNUserNotificationCenter.current().add(request) { (error: Error?) in
             
