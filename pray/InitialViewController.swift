@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import UserNotifications
 
-class InitialViewController: UIViewController, UNUserNotificationCenterDelegate {
+class InitialViewController: UIViewController, UNUserNotificationCenterDelegate, CLLocationManagerDelegate {
 
     @IBOutlet weak var welcomeStackView: UIStackView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -57,6 +57,7 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
         if status == CLAuthorizationStatus.authorizedWhenInUse {
+            
             if hasPlacemark() {
                 
                 allowLocationAccessButton.removeFromSuperview()
@@ -112,6 +113,14 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         
     }
     
+    func checkCurrentLocation() -> CLLocation {
+        if let location = locationManager.location {
+            return location
+        } else {
+            return checkCurrentLocation()
+        }
+    }
+    
     func updateLocation() {
         getPlacemark {
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -148,27 +157,30 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
             
-            let location = locationManager.location!
-            
-            locationManager.stopUpdatingLocation()
-            
-            CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
-                guard error == nil else {
-                    return
+            executeOnMain(withDelay: 1.0, { 
+                let location = self.checkCurrentLocation()
+                
+                self.locationManager.stopUpdatingLocation()
+                
+                CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
+                    guard error == nil else {
+                        return
+                    }
+                    
+                    let placemark = placemarks![0]
+                    
+                    let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
+                    let userDefaults = UserDefaults.standard
+                    userDefaults.set(encodedData, forKey: "placemark")
+                    
+                    DataSource.currentPlacemark = placemark
+                    
+                    self.getCalendarFromAPIToCoreData(placemark: placemark) {
+                        completion()
+                    }
                 }
-                
-                let placemark = placemarks![0]
-                
-                let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
-                let userDefaults = UserDefaults.standard
-                userDefaults.set(encodedData, forKey: "placemark")
-                
-                DataSource.currentPlacemark = placemark
-                
-                self.getCalendarFromAPIToCoreData(placemark: placemark) {
-                    completion()
-                }
-            }
+
+            })
         }
     }
     
@@ -204,25 +216,28 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-
-            let location = locationManager.location!
             
-            locationManager.stopUpdatingLocation()
+            executeOnMain(withDelay: 1.0, { 
+                let location = self.checkCurrentLocation()
+                
+                self.locationManager.stopUpdatingLocation()
+                
+                let previousLocation = placemark.location
+                
+                
+                let latitudeIsInRange = self.isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
+                
+                
+                let longitudeIsInRange = self.isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
+                
+                if  latitudeIsInRange && longitudeIsInRange  {
+                    DataSource.currentPlacemark = placemark
+                    completion(true)
+                }
+                
+                completion(false)
+            })
             
-            let previousLocation = placemark.location
-            
-            
-            let latitudeIsInRange = isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
-            
-            
-            let longitudeIsInRange = isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
-            
-            if  latitudeIsInRange && longitudeIsInRange  {
-                DataSource.currentPlacemark = placemark
-                completion(true)
-            }
-            
-            completion(false)
         }
     }
     
@@ -309,12 +324,7 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
         }
         completionHandler()
     }
+    
 }
 
-extension InitialViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let _ = locations[0]
-        locationManager.stopUpdatingLocation()
-    }
-}
 
