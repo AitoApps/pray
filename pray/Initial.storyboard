@@ -109,6 +109,7 @@
                         <outlet property="allowLocationAccessButton" destination="V0a-WC-4zS" id="RPv-FM-eke"/>
                         <outlet property="allowNotificationAccessButton" destination="mRI-fb-47F" id="Zxx-g2-yLl"/>
                         <outlet property="backgroundPatternImageView" destination="9fv-de-JwZ" id="sCy-U7-Gq7"/>
+                        <outlet property="welcomeStackView" destination="tHD-qV-GUd" id="Occ-NY-5pW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySa-Pq-P7N" sceneMemberID="firstResponder"/>

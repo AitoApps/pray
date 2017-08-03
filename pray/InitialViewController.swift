@@ -13,6 +13,7 @@ import UserNotifications
 
 class InitialViewController: UIViewController, UNUserNotificationCenterDelegate {
 
+    @IBOutlet weak var welcomeStackView: UIStackView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var backgroundPatternImageView: UIImageView!
     
@@ -49,6 +50,10 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        welcomeStackView.isHidden = true
+        
+        activityIndicator.startAnimating()
+        
         let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
         
         if status == CLAuthorizationStatus.authorizedWhenInUse {
@@ -76,6 +81,9 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             }
             
         } else {
+            activityIndicator.stopAnimating()
+            
+            welcomeStackView.isHidden = false
 
             
         }
@@ -206,11 +214,8 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             
             let latitudeIsInRange = isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
             
-            print(latitudeIsInRange)
             
             let longitudeIsInRange = isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
-            
-            print(longitudeIsInRange)
             
             if  latitudeIsInRange && longitudeIsInRange  {
                 DataSource.currentPlacemark = placemark
@@ -234,7 +239,11 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate 
             if notificationSettings.authorizationStatus != .authorized {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
-                        self.allowNotificationAccessButton.removeFromSuperview()
+                        
+                        self.executeOnMain {
+                            self.allowNotificationAccessButton.removeFromSuperview()
+                        }
+                        
 
                         self.createNotificationFromCalendar {
                             self.activityIndicator.stopAnimating()
