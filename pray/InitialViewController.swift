@@ -249,7 +249,9 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
     
     
     func setupUserNotification() {
+        self.allowNotificationAccessButton.isHidden = true
         self.activityIndicator.startAnimating()
+        allowNotificationAccessButton.isEnabled = false
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings: UNNotificationSettings) in
             if notificationSettings.authorizationStatus != .authorized {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
@@ -259,15 +261,17 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
                             self.allowNotificationAccessButton.removeFromSuperview()
                         }
                         
-
                         self.createNotificationFromCalendar {
                             self.activityIndicator.stopAnimating()
                             self.presentMain()
                         }
                     } else {
                         self.activityIndicator.stopAnimating()
-                        let alert = UIAlertController(title: "Error", message: "Please turn on your notification service in settings", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil)
+                        let alert = UIAlertController(title: "Notification Access", message: "For better experience, you can turn on your alerts in Settings", preferredStyle: .alert)
+
+                        let action = UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+                            self.presentMain()
+                        })
                         alert.addAction(action)
                         self.present(alert, animated: true, completion: nil)
                     }
