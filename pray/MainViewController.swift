@@ -49,14 +49,31 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
     
     var timings: [Timing]!
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
         day = DataSource.today()
         initialViewSetup()
         setupSwipeGesture()
         countDownLabel.text = timeString(time: TimeInterval(seconds))
         
+    }
+    
+    func willEnterForeground() {
+        setupTimer()
+        countDownLabel.text = timeString(time: TimeInterval(seconds))
+        setupActiveTimingViewInteractor()
+    }
+    
+    func willResignActive() {
+        timer.invalidate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,8 +87,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
         super.viewDidDisappear(animated)
         timer.invalidate()
     }
-    
-    
     
     func addGestureToView(view: UIView) {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(completionDidTap(sender:)))
@@ -128,8 +143,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
                 }
             }
         }
-        
-        
     }
     
     func setupTimer() {
@@ -140,7 +153,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
                 activeTimingNameLabel.text = activeTiming!.name
                 runTimer()
             }
-            
         }
     }
     
@@ -169,11 +181,6 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
             }
         }
     }
-    
-    
-    
-    
- 
     
     func updateTimer() {
         if seconds < 1 {
