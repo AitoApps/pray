@@ -34,9 +34,10 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
         allowNotificationAccessButton.layer.cornerRadius = 20
         allowNotificationAccessButton.layer.borderWidth = 1.0
         allowNotificationAccessButton.layer.borderColor = UIColor.white.cgColor
-        allowNotificationAccessButton.isEnabled = false
         
         UNUserNotificationCenter.current().delegate = self
+        
+        allowNotificationAccessButton.isHidden = true
         
         allowLocationAccessButton.addTarget(self, action: #selector(getLocation), for: .touchUpInside)
         allowNotificationAccessButton.addTarget(self, action: #selector(setupUserNotification), for: .touchUpInside)
@@ -86,7 +87,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
             
             welcomeStackView.isHidden = false
 
-            
         }
         
     }
@@ -144,7 +144,7 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
 //                let cityNameLabel = cityName ?? line
 
                 self.allowLocationAccessButton.removeFromSuperview()
-                self.allowNotificationAccessButton.isEnabled = true
+                self.allowNotificationAccessButton.isHidden = false
             }
         }
     }
@@ -249,17 +249,19 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
     
     
     func setupUserNotification() {
-        self.allowNotificationAccessButton.isHidden = true
         self.activityIndicator.startAnimating()
-        allowNotificationAccessButton.isEnabled = false
+        
+        if allowNotificationAccessButton != nil {
+            self.allowNotificationAccessButton.isHidden = true
+            
+        }
+        
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings: UNNotificationSettings) in
             if notificationSettings.authorizationStatus != .authorized {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
                         
-                        self.executeOnMain {
-                            self.allowNotificationAccessButton.removeFromSuperview()
-                        }
+                        
                         
                         self.createNotificationFromCalendar {
                             self.activityIndicator.stopAnimating()
@@ -277,8 +279,6 @@ class InitialViewController: UIViewController, UNUserNotificationCenterDelegate,
                     }
                 }
             } else {
-                
-                
                 self.createNotificationFromCalendar {
                     self.activityIndicator.stopAnimating()
                     self.presentMain()
