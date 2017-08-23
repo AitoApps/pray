@@ -175,13 +175,8 @@ class InitialViewController: UIViewController {
         }
         
         let placemark = NSKeyedUnarchiver.unarchiveObject(with: placemarkData) as! CLPlacemark
-        
         let previousLocation = placemark.location
-        
-        
         let latitudeIsInRange = self.isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
-        
-        
         let longitudeIsInRange = self.isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
         
         if  latitudeIsInRange && longitudeIsInRange  {
