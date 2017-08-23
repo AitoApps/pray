@@ -20,12 +20,35 @@ class InitialViewController: UIViewController {
     
     var currentLocation: CLLocation? = nil {
         didSet {
-            activityIndicator.startAnimating()
-            getPlacemark {
-                self.setupUserNotification()
+            if isCheckingLocationIfInRange {
+                isInRange(location: currentLocation!, completion: { (inRange: Bool) in
+                    self.isCheckingLocationIfInRange = false
+                    if inRange {
+                        self.preloadDaysFromCoreData()
+                        if DataSource.calendar.count == 0 {
+                            self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
+                                self.createNotificationFromCalendar {
+                                    self.presentMain()
+                                }
+                            })
+                        } else {
+                            self.presentMain()
+                        }
+                    } else {
+                        self.updateLocation()
+                    }
+                })
+            } else {
+                activityIndicator.startAnimating()
+                getPlacemark {
+                    self.setupUserNotification()
+                }
             }
+            
         }
     }
+    
+    var isCheckingLocationIfInRange = false
     
     let userNotificationCenter = UNUserNotificationCenter.current()
     
@@ -51,33 +74,15 @@ class InitialViewController: UIViewController {
         switch status {
         case .notDetermined:
             activityIndicator.stopAnimating()
-            getLocation()
+            getCurrentLocation()
         default:
-            locationManager.delegate = self
-            getLocation()
             welcomeStackView.isHidden = true
             if hasPlacemark() {
-                isInRange(completion: { (inRange: Bool) in
-                    if inRange {
-                        self.preloadDaysFromCoreData()
-                        if DataSource.calendar.count == 0 {
-                            self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
-                                self.createNotificationFromCalendar {
-                                    self.activityIndicator.stopAnimating()
-                                    self.presentMain()
-                                }
-                            })
-                        } else {
-                            self.activityIndicator.stopAnimating()
-                            self.presentMain()
-                        }
-                    } else {
-                        self.updateLocation()
-                    }
-                })
+                isCheckingLocationIfInRange = true
+                getCurrentLocation()
             } else {
                 activityIndicator.stopAnimating()
-                getLocation()
+                getCurrentLocation()
             }
             
         }
@@ -113,7 +118,7 @@ class InitialViewController: UIViewController {
         }
     }
     
-    func getLocation() {
+    func getCurrentLocation() {
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -162,7 +167,7 @@ class InitialViewController: UIViewController {
         return false
     }
     
-    func isInRange(completion: @escaping (Bool) -> Void) {
+    func isInRange(location: CLLocation, completion: @escaping (Bool) -> Void) {
         
         guard let placemarkData = UserDefaults.standard.object(forKey: "placemark") as? Data else {
             completion(false)
@@ -171,40 +176,20 @@ class InitialViewController: UIViewController {
         
         let placemark = NSKeyedUnarchiver.unarchiveObject(with: placemarkData) as! CLPlacemark
         
-        if CLLocationManager.locationServicesEnabled() {
-            
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.delegate = self
-            locationManager.startUpdatingLocation()
-            
-            executeOnMain(withDelay: 1.0, {
-                let location = self.currentLocation!
-                
-                self.locationManager.stopUpdatingLocation()
-                
-                let previousLocation = placemark.location
-                
-                
-                let latitudeIsInRange = self.isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
-                
-                
-                let longitudeIsInRange = self.isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
-                
-                if  latitudeIsInRange && longitudeIsInRange  {
-                    DataSource.currentPlacemark = placemark
-                    completion(true)
-                }
-                
-                completion(false)
-            })
-            
+        let previousLocation = placemark.location
+        
+        
+        let latitudeIsInRange = self.isDegreesInRange(x: location.coordinate.latitude, in: (previousLocation?.coordinate.latitude)!)
+        
+        
+        let longitudeIsInRange = self.isDegreesInRange(x: location.coordinate.longitude, in: (previousLocation?.coordinate.longitude)!)
+        
+        if  latitudeIsInRange && longitudeIsInRange  {
+            DataSource.currentPlacemark = placemark
+            completion(true)
         }
-    }
-    
-    func presentMain() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
-        self.present(main, animated: false, completion: nil)
+        
+        completion(false)
     }
     
     
@@ -236,6 +221,12 @@ class InitialViewController: UIViewController {
                 
             }
         }
+    }
+    
+    func presentMain() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let main = storyboard.instantiateViewController(withIdentifier: "Main") as! UINavigationController
+        self.present(main, animated: false, completion: nil)
     }
     
     func presentDeniedLocationAccessAlert() {
@@ -314,18 +305,6 @@ class InitialViewController: UIViewController {
                 return
             }
         }
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if response.actionIdentifier == "remindIn15Mins" {
-            print("Remind in 15 mins")
-        } else if response.actionIdentifier == "remindIn30Mins" {
-            print("Remind In 30 mins")
-        } else if response.actionIdentifier == "done" {
-            print("Done")
-            UIApplication.shared.applicationIconBadgeNumber = 0
-        }
-        completionHandler()
     }
     
 }
