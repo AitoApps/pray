@@ -53,6 +53,8 @@ class InitialViewController: UIViewController {
             activityIndicator.stopAnimating()
             getLocation()
         default:
+            locationManager.delegate = self
+            getLocation()
             welcomeStackView.isHidden = true
             if hasPlacemark() {
                 isInRange(completion: { (inRange: Bool) in
@@ -61,10 +63,12 @@ class InitialViewController: UIViewController {
                         if DataSource.calendar.count == 0 {
                             self.getCalendarFromAPIToCoreData(placemark: DataSource.currentPlacemark, completion: {
                                 self.createNotificationFromCalendar {
+                                    self.activityIndicator.stopAnimating()
                                     self.presentMain()
                                 }
                             })
                         } else {
+                            self.activityIndicator.stopAnimating()
                             self.presentMain()
                         }
                     } else {
@@ -100,14 +104,6 @@ class InitialViewController: UIViewController {
             completion()
         })
         
-    }
-    
-    func checkCurrentLocation() -> CLLocation {
-        if let location = locationManager.location {
-            return location
-        } else {
-            return checkCurrentLocation()
-        }
     }
     
     func updateLocation() {
@@ -178,10 +174,11 @@ class InitialViewController: UIViewController {
         if CLLocationManager.locationServicesEnabled() {
             
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.delegate = self
             locationManager.startUpdatingLocation()
             
-            executeOnMain(withDelay: 1.0, { 
-                let location = self.checkCurrentLocation()
+            executeOnMain(withDelay: 1.0, {
+                let location = self.currentLocation!
                 
                 self.locationManager.stopUpdatingLocation()
                 
