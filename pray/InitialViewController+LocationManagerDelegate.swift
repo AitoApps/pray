@@ -19,11 +19,11 @@ extension InitialViewController: CLLocationManagerDelegate {
             break
         case .authorizedWhenInUse:
             // If authorized when in use
-            manager.startUpdatingLocation()
+            getCurrentLocation()
             break
         case .authorizedAlways:
             // If always authorized
-            manager.startUpdatingLocation()
+            getCurrentLocation()
             break
         case .restricted:
             // If restricted by e.g. parental controls. User can't enable Location Services
