@@ -42,7 +42,10 @@ class InitialViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        initialSetup()
+    }
+    
+    func initialSetup() {
         activityIndicator.startAnimating()
         let status = CLLocationManager.authorizationStatus()
         switch status {
@@ -68,10 +71,12 @@ class InitialViewController: UIViewController {
                         self.updateLocation()
                     }
                 })
+            } else {
+                activityIndicator.stopAnimating()
+                getLocation()
             }
-
+            
         }
-        
     }
     
         
@@ -117,10 +122,11 @@ class InitialViewController: UIViewController {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
         } else {
-            print("Location service is not enabled")
+            presentDisabledLocationServiceAlert()
+            welcomeStackView.isHidden = false
         }
-        
     }
     
     func getPlacemark(completion: @escaping () -> Void) {
@@ -253,6 +259,27 @@ class InitialViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func presentDisabledLocationServiceAlert() {
+        let alert = UIAlertController(title: "Location Service Disabled", message: "For better experience, you can turn on your location service in Settings > Privacy > Location Services", preferredStyle: .alert)
+        
+        let goToSettingsAction = UIAlertAction(title: "Go To Settings", style: .destructive, handler: { (action: UIAlertAction) in
+            let locationServiceURL = URL(string: "App-Prefs:root=LOCATION_SERVICES")!
+            if UIApplication.shared.canOpenURL(locationServiceURL) {
+                UIApplication.shared.open(locationServiceURL, completionHandler: { (success: Bool) in
+                    self.initialSetup()
+                })
+            }
+        })
+        
+        let tryAgainAction = UIAlertAction(title: "Try Again", style: UIAlertActionStyle.default) { (action: UIAlertAction) in
+            self.initialSetup()
+        }
+        
+        alert.addAction(goToSettingsAction)
+        alert.addAction(tryAgainAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func presentDeniedNotificationAccessAlert() {
         let alert = UIAlertController(title: "Notification Access Denied", message: "For better experience, you can turn on your notification permission in Settings", preferredStyle: .alert)
         
@@ -268,7 +295,6 @@ class InitialViewController: UIViewController {
 //        let remindIn15Mins = UNNotificationAction(identifier: "remindIn15Mins", title: "Remind me in 15 minutes", options: .destructive)
 //        let done = UNNotificationAction(identifier: "done", title: "Done", options: .foreground)
 //        let category = UNNotificationCategory(identifier: "default", actions: [remindIn15Mins, done], intentIdentifiers: [], options: [])
-//        
 //        UNUserNotificationCenter.current().setNotificationCategories([category])
         
         let content = UNMutableNotificationContent()
