@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F2073" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5s5-Mt-LMO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5s5-Mt-LMO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -105,6 +105,23 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="vni-lW-n3G">
+                                <rect key="frame" x="16" y="615" width="343" height="36"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Aladhan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oq2-4c-WQj">
+                                        <rect key="frame" x="110" y="0.0" width="123.5" height="16"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All rights reserved © 2017 Zulwiyoza Putra" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-t8-Hru">
+                                        <rect key="frame" x="43" y="20" width="257.5" height="16"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -112,6 +129,7 @@
                             <constraint firstItem="Vei-xH-GeI" firstAttribute="top" secondItem="tkr-w0-IJK" secondAttribute="top" constant="96" id="3Xd-hY-dZO"/>
                             <constraint firstItem="Ls3-Io-qwP" firstAttribute="centerY" secondItem="QW0-bR-T5d" secondAttribute="centerY" id="4Gv-by-WHV"/>
                             <constraint firstItem="tkr-w0-IJK" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" id="AS7-Hc-iQP"/>
+                            <constraint firstItem="vni-lW-n3G" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" constant="16" id="BIZ-JW-Srp"/>
                             <constraint firstAttribute="trailing" secondItem="Ls3-Io-qwP" secondAttribute="trailing" constant="16" id="CI7-hQ-krZ"/>
                             <constraint firstAttribute="trailing" secondItem="Vei-xH-GeI" secondAttribute="trailing" constant="32" id="DAa-oL-IrJ"/>
                             <constraint firstItem="tkr-w0-IJK" firstAttribute="top" secondItem="QW0-bR-T5d" secondAttribute="top" id="Ihk-gC-1OY"/>
@@ -119,8 +137,10 @@
                             <constraint firstItem="4Zy-6r-ihN" firstAttribute="top" secondItem="tkr-w0-IJK" secondAttribute="bottom" id="NkI-eW-Gsj"/>
                             <constraint firstItem="VEp-uY-5NR" firstAttribute="width" secondItem="VEp-uY-5NR" secondAttribute="height" multiplier="1:1" id="TVT-Tq-YCo"/>
                             <constraint firstItem="Ls3-Io-qwP" firstAttribute="centerX" secondItem="Vei-xH-GeI" secondAttribute="centerX" id="X9R-q0-kkK"/>
+                            <constraint firstAttribute="trailing" secondItem="vni-lW-n3G" secondAttribute="trailing" constant="16" id="cEv-BG-0QD"/>
                             <constraint firstItem="Ls3-Io-qwP" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" constant="16" id="hq9-Xf-hGm"/>
                             <constraint firstItem="Vei-xH-GeI" firstAttribute="leading" secondItem="QW0-bR-T5d" secondAttribute="leading" constant="32" id="ja3-V6-8HC"/>
+                            <constraint firstItem="4Zy-6r-ihN" firstAttribute="top" secondItem="vni-lW-n3G" secondAttribute="bottom" constant="16" id="lVH-Bh-M0t"/>
                             <constraint firstAttribute="trailing" secondItem="tkr-w0-IJK" secondAttribute="trailing" id="xUN-xY-shl"/>
                             <constraint firstAttribute="trailing" secondItem="VEp-uY-5NR" secondAttribute="trailing" id="yck-nP-0uY"/>
                         </constraints>

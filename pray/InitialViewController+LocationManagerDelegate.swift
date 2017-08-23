@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import CoreLocation
 
 extension InitialViewController: CLLocationManagerDelegate {
@@ -29,6 +30,7 @@ extension InitialViewController: CLLocationManagerDelegate {
             break
         case .denied:
             // If user denied your app access to Location Services, but can grant access from Settings.app
+            presentDeniedLocationAccessAlert()
             break
         }
     }
@@ -37,5 +39,6 @@ extension InitialViewController: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         currentLocation = locationManager.location
         locationManager.delegate = nil
+        // Update placemark
     }
 }

@@ -20,7 +20,10 @@ class InitialViewController: UIViewController {
     
     var currentLocation: CLLocation? = nil {
         didSet {
-            setupUserNotification()
+            activityIndicator.startAnimating()
+            getPlacemark {
+                self.setupUserNotification()
+            }
         }
     }
     
@@ -28,17 +31,13 @@ class InitialViewController: UIViewController {
     
     @IBOutlet weak var welcomeStackView: UIStackView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        backgroundPatternImageView.imageGradientFadeTop(target: self)
-        
-        
-        
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.lightContent
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        backgroundPatternImageView.imageGradientFadeTop(target: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -46,7 +45,6 @@ class InitialViewController: UIViewController {
         
         activityIndicator.startAnimating()
         let status = CLLocationManager.authorizationStatus()
-        
         switch status {
         case .notDetermined:
             activityIndicator.stopAnimating()
@@ -125,15 +123,12 @@ class InitialViewController: UIViewController {
         
     }
     
-    func getPlacemark(location: CLLocation) {
+    func getPlacemark(completion: @escaping () -> Void) {
         
-        CLGeocoder().reverseGeocodeLocation(location) { (placemarks: [CLPlacemark]?, error: Error?) in
-            guard error == nil else {
-                return
-            }
+        CLGeocoder().reverseGeocodeLocation(currentLocation!) { (placemarks: [CLPlacemark]?, error: Error?) in
+            guard error == nil else { return }
             
             let placemark = placemarks![0]
-            
             let encodedData = NSKeyedArchiver.archivedData(withRootObject: placemark)
             let userDefaults = UserDefaults.standard
             userDefaults.set(encodedData, forKey: "placemark")
@@ -214,7 +209,13 @@ class InitialViewController: UIViewController {
         self.activityIndicator.startAnimating()
         
         UNUserNotificationCenter.current().getNotificationSettings { (notificationSettings: UNNotificationSettings) in
-            if notificationSettings.authorizationStatus != .authorized {
+            switch notificationSettings.authorizationStatus {
+            case .authorized:
+                self.createNotificationFromCalendar {
+                    self.activityIndicator.stopAnimating()
+                    self.presentMain()
+                }
+            case .notDetermined:
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (didAllow: Bool, error: Error?) in
                     if didAllow {
                         self.createNotificationFromCalendar {
@@ -223,22 +224,43 @@ class InitialViewController: UIViewController {
                         }
                     } else {
                         self.activityIndicator.stopAnimating()
-                        let alert = UIAlertController(title: "Notification Access", message: "For better experience, you can turn on your alerts in Settings", preferredStyle: .alert)
-
-                        let action = UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
-                            self.presentMain()
-                        })
-                        alert.addAction(action)
-                        self.present(alert, animated: true, completion: nil)
+                        self.presentDeniedNotificationAccessAlert()
                     }
                 }
-            } else {
-                self.createNotificationFromCalendar {
-                    self.activityIndicator.stopAnimating()
-                    self.presentMain()
-                }
+            case .denied:
+                self.activityIndicator.stopAnimating()
+                self.presentDeniedNotificationAccessAlert()
+                
             }
         }
+    }
+    
+    func presentDeniedLocationAccessAlert() {
+        let alert = UIAlertController(title: "Location Access Denied", message: "For better experience, you can turn on your location permission in Settings > Pray Tracker > Location", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Go To Settings", style: .default, handler: { (action: UIAlertAction) in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)")
+                })
+            }
+        })
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentDeniedNotificationAccessAlert() {
+        let alert = UIAlertController(title: "Notification Access Denied", message: "For better experience, you can turn on your notification permission in Settings", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction) in
+            self.presentMain()
+        })
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // Mark: Notification
