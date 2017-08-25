@@ -95,51 +95,58 @@ class MainViewController: PrayViewController, CLLocationManagerDelegate {
 
     
     func completionDidTap(sender: UITapGestureRecognizer) {
-        let tag = sender.view!.tag
-        let readableTime = Date().formatTimeToReadableTime()
-        let date = Date()
         
+        // BUG HERE TRACKER IS STILL TAPPABLEt
         
-        switch tag {
-        case 1:
-            fajrCompletion.text = "Completed at \(readableTime)"
-            fajrTimingView.alpha = 0.5
-            for timing in timings {
-                if timing.name == Time.Fajr.rawValue {
-                    updateCompletionDate(timing: timing, completedAt: date)
-                }
-            }
-            
-        case 2:
-            dhuhrCompletion.text = "Completed at \(readableTime)"
-            dhuhrTimingView.alpha = 0.5
-            for timing in timings {
-                if timing.name == Time.Dhuhr.rawValue {
-                    updateCompletionDate(timing: timing, completedAt: date)
-                }
-            }
-        case 3:
-            asrCompletion.text = "Completed at \(readableTime)"
-            asrTimingView.alpha = 0.5
-            for timing in timings {
-                if timing.name == Time.Asr.rawValue {
-                    updateCompletionDate(timing: timing, completedAt: date)
-                }
-            }
-        case 4:
-            maghribCompletion.text = "Completed at \(readableTime)"
-            maghribTimingView.alpha = 0.5
-            for timing in timings {
-                if timing.name == Time.Maghrib.rawValue {
-                    updateCompletionDate(timing: timing, completedAt: date)
-                }
-            }
-        default:
-            ishaCompletion.text = "Completed at \(readableTime)"
-            ishaTimingView.alpha = 0.5
-            for timing in timings {
-                if timing.name == Time.Isha.rawValue {
-                    updateCompletionDate(timing: timing, completedAt: date)
+        presentPrayerCheckInAlert { (ok: Bool) in
+            if ok {
+                let tag = sender.view!.tag
+                let readableTime = Date().formatTimeToReadableTime()
+                let date = Date()
+                
+                
+                switch tag {
+                case 1:
+                    self.fajrCompletion.text = "Completed at \(readableTime)"
+                    self.fajrTimingView.alpha = 0.5
+                    for timing in self.timings {
+                        if timing.name == Time.Fajr.rawValue {
+                            self.updateCompletionDate(timing: timing, completedAt: date)
+                        }
+                    }
+                    
+                case 2:
+                    self.dhuhrCompletion.text = "Completed at \(readableTime)"
+                    self.dhuhrTimingView.alpha = 0.5
+                    for timing in self.timings {
+                        if timing.name == Time.Dhuhr.rawValue {
+                            self.updateCompletionDate(timing: timing, completedAt: date)
+                        }
+                    }
+                case 3:
+                    self.asrCompletion.text = "Completed at \(readableTime)"
+                    self.asrTimingView.alpha = 0.5
+                    for timing in self.timings {
+                        if timing.name == Time.Asr.rawValue {
+                            self.updateCompletionDate(timing: timing, completedAt: date)
+                        }
+                    }
+                case 4:
+                    self.maghribCompletion.text = "Completed at \(readableTime)"
+                    self.maghribTimingView.alpha = 0.5
+                    for timing in self.timings {
+                        if timing.name == Time.Maghrib.rawValue {
+                            self.updateCompletionDate(timing: timing, completedAt: date)
+                        }
+                    }
+                default:
+                    self.ishaCompletion.text = "Completed at \(readableTime)"
+                    self.ishaTimingView.alpha = 0.5
+                    for timing in self.timings {
+                        if timing.name == Time.Isha.rawValue {
+                            self.updateCompletionDate(timing: timing, completedAt: date)
+                        }
+                    }
                 }
             }
         }

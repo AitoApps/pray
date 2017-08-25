@@ -196,4 +196,20 @@ extension MainViewController {
         }
         completion()
     }
+    
+    func presentPrayerCheckInAlert(completion: @escaping (_ ok: Bool) -> Void) {
+        let alert = UIAlertController(title: "Prayer Check In", message: "Are you sure you have done this prayer?", preferredStyle: .alert)
+        
+        let yesAction = UIAlertAction(title: "Yes, Check Me In", style: .destructive, handler: { (action: UIAlertAction) in
+            completion(true)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Not Yet", style: .default, handler: { (action: UIAlertAction) in
+            completion(false)
+        })
+        
+        alert.addAction(yesAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }
